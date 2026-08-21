@@ -32,14 +32,17 @@ namespace TurboExtractinator.Patches
 
             int speed = Math.Max(1, Math.Min(60, mod.Config.SpeedMultiplier));
 
-            // Reduce item cooldown delay according to speed multiplier (e.g. 15 ticks / 5 = 3 ticks)
+            // Reduce item cooldown delay according to speed multiplier while preserving itemTime == itemTimeMax equality
             if (__instance.itemTime > 0)
             {
-                __instance.itemTime = Math.Max(1, __instance.itemTime / speed);
+                int newTime = Math.Max(1, __instance.itemTime / speed);
+                __instance.SetItemTime(newTime);
             }
             if (__instance.itemAnimation > 0)
             {
-                __instance.itemAnimation = Math.Max(1, __instance.itemAnimation / speed);
+                int newAnim = Math.Max(1, __instance.itemAnimation / speed);
+                __instance.itemAnimation = newAnim;
+                __instance.itemAnimationMax = Math.Max(1, __instance.itemAnimationMax / speed);
             }
 
             // Optional extra batch processing per tick if configured
