@@ -38,6 +38,19 @@ namespace TerrariaModCore.Tests
             int accelerated15 = Math.Max(1, baseItemTime / speed15);
             assert(accelerated15 == 1, $"Speed calculation: 15 ticks / 15x = {accelerated15} tick (1 frame per item)");
 
+            // 3. Item Validation Guard Simulation (Throwing Knives vs Desert Fossil)
+            int throwingKnifeType = ItemID.ThrowingKnife; // 279
+            int extractModeThrowingKnife = throwingKnifeType < ItemID.Sets.ExtractinatorMode.Length ? ItemID.Sets.ExtractinatorMode[throwingKnifeType] : -1;
+            assert(extractModeThrowingKnife < 0, "Extractinator Guard: ThrowingKnife is NOT an extractable item (mode < 0)");
+
+            int desertFossilType = ItemID.DesertFossil; // 3380
+            int extractModeFossil = desertFossilType < ItemID.Sets.ExtractinatorMode.Length ? ItemID.Sets.ExtractinatorMode[desertFossilType] : -1;
+            assert(extractModeFossil >= 0, "Extractinator Guard: DesertFossil is a valid extractable item (mode >= 0)");
+
+            int siltType = ItemID.SiltBlock; // 173
+            int extractModeSilt = siltType < ItemID.Sets.ExtractinatorMode.Length ? ItemID.Sets.ExtractinatorMode[siltType] : -1;
+            assert(extractModeSilt >= 0, "Extractinator Guard: SiltBlock is a valid extractable item (mode >= 0)");
+
             // 3. Mod Initialization & Lifecycle
             var logger = new CoreLogger(null, "Test");
             var modLogger = new ModLogger(logger, "turbo_extractinator");
