@@ -6,7 +6,7 @@ This document describes the automated test architecture, test suites, and assert
 
 ## 1. Overview & Test Runner
 
-TMC includes a standalone test suite (`TerrariaModCore.Tests.exe`) that executes **85 comprehensive assertions** covering core infrastructure, isolated plugin behaviors, and multi-mod coexistence scenarios.
+TMC includes a standalone test suite (`TerrariaModCore.Tests.exe`) that executes **97 comprehensive assertions** covering core infrastructure, isolated plugin behaviors, and multi-mod coexistence scenarios.
 
 ### Running the Test Suite
 ```powershell
@@ -23,7 +23,7 @@ dotnet build tests/TerrariaModCore.Tests/TerrariaModCore.Tests.csproj -c Release
 ==========================================
      TerrariaModCore (TMC) Test Suite     
 ==========================================
-RESULTS: 85 PASSED, 0 FAILED
+RESULTS: 97 PASSED, 0 FAILED
 ==========================================
 ```
 
@@ -58,14 +58,16 @@ RESULTS: 85 PASSED, 0 FAILED
 
 ### 2.6 FishingLinePlus Plugin Tests
 - **Multi-Bobber Calculation**: Tests bobber count clamping and spawn counts.
-- **Spread Physics**: Tests fan-angle distribution and velocity variance calculation.
-- **Dual-Layer Synchronization**: Validates dynamic bite propagation and reel-in catch table rolls.
+- **Angular Spread Physics**: Tests trigonometry rotation vectors across fan spreads.
+- **Dual-Layer Synchronization**: Validates synchronized pull and biting triggers across active bobber pools.
 
-### 2.7 Multi-Mod Coexistence Matrix Tests (7 Scenarios)
-1. `OreCascade` alone (2 patches)
-2. `AutoFishing` alone (1 patch)
-3. `FishingLinePlus` alone (3 patches)
-4. `OreCascade` + `AutoFishing` (3 patches)
-5. `OreCascade` + `FishingLinePlus` (5 patches)
-6. `AutoFishing` + `FishingLinePlus` (4 patches)
-7. `OreCascade` + `AutoFishing` + `FishingLinePlus` (6 patches simultaneously)
+### 2.7 TurboExtractinator Plugin Tests
+- **Speed Multiplier Scaling**: Tests item cooldown division (`15 ticks / 5x = 3 ticks`).
+- **Single-Frame Cap**: Verifies 1-tick floor at extreme speed settings (`15 ticks / 15x = 1 tick`).
+- **Batch Extraction Logic**: Validates extra batch iteration loops when configured.
+- **Mod Lifecycle & Patch Isolation**: Verifies full lifecycle and clean unpatching.
+
+### 2.8 Mod Coexistence Matrix Tests (8 Scenarios)
+- **Scenarios 1–4**: Individual plugin lifecycle and patch stability.
+- **Scenarios 5–7**: Dual-mod synergies (`OreCascade + AutoFishing`, `OreCascade + TurboExtractinator`, `AutoFishing + FishingLinePlus`).
+- **Scenario 8**: All 4 production mods active simultaneously with 7 active patches and 0 conflicts.

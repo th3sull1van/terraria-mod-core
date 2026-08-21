@@ -9,6 +9,7 @@ using TerrariaModCore.API;
 using TerrariaModCore.Configuration;
 using TerrariaModCore.Logging;
 using TerrariaModCore.Patching;
+using TurboExtractinator;
 
 namespace TerrariaModCore.Tests
 {
@@ -29,18 +30,21 @@ namespace TerrariaModCore.Tests
             // Scenario 3: FishingLinePlus alone
             TestCombination(assert, "Scenario 3: FishingLinePlus alone", new[] { typeof(FishingLinePlusMod) });
 
-            // Scenario 4: OreCascade + AutoFishing
-            TestCombination(assert, "Scenario 4: OreCascade + AutoFishing", new[] { typeof(OreCascadeMod), typeof(AutoFishingMod) });
+            // Scenario 4: TurboExtractinator alone
+            TestCombination(assert, "Scenario 4: TurboExtractinator alone", new[] { typeof(TurboExtractinatorMod) });
 
-            // Scenario 5: OreCascade + FishingLinePlus
-            TestCombination(assert, "Scenario 5: OreCascade + FishingLinePlus", new[] { typeof(OreCascadeMod), typeof(FishingLinePlusMod) });
+            // Scenario 5: OreCascade + AutoFishing
+            TestCombination(assert, "Scenario 5: OreCascade + AutoFishing", new[] { typeof(OreCascadeMod), typeof(AutoFishingMod) });
 
-            // Scenario 6: AutoFishing + FishingLinePlus (Shared fishing hooks)
-            TestCombination(assert, "Scenario 6: AutoFishing + FishingLinePlus", new[] { typeof(AutoFishingMod), typeof(FishingLinePlusMod) });
+            // Scenario 6: OreCascade + TurboExtractinator (Excavation & Extraction)
+            TestCombination(assert, "Scenario 6: OreCascade + TurboExtractinator", new[] { typeof(OreCascadeMod), typeof(TurboExtractinatorMod) });
 
-            // Scenario 7: All three mods simultaneously
-            TestCombination(assert, "Scenario 7: All Three (OreCascade + AutoFishing + FishingLinePlus)",
-                new[] { typeof(OreCascadeMod), typeof(AutoFishingMod), typeof(FishingLinePlusMod) });
+            // Scenario 7: AutoFishing + FishingLinePlus (Shared fishing hooks)
+            TestCombination(assert, "Scenario 7: AutoFishing + FishingLinePlus", new[] { typeof(AutoFishingMod), typeof(FishingLinePlusMod) });
+
+            // Scenario 8: All Four production mods simultaneously
+            TestCombination(assert, "Scenario 8: All Four (OreCascade + AutoFishing + FishingLinePlus + TurboExtractinator)",
+                new[] { typeof(OreCascadeMod), typeof(AutoFishingMod), typeof(FishingLinePlusMod), typeof(TurboExtractinatorMod) });
         }
 
         private static void TestCombination(Action<bool, string> assert, string scenarioName, Type[] modTypes)

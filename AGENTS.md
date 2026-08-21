@@ -16,11 +16,12 @@ TerrariaModCore.sln
 │   ├── TerrariaModCore/            # Core host engine (ModLoader, DependencyResolver, PatchManager)
 │   ├── TerrariaModCore.Launcher/   # Standalone bootstrapper (TerrariaModded.exe, LAA 4GB, AssemblyResolve)
 │   └── mods/
-│       ├── OreCascade/             # Iterative BFS VeinMiner & Gem Excavator plugin
-│       ├── AutoFishing/            # 60 TPS native state machine fishing automation plugin
-│       └── FishingLinePlus/        # Multi-line fishing with dual-layer catch synchronization
+│       ├── OreCascade/                 # Iterative BFS VeinMiner & Gem Excavator plugin
+│       ├── AutoFishing/                # 60 TPS native state machine fishing automation plugin
+│       ├── FishingLinePlus/            # Multi-line fishing with dual-layer catch synchronization
+│       └── TurboExtractinator/         # High-speed Extractinator acceleration plugin
 ├── tests/
-│   └── TerrariaModCore.Tests/      # Standalone 85-assertion automated test suite
+│   └── TerrariaModCore.Tests/      # Standalone 97-assertion automated test suite
 ├── docs/                           # Comprehensive technical documentation
 ├── dist/                           # Assembled release distribution
 └── build_dist.ps1                  # Master compilation, test execution, and packaging script
@@ -119,4 +120,4 @@ When implementing or editing a plugin:
 - [ ] Register all patches with `context.PatchManager.RegisterAll(context.Manifest.Id, assembly)`.
 - [ ] Include a dedicated, polished `README.md` inside the mod's folder (e.g. `src/mods/MyMod/README.md`).
 - [ ] Add corresponding unit and coexistence test cases to `TerrariaModCore.Tests`.
-- [ ] Verify that all 85+ tests pass with zero failures.
+- [ ] Verify that all 97+ tests pass with zero failures.

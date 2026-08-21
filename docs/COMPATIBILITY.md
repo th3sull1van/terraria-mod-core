@@ -31,25 +31,30 @@ The table below catalogs every vanilla method intercepted across TMC Core and th
 | **FishingLinePlus** | `Player` | `ItemCheck_Shoot(...)` | `Postfix` | Spawns additional bobber projectiles with angular spread when casting. |
 | **FishingLinePlus** | `Player` | `ItemCheck_PullFishingBobbers(Item)` | `Prefix` | Guarantees fishing loot table checks on all active floating bobbers before retraction. |
 | **FishingLinePlus** | `Projectile` | `AI_061_FishingBobber()` | `Postfix` | Synchronizes bite states and splashing animations across all active bobbers in water. |
+| **TurboExtractinator** | `Player` | `PlaceThing_ItemInExtractinator(...)` | `Postfix` | Scales down `itemTime` / `itemAnimation` by `SpeedMultiplier` and processes extra batch extractions. |
 
 ---
 
 ## 3. Production Mod Coexistence Matrix
 
-All 7 combinations of production mods have been tested and verified for conflict-free coexistence:
+All 8 combinations of production mods have been tested and verified for conflict-free coexistence:
 
 | Scenario | Active Plugins | Total Active Patches | Coexistence Status |
 | :---: | :--- | :---: | :---: |
 | **1** | OreCascade alone | 2 | ✅ Verified Clean |
 | **2** | AutoFishing alone | 1 | ✅ Verified Clean |
 | **3** | FishingLinePlus alone | 3 | ✅ Verified Clean |
-| **4** | OreCascade + AutoFishing | 3 | ✅ Verified Clean |
-| **5** | OreCascade + FishingLinePlus | 5 | ✅ Verified Clean |
-| **6** | AutoFishing + FishingLinePlus | 4 | ✅ Verified Clean |
-| **7** | **All Three Simultaneously** | **6** | **✅ Verified Clean** |
+| **4** | TurboExtractinator alone | 1 | ✅ Verified Clean |
+| **5** | OreCascade + AutoFishing | 3 | ✅ Verified Clean |
+| **6** | OreCascade + TurboExtractinator | 3 | ✅ Verified Clean |
+| **7** | AutoFishing + FishingLinePlus | 4 | ✅ Verified Clean |
+| **8** | **All Four Simultaneously** | **7** | **✅ Verified Clean** |
 
 ### Synergy Highlights
 - **`AutoFishing` + `FishingLinePlus`**:
   - `AutoFishing` scans the active projectile array for any bobbers owned by the player with a confirmed bite (`ai[1] < 0f`).
   - When a bite occurs, `AutoFishing` calls `ItemCheck_PullFishingBobbers()`.
   - `FishingLinePlus` intercepts the pull call, guarantees catch rolls on all floating lines, and retrieves multiple fish/items in a single automated reel cycle.
+- **`OreCascade` + `TurboExtractinator`**:
+  - `OreCascade` rapidly accumulates thousands of silt, slush, and desert fossil blocks in seconds.
+  - `TurboExtractinator` converts these massive ore/fossil stockpiles at 5x+ speed with batch extraction support.

@@ -1,0 +1,16 @@
+{
+  "Id": "turbo_extractinator",
+  "Name": "TurboExtractinator",
+  "Version": "1.0.0",
+  "Author": "th3sull1van",
+  "Description": "Accelerates Extractinator and Chlorophyte Extractinator processing speed by a configurable multiplier (default 5x).",
+  "EntryAssembly": "TurboExtractinator.dll",
+  "EntryType": "TurboExtractinator.TurboExtractinatorMod",
+  "TargetGameVersion": "1.4.5.7",
+  "Enabled": true,
+  "Dependencies": [],
+  "OptionalDependencies": [],
+  "LoadBefore": [],
+  "LoadAfter": [],
+  "IncompatibleWith": []
+}

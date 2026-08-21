@@ -101,3 +101,25 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
 | `LinesPerCast` | `int` | `4` | `1` – `20` | Number of bobbers launched per cast action. |
 | `SpreadAngleDegrees` | `double` | `7.0` | `0.0` – `45.0` | Angular spread between bobber trajectories in degrees. |
 | `VelocitySpread` | `double` | `0.08` | `0.0` – `0.5` | Randomized velocity variation percentage per bobber for natural distribution. |
+
+---
+
+## 5. TurboExtractinator Configuration (`mods/TurboExtractinator/config.json`)
+
+```json
+{
+  "Enabled": true,
+  "SpeedMultiplier": 5,
+  "AffectsChlorophyteExtractinator": true,
+  "BatchExtractionSize": 1
+}
+```
+
+### Options Breakdown
+
+| Setting | Type | Default | Range / Format | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle for extraction speed acceleration. |
+| `SpeedMultiplier` | `int` | `5` | `1` – `60` | Speed acceleration multiplier (default 5 means 5x faster). |
+| `AffectsChlorophyteExtractinator` | `bool` | `true` | `true` / `false` | Also applies speed acceleration to the Chlorophyte Extractinator. |
+| `BatchExtractionSize` | `int` | `1` | `1` – `50` | Number of items processed per extraction tick cycle. |

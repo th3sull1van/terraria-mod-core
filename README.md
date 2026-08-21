@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Vanilla-Zero_tModLoader-06b6d4?style=for-the-badge" alt="Zero tModLoader">
   <img src="https://img.shields.io/badge/Memory-4GB_LAA_Enabled-f59e0b?style=for-the-badge" alt="4GB LAA Enabled">
-  <img src="https://img.shields.io/badge/Tests-85_Passing-10b981?style=for-the-badge" alt="85 Tests Passing">
+  <img src="https://img.shields.io/badge/Tests-97_Passing-10b981?style=for-the-badge" alt="97 Tests Passing">
   <img src="https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge" alt="License MIT">
 </p>
 
@@ -62,6 +62,7 @@
 | **⛏️ OreCascade** | Instant chain-mining for ores and gemstones using iterative Breadth-First Search (BFS), strict vein isolation, and legitimate vanilla drop preservation. | [OreCascade README](src/mods/OreCascade/README.md) |
 | **🎣 AutoFishing** | Intelligent automated casting, in-engine bite detection (`ai[1] < 0`), and reel-in execution synchronized with the 60 TPS game loop. | [AutoFishing README](src/mods/AutoFishing/README.md) |
 | **🎣 FishingLinePlus** | Multiple simultaneous functional fishing lines with angular velocity spread physics, dual-layer catch synchronization, and multi-catch mechanics. | [FishingLinePlus README](src/mods/FishingLinePlus/README.md) |
+| **⚡ TurboExtractinator** | Accelerates Extractinator and Chlorophyte Extractinator processing speeds by a configurable multiplier (default 5x) with batch extraction support. | [TurboExtractinator README](src/mods/TurboExtractinator/README.md) |
 
 ---
 
@@ -150,10 +151,11 @@ terraria_mod_core/
 │   └── mods/                           # Included Production Plugins
 │       ├── OreCascade/                 # VeinMiner / Ore Excavator plugin
 │       ├── AutoFishing/                # Smart fishing automation plugin
-│       └── FishingLinePlus/            # Multi-line / multi-bobber fishing plugin
+│       ├── FishingLinePlus/            # Multi-line / multi-bobber fishing plugin
+│       └── TurboExtractinator/         # High-speed Extractinator acceleration plugin
 │
 └── tests/
-    └── TerrariaModCore.Tests/          # 85-Assertion Automated Test Suite
+    └── TerrariaModCore.Tests/          # 97-Assertion Automated Test Suite
         ├── Program.cs                  # Standalone test runner
         ├── DependencyResolverTests.cs  # Dependency ordering & cycle tests
         ├── PatchManagerTests.cs        # Harmony prefix/postfix/unpatch tests
@@ -161,7 +163,8 @@ terraria_mod_core/
         ├── OreCascadePluginTests.cs    # BFS vein-mining & pickaxe power tests
         ├── AutoFishingPluginTests.cs   # Fishing state machine & bite detection tests
         ├── FishingLinePlusPluginTests.cs # Spread physics & multi-catch tests
-        └── ModCoexistenceTests.cs      # 7 multi-mod coexistence scenarios
+        ├── TurboExtractinatorPluginTests.cs # Speed scaling & batch extraction tests
+        └── ModCoexistenceTests.cs      # 8 multi-mod coexistence scenarios
 ```
 
 ---

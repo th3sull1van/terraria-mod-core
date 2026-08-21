@@ -39,6 +39,7 @@ New-Item -ItemType Directory -Path "$dist\TMC\logs" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\OreCascade" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoFishing" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\FishingLinePlus" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\TurboExtractinator" -Force | Out-Null
 
 # Copy Launcher (TerrariaModded.exe)
 Copy-Item "$workspace\src\TerrariaModCore.Launcher\bin\Release\TerrariaModded.exe" "$dist\" -Force
@@ -131,6 +132,20 @@ $fishingLineConfig = @'
 }
 '@
 Set-Content -Path "$dist\mods\FishingLinePlus\config.json" -Value $fishingLineConfig -Encoding UTF8
+
+# Copy TurboExtractinator
+Copy-Item "$workspace\src\mods\TurboExtractinator\bin\Release\TurboExtractinator.dll" "$dist\mods\TurboExtractinator\" -Force
+Copy-Item "$workspace\src\mods\TurboExtractinator\bin\Release\TurboExtractinator.pdb" "$dist\mods\TurboExtractinator\" -Force
+Copy-Item "$workspace\src\mods\TurboExtractinator\manifest.json" "$dist\mods\TurboExtractinator\" -Force
+$turboConfig = @'
+{
+  "Enabled": true,
+  "SpeedMultiplier": 5,
+  "AffectsChlorophyteExtractinator": true,
+  "BatchExtractionSize": 1
+}
+'@
+Set-Content -Path "$dist\mods\TurboExtractinator\config.json" -Value $turboConfig -Encoding UTF8
 
 Write-Host "`nDistribution assembled successfully in: $dist" -ForegroundColor Green
 Get-ChildItem -Path $dist -Recurse | Select-Object FullName

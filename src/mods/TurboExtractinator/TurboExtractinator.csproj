@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{E1F2A3B4-0007-4000-8000-000000000007}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{E4F5A6B7-0007-4000-8000-000000000007}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TerrariaModCore.Tests</RootNamespace>
-    <AssemblyName>TerrariaModCore.Tests</AssemblyName>
+    <RootNamespace>TurboExtractinator</RootNamespace>
+    <AssemblyName>TurboExtractinator</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <PlatformTarget>x86</PlatformTarget>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -40,54 +40,30 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>..\..\packages\Lib.Harmony.2.4.2\lib\net48\0Harmony.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\packages\Lib.Harmony.2.4.2\lib\net48\0Harmony.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Terraria">
       <HintPath>$(TerrariaPath)\Terraria.exe</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\packages\Mono.Cecil.0.11.6\lib\net40\Mono.Cecil.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TerrariaModCore.API\TerrariaModCore.API.csproj">
+    <ProjectReference Include="..\..\TerrariaModCore.API\TerrariaModCore.API.csproj">
       <Project>{A1B2C3D4-0001-4000-8000-000000000001}</Project>
       <Name>TerrariaModCore.API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\TerrariaModCore\TerrariaModCore.csproj">
-      <Project>{B1C2D3E4-0002-4000-8000-000000000002}</Project>
-      <Name>TerrariaModCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\mods\OreCascade\OreCascade.csproj">
-      <Project>{D1E2F3A4-0004-4000-8000-000000000004}</Project>
-      <Name>OreCascade</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\mods\AutoFishing\AutoFishing.csproj">
-      <Project>{D2E3F4A5-0005-4000-8000-000000000005}</Project>
-      <Name>AutoFishing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\mods\FishingLinePlus\FishingLinePlus.csproj">
-      <Project>{D3E4F5A6-0006-4000-8000-000000000006}</Project>
-      <Name>FishingLinePlus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\mods\TurboExtractinator\TurboExtractinator.csproj">
-      <Project>{D4E5F6A7-0008-4000-8000-000000000008}</Project>
-      <Name>TurboExtractinator</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="DependencyResolverTests.cs" />
-    <Compile Include="PatchManagerTests.cs" />
-    <Compile Include="ConfigManagerTests.cs" />
-    <Compile Include="FaultIsolationTests.cs" />
-    <Compile Include="OreCascadePluginTests.cs" />
-    <Compile Include="AutoFishingPluginTests.cs" />
-    <Compile Include="FishingLinePlusPluginTests.cs" />
-    <Compile Include="TurboExtractinatorPluginTests.cs" />
-    <Compile Include="ModCoexistenceTests.cs" />
+    <Compile Include="TurboExtractinatorMod.cs" />
+    <Compile Include="TurboExtractConfig.cs" />
+    <Compile Include="Patches\ExtractinatorSpeedPatch.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

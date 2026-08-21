@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Vanilla-Zero_tModLoader-06b6d4?style=for-the-badge" alt="Zero tModLoader">
   <img src="https://img.shields.io/badge/Memória-4GB_LAA_Ativo-f59e0b?style=for-the-badge" alt="4GB LAA Ativo">
-  <img src="https://img.shields.io/badge/Testes-85_Passando-10b981?style=for-the-badge" alt="85 Testes Passando">
+  <img src="https://img.shields.io/badge/Testes-97_Passando-10b981?style=for-the-badge" alt="97 Testes Passando">
   <img src="https://img.shields.io/badge/Licença-MIT-3b82f6?style=for-the-badge" alt="Licença MIT">
 </p>
 
@@ -62,6 +62,7 @@
 | **⛏️ OreCascade** | Mineração em cadeia instantânea para minérios e pedras preciosas usando Busca em Largura (BFS), isolamento estrito de veios e preservação legítima de drops vanilla. | [OreCascade README](src/mods/OreCascade/README.md) |
 | **🎣 AutoFishing** | Automação inteligente de pesca com arremesso automático, detecção nativa de fisgada (`ai[1] < 0`) e recolhimento sincronizado com o loop de 60 TPS do jogo. | [AutoFishing README](src/mods/AutoFishing/README.md) |
 | **🎣 FishingLinePlus** | Múltiplas linhas de pesca funcionais e simultâneas com física de dispersão angular, sincronização de fisgada em dupla camada e captura múltipla. | [FishingLinePlus README](src/mods/FishingLinePlus/README.md) |
+| **⚡ TurboExtractinator** | Acelera a velocidade de processamento do Extractinator e Chlorophyte Extractinator por um multiplicador configurável (padrão 5x) com suporte a lotes. | [TurboExtractinator README](src/mods/TurboExtractinator/README.md) |
 
 ---
 
@@ -150,10 +151,11 @@ terraria_mod_core/
 │   └── mods/                           # Mods de Produção Integrados
 │       ├── OreCascade/                 # Plugin VeinMiner / Escavação de Minérios
 │       ├── AutoFishing/                # Plugin de automação inteligente de pesca
-│       └── FishingLinePlus/            # Plugin de múltiplas linhas de pesca simultâneas
+│       ├── FishingLinePlus/            # Plugin de múltiplas linhas de pesca simultâneas
+│       └── TurboExtractinator/         # Plugin de aceleração do Extractinator
 │
 └── tests/
-    └── TerrariaModCore.Tests/          # Suíte Automatizada com 85 Testes
+    └── TerrariaModCore.Tests/          # Suíte Automatizada com 97 Testes
         ├── Program.cs                  # Executor autônomo de testes
         ├── DependencyResolverTests.cs  # Testes de resolução de dependências e ciclos
         ├── PatchManagerTests.cs        # Testes de prefix/postfix e reversão Harmony
@@ -161,7 +163,8 @@ terraria_mod_core/
         ├── OreCascadePluginTests.cs    # Testes de algoritmo BFS e poder de picareta
         ├── AutoFishingPluginTests.cs   # Testes da máquina de estados de pesca
         ├── FishingLinePlusPluginTests.cs # Testes de física de dispersão e captura múltipla
-        └── ModCoexistenceTests.cs      # 7 cenários de coexistência entre mods
+        ├── TurboExtractinatorPluginTests.cs # Testes de escala de velocidade e lotes
+        └── ModCoexistenceTests.cs      # 8 cenários de coexistência entre mods
 ```
 
 ---

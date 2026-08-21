@@ -116,6 +116,7 @@ namespace TerrariaModCore.Tests
             OreCascadePluginTests.Run(Assert);
             AutoFishingPluginTests.Run(Assert);
             FishingLinePlusPluginTests.Run(Assert);
+            TurboExtractinatorPluginTests.Run(Assert);
 
             // 6. Mod Coexistence Matrix Tests
             ModCoexistenceTests.Run(Assert);
