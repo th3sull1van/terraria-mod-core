@@ -28,6 +28,11 @@ if ($msbuild) {
     dotnet build "$workspace\TerrariaModCore.sln" -c Release -p:Platform="x86" -v m
 }
 
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Build failed with exit code $LASTEXITCODE! Halting distribution packaging."
+    exit $LASTEXITCODE
+}
+
 Write-Host "Assembling Distribution in $dist..." -ForegroundColor Cyan
 if (Test-Path $dist) {
     Remove-Item $dist -Recurse -Force
