@@ -1,0 +1,17 @@
+{
+  "id": "fishing_line_plus",
+  "name": "Fishing Line Plus",
+  "version": "1.0.0",
+  "author": "Silvio",
+  "description": "Enables multi-line fishing by allowing multiple simultaneous fishing bobbers and lines per cast with configurable spread.",
+  "entryAssembly": "FishingLinePlus.dll",
+  "entryType": "FishingLinePlus.FishingLinePlusMod",
+  "targetGameVersion": "1.4.5.7",
+  "coreVersion": "1.0.0",
+  "dependencies": [],
+  "optionalDependencies": [],
+  "loadBefore": [],
+  "loadAfter": [],
+  "incompatibleWith": [],
+  "enabled": true
+}

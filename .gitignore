@@ -1,0 +1,33 @@
+# Visual Studio / MSBuild files
+[Bb]in/
+[Oo]bj/
+[Dd]ist/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.dbmdl
+
+# NuGet Packages & Build Outputs
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.assets.json
+
+# Logs & Diagnostics
+*.log
+TMC/logs/
+test_temp_*/
+
+# Crash Dumps & Memory
+*.dmp
+*.mdmp
+*.crash
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
