@@ -19,9 +19,11 @@ TerrariaModCore.sln
 │       ├── OreCascade/                 # Iterative BFS VeinMiner & Gem Excavator plugin
 │       ├── AutoFishing/                # 60 TPS native state machine fishing automation plugin
 │       ├── FishingLinePlus/            # Multi-line fishing with dual-layer catch synchronization
-│       └── TurboExtractinator/         # High-speed Extractinator acceleration plugin
+│       ├── TurboExtractinator/         # High-speed Extractinator acceleration plugin
+│       ├── AutoBuff/                   # Automatic buff potion & food replenishment plugin
+│       └── AutoOpen/                   # Rapid automated grab bag & container opener plugin
 ├── tests/
-│   └── TerrariaModCore.Tests/      # Standalone 109-assertion automated test suite
+│   └── TerrariaModCore.Tests/      # Standalone 183-assertion automated test suite
 ├── docs/                           # Comprehensive technical documentation
 ├── dist/                           # Assembled release distribution
 └── build_dist.ps1                  # Master compilation, test execution, and packaging script
@@ -120,4 +122,4 @@ When implementing or editing a plugin:
 - [ ] Register all patches with `context.PatchManager.RegisterAll(context.Manifest.Id, assembly)`.
 - [ ] Include a dedicated, polished `README.md` inside the mod's folder (e.g. `src/mods/MyMod/README.md`).
 - [ ] Add corresponding unit and coexistence test cases to `TerrariaModCore.Tests`.
-- [ ] Verify that all 109+ tests pass with zero failures.
+- [ ] Verify that all 183+ tests pass with zero failures.

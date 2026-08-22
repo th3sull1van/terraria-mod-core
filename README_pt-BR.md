@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Vanilla-Zero_tModLoader-06b6d4?style=for-the-badge" alt="Zero tModLoader">
   <img src="https://img.shields.io/badge/Memória-4GB_LAA_Ativo-f59e0b?style=for-the-badge" alt="4GB LAA Ativo">
-  <img src="https://img.shields.io/badge/Testes-109_Passando-10b981?style=for-the-badge" alt="109 Testes Passando">
+  <img src="https://img.shields.io/badge/Testes-183_Passando-10b981?style=for-the-badge" alt="183 Testes Passando">
   <img src="https://img.shields.io/badge/Licença-MIT-3b82f6?style=for-the-badge" alt="Licença MIT">
 </p>
 
@@ -63,6 +63,8 @@
 | **🎣 AutoFishing** | Automação inteligente de pesca com arremesso automático, detecção nativa de fisgada (`ai[1] < 0`) e recolhimento sincronizado com o loop de 60 TPS do jogo. | [AutoFishing README](src/mods/AutoFishing/README.md) |
 | **🎣 FishingLinePlus** | Múltiplas linhas de pesca funcionais e simultâneas com física de dispersão angular, sincronização de fisgada em dupla camada e captura múltipla. | [FishingLinePlus README](src/mods/FishingLinePlus/README.md) |
 | **⚡ TurboExtractinator** | Acelera a velocidade de processamento do Extractinator e Chlorophyte Extractinator por um multiplicador configurável (padrão 5x) com suporte a lotes. | [TurboExtractinator README](src/mods/TurboExtractinator/README.md) |
+| **🧪 AutoBuff** | Toma poções de buff e come alimentos do inventário e Void Bag automaticamente quando os buffs expiram, garantindo tempo ativo contínuo sem desperdício. | [AutoBuff README](src/mods/AutoBuff/README.md) |
+| **📦 AutoOpen** | Abertura contínua e acelerada de bolsas de tesouro, caixas de pesca, ostras, presentes e baús trancados segurando o botão direito (estilo Extractinator). | [AutoOpen README](src/mods/AutoOpen/README.md) |
 
 ---
 

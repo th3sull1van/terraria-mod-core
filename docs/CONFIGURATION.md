@@ -125,3 +125,75 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
 | `SpeedMultiplier` | `int` | `5` | `1` – `60` | Speed acceleration multiplier (default 5 means 5x faster). |
 | `AffectsChlorophyteExtractinator` | `bool` | `true` | `true` / `false` | Also applies speed acceleration to the Chlorophyte Extractinator. |
 | `BatchExtractionSize` | `int` | `1` | `1` – `50` | Number of items processed per extraction tick cycle. |
+
+---
+
+## 6. AutoBuff Configuration (`mods/AutoBuff/config.json`)
+
+```json
+{
+  "Enabled": true,
+  "CheckIntervalTicks": 15,
+  "IncludeFood": true,
+  "IncludeFlasks": true,
+  "IncludeVoidBag": true,
+  "MinBuffTimeThresholdTicks": 0,
+  "ExcludedBuffIds": [
+    18,
+    119,
+    120
+  ],
+  "ExcludedItemIds": [
+    1344,
+    2756
+  ]
+}
+```
+
+### Options Breakdown
+
+| Setting | Type | Default | Range / Format | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle for all auto-buff replenishment logic. |
+| `CheckIntervalTicks` | `int` | `15` | `1` – `300` | Delay in game ticks between inventory evaluation scans (15 ticks = 4 scans/sec). |
+| `IncludeFood` | `bool` | `true` | `true` / `false` | Automatically consumes the best food item available when Well-Fed runs out. |
+| `IncludeFlasks` | `bool` | `true` | `true` / `false` | Automatically refreshes melee weapon flasks / imbues. |
+| `IncludeVoidBag` | `bool` | `true` | `true` / `false` | Scans items located in the player's unlocked and open Void Bag. |
+| `MinBuffTimeThresholdTicks` | `int` | `0` | `0` – `3600` | Re-applies buff if remaining duration is below threshold (0 = only when expired). |
+| `ExcludedBuffIds` | `List<int>` | `[18, 119, 120]` | Array of integers | List of Buff IDs excluded from auto-consumption (default excludes Gravitation, Lovestruck, Stinky). |
+| `ExcludedItemIds` | `List<int>` | `[1344, 2756]` | Array of integers | List of Item IDs excluded from auto-consumption (default excludes Red Potion, Gender Change). |
+
+---
+
+## 6. AutoOpen (`mods/AutoOpen/config.json`)
+
+Controls continuous rapid right-click opening and automated grab bag and container unpacking.
+
+```json
+{
+  "Enabled": true,
+  "RapidRightClickOpen": true,
+  "OpenDelayTicks": 3,
+  "BatchSize": 1,
+  "PlaySound": true,
+  "AutoOpenInventory": false,
+  "AutoOpenIntervalTicks": 10,
+  "IncludeVoidBag": true,
+  "ExcludedItemIds": []
+}
+```
+
+### Options Breakdown
+
+| Setting | Type | Default | Range / Format | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle enabling or disabling AutoOpen. |
+| `RapidRightClickOpen` | `bool` | `true` | `true` / `false` | Enables continuous rapid opening when holding down Right-Click. |
+| `OpenDelayTicks` | `int` | `3` | `0` – `60` | Delay in game ticks between opens while holding right click (3 ticks = 20 openings/sec). |
+| `BatchSize` | `int` | `1` | `1` – `50` | Number of containers opened per tick cycle. |
+| `PlaySound` | `bool` | `true` | `true` / `false` | Plays the native container opening sound effect. |
+| `AutoOpenInventory` | `bool` | `false` | `true` / `false` | Hands-free background mode that automatically unpacks grab bags in inventory. |
+| `AutoOpenIntervalTicks` | `int` | `10` | `1` – `120` | Interval in game ticks between background inventory scans. |
+| `IncludeVoidBag` | `bool` | `true` | `true` / `false` | Scans and opens containers inside the player's Void Bag. |
+| `ExcludedItemIds` | `List<int>` | `[]` | Array of integers | List of Item IDs excluded from automated opening. |
+

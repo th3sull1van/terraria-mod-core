@@ -76,6 +76,14 @@
       <Project>{D4E5F6A7-0008-4000-8000-000000000008}</Project>
       <Name>TurboExtractinator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\mods\AutoBuff\AutoBuff.csproj">
+      <Project>{D5E6F7A8-0009-4000-8000-000000000009}</Project>
+      <Name>AutoBuff</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\mods\AutoOpen\AutoOpen.csproj">
+      <Project>{D6E7F8A9-0010-4000-8000-000000000010}</Project>
+      <Name>AutoOpen</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -87,6 +95,8 @@
     <Compile Include="AutoFishingPluginTests.cs" />
     <Compile Include="FishingLinePlusPluginTests.cs" />
     <Compile Include="TurboExtractinatorPluginTests.cs" />
+    <Compile Include="AutoBuffPluginTests.cs" />
+    <Compile Include="AutoOpenPluginTests.cs" />
     <Compile Include="ModCoexistenceTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -45,6 +45,8 @@ New-Item -ItemType Directory -Path "$dist\mods\OreCascade" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoFishing" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\FishingLinePlus" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\TurboExtractinator" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\AutoBuff" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\AutoOpen" -Force | Out-Null
 
 # Copy Launcher (TerrariaModded.exe)
 Copy-Item "$workspace\src\TerrariaModCore.Launcher\bin\Release\TerrariaModded.exe" "$dist\" -Force
@@ -152,6 +154,50 @@ $turboConfig = @'
 }
 '@
 Set-Content -Path "$dist\mods\TurboExtractinator\config.json" -Value $turboConfig -Encoding UTF8
+
+# Copy AutoBuff
+Copy-Item "$workspace\src\mods\AutoBuff\bin\Release\AutoBuff.dll" "$dist\mods\AutoBuff\" -Force
+Copy-Item "$workspace\src\mods\AutoBuff\bin\Release\AutoBuff.pdb" "$dist\mods\AutoBuff\" -Force
+Copy-Item "$workspace\src\mods\AutoBuff\manifest.json" "$dist\mods\AutoBuff\" -Force
+$autoBuffConfig = @'
+{
+  "Enabled": true,
+  "CheckIntervalTicks": 15,
+  "IncludeFood": true,
+  "IncludeFlasks": true,
+  "IncludeVoidBag": true,
+  "MinBuffTimeThresholdTicks": 0,
+  "ExcludedBuffIds": [
+    18,
+    119,
+    120
+  ],
+  "ExcludedItemIds": [
+    1344,
+    2756
+  ]
+}
+'@
+Set-Content -Path "$dist\mods\AutoBuff\config.json" -Value $autoBuffConfig -Encoding UTF8
+
+# Copy AutoOpen
+Copy-Item "$workspace\src\mods\AutoOpen\bin\Release\AutoOpen.dll" "$dist\mods\AutoOpen\" -Force
+Copy-Item "$workspace\src\mods\AutoOpen\bin\Release\AutoOpen.pdb" "$dist\mods\AutoOpen\" -Force
+Copy-Item "$workspace\src\mods\AutoOpen\manifest.json" "$dist\mods\AutoOpen\" -Force
+$autoOpenConfig = @'
+{
+  "Enabled": true,
+  "RapidRightClickOpen": true,
+  "OpenDelayTicks": 3,
+  "BatchSize": 1,
+  "PlaySound": true,
+  "AutoOpenInventory": false,
+  "AutoOpenIntervalTicks": 10,
+  "IncludeVoidBag": true,
+  "ExcludedItemIds": []
+}
+'@
+Set-Content -Path "$dist\mods\AutoOpen\config.json" -Value $autoOpenConfig -Encoding UTF8
 
 Write-Host "`nDistribution assembled successfully in: $dist" -ForegroundColor Green
 Get-ChildItem -Path $dist -Recurse | Select-Object FullName

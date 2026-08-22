@@ -1,0 +1,17 @@
+{
+  "id": "auto_buff",
+  "name": "Auto Buff",
+  "version": "1.0.0",
+  "author": "Silvio",
+  "description": "Automatically consumes buff potions and food from inventory and Void Bag when buff durations expire.",
+  "entryAssembly": "AutoBuff.dll",
+  "entryType": "AutoBuff.AutoBuffMod",
+  "targetGameVersion": "1.4.5.7",
+  "coreVersion": "1.0.0",
+  "dependencies": [],
+  "optionalDependencies": [],
+  "loadBefore": [],
+  "loadAfter": [],
+  "incompatibleWith": [],
+  "enabled": true
+}

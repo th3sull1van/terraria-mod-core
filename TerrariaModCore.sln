@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FishingLinePlus", "src\mods
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboExtractinator", "src\mods\TurboExtractinator\TurboExtractinator.csproj", "{D4E5F6A7-0008-4000-8000-000000000008}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoBuff", "src\mods\AutoBuff\AutoBuff.csproj", "{D5E6F7A8-0009-4000-8000-000000000009}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoOpen", "src\mods\AutoOpen\AutoOpen.csproj", "{D6E7F8A9-0010-4000-8000-000000000010}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerrariaModCore.Tests", "tests\TerrariaModCore.Tests\TerrariaModCore.Tests.csproj", "{E1F2A3B4-0007-4000-8000-000000000007}"
 EndProject
 Global
@@ -52,6 +56,14 @@ Global
 		{D4E5F6A7-0008-4000-8000-000000000008}.Debug|x86.Build.0 = Debug|x86
 		{D4E5F6A7-0008-4000-8000-000000000008}.Release|x86.ActiveCfg = Release|x86
 		{D4E5F6A7-0008-4000-8000-000000000008}.Release|x86.Build.0 = Release|x86
+		{D5E6F7A8-0009-4000-8000-000000000009}.Debug|x86.ActiveCfg = Debug|x86
+		{D5E6F7A8-0009-4000-8000-000000000009}.Debug|x86.Build.0 = Debug|x86
+		{D5E6F7A8-0009-4000-8000-000000000009}.Release|x86.ActiveCfg = Release|x86
+		{D5E6F7A8-0009-4000-8000-000000000009}.Release|x86.Build.0 = Release|x86
+		{D6E7F8A9-0010-4000-8000-000000000010}.Debug|x86.ActiveCfg = Debug|x86
+		{D6E7F8A9-0010-4000-8000-000000000010}.Debug|x86.Build.0 = Debug|x86
+		{D6E7F8A9-0010-4000-8000-000000000010}.Release|x86.ActiveCfg = Release|x86
+		{D6E7F8A9-0010-4000-8000-000000000010}.Release|x86.Build.0 = Release|x86
 		{E1F2A3B4-0007-4000-8000-000000000007}.Debug|x86.ActiveCfg = Debug|x86
 		{E1F2A3B4-0007-4000-8000-000000000007}.Debug|x86.Build.0 = Debug|x86
 		{E1F2A3B4-0007-4000-8000-000000000007}.Release|x86.ActiveCfg = Release|x86

@@ -1,0 +1,17 @@
+{
+  "id": "auto_open",
+  "name": "Auto Open",
+  "version": "1.0.0",
+  "author": "Silvio",
+  "description": "Automates and accelerates right-click opening of grab bags, crates, boss bags, lockboxes, oysters, and presents.",
+  "entryAssembly": "AutoOpen.dll",
+  "entryType": "AutoOpen.AutoOpenMod",
+  "targetGameVersion": "1.4.5.7",
+  "coreVersion": "1.0.0",
+  "dependencies": [],
+  "optionalDependencies": [],
+  "loadBefore": [],
+  "loadAfter": [],
+  "incompatibleWith": [],
+  "enabled": true
+}
