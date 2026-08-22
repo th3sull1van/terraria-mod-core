@@ -12,5 +12,6 @@ namespace OreCascade
         public bool AllowDiagonalConnections { get; set; } = false;
         public bool RequireSameOreType { get; set; } = true;
         public bool IncludeGems { get; set; } = true;
+        public bool IncludeExtractables { get; set; } = true;
     }
 }

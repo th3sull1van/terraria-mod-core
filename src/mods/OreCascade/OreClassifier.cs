@@ -4,7 +4,7 @@ using Terraria.ID;
 namespace OreCascade
 {
     /// <summary>
-    /// Classifies tiles into ores and gems and evaluates vein matching rules.
+    /// Classifies tiles into ores, gems, and extractable blocks (Silt, Slush, Desert Fossil) and evaluates vein matching rules.
     /// </summary>
     public static class OreClassifier
     {
@@ -35,6 +35,12 @@ namespace OreCascade
             TileID.LunarOre         // 408
         };
 
+        private static readonly HashSet<ushort> Extractables = new HashSet<ushort>
+        {
+            TileID.Silt,            // 123
+            TileID.Slush            // 224
+        };
+
         private static readonly HashSet<ushort> Gems = new HashSet<ushort>
         {
             TileID.Sapphire,        // 63
@@ -49,11 +55,18 @@ namespace OreCascade
 
         public static bool IsOre(ushort tileType) => StandardOres.Contains(tileType);
 
+        public static bool IsExtractable(ushort tileType) => Extractables.Contains(tileType);
+
         public static bool IsGem(ushort tileType) => Gems.Contains(tileType);
 
         public static bool IsEligible(ushort tileType, CascadeConfig config)
         {
             if (StandardOres.Contains(tileType))
+            {
+                return true;
+            }
+
+            if (config != null && config.IncludeExtractables && Extractables.Contains(tileType))
             {
                 return true;
             }

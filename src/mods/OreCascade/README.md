@@ -46,7 +46,8 @@ The configuration file is located at `mods/OreCascade/config.json`:
   "MaxBlocksPerActivation": 100,
   "AllowDiagonalConnections": false,
   "RequireSameOreType": true,
-  "IncludeGems": true
+  "IncludeGems": true,
+  "IncludeExtractables": true
 }
 ```
 
@@ -59,14 +60,16 @@ The configuration file is located at `mods/OreCascade/config.json`:
 | `AllowDiagonalConnections` | `bool` | `false` | When `true`, searches 8-directional neighbors instead of 4-way orthogonal neighbors. |
 | `RequireSameOreType` | `bool` | `true` | When `true`, restricts mining strictly to the same tile type and frame identity. |
 | `IncludeGems` | `bool` | `true` | When `true`, enables chain-mining for natural gemstones (Amethyst, Diamond, etc.) and Amber. |
+| `IncludeExtractables` | `bool` | `true` | When `true`, enables chain-mining for extractable resource blocks (Silt, Slush, Desert Fossil). |
 
 ---
 
-## 💎 Supported Ores & Gemstones
+## 💎 Supported Ores, Gemstones & Extractables
 
 | Tier / Category | Ores & Blocks Included |
 | :--- | :--- |
-| **Pre-Hardmode** | Copper, Tin, Iron, Lead, Silver, Tungsten, Gold, Platinum, Desert Fossil, Meteorite, Demonite, Crimtane, Obsidian, Hellstone |
+| **Pre-Hardmode Ores** | Copper, Tin, Iron, Lead, Silver, Tungsten, Gold, Platinum, Meteorite, Demonite, Crimtane, Obsidian, Hellstone |
+| **Extractables & Fossils** | Silt Block, Slush Block, Desert Fossil, Fossil Ore |
 | **Hardmode (Tiers 1-3)** | Cobalt, Palladium, Mythril, Orichalcum, Adamantite, Titanium |
 | **Endgame & Celestial** | Chlorophyte, Luminite (Lunar Ore) |
 | **Gemstones (Optional)** | Amethyst, Topaz, Sapphire, Emerald, Ruby, Diamond, Amber |

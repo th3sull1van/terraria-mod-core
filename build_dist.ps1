@@ -102,7 +102,8 @@ $oreConfig = @'
   "MaxBlocksPerActivation": 100,
   "AllowDiagonalConnections": false,
   "RequireSameOreType": true,
-  "IncludeGems": true
+  "IncludeGems": true,
+  "IncludeExtractables": true
 }
 '@
 Set-Content -Path "$dist\mods\OreCascade\config.json" -Value $oreConfig -Encoding UTF8

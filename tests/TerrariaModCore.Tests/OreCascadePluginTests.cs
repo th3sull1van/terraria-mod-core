@@ -21,15 +21,28 @@ namespace TerrariaModCore.Tests
             assert(OreClassifier.IsGem(TileID.Diamond), "Diamond is classified as Gem");
             assert(OreClassifier.IsEligible(TileID.Diamond, config), "Diamond is eligible when IncludeGems=true");
 
+            // Extractable Blocks (Silt, Slush, Desert Fossil)
+            assert(OreClassifier.IsExtractable(TileID.Silt), "Silt is classified as Extractable");
+            assert(OreClassifier.IsExtractable(TileID.Slush), "Slush is classified as Extractable");
+            assert(OreClassifier.IsEligible(TileID.Silt, config), "Silt is eligible when IncludeExtractables=true");
+            assert(OreClassifier.IsEligible(TileID.Slush, config), "Slush is eligible when IncludeExtractables=true");
+
+            var noExtractables = new CascadeConfig { IncludeExtractables = false };
+            assert(!OreClassifier.IsEligible(TileID.Silt, noExtractables), "Silt is NOT eligible when IncludeExtractables=false");
+            assert(!OreClassifier.IsEligible(TileID.Slush, noExtractables), "Slush is NOT eligible when IncludeExtractables=false");
+
             var noGems = new CascadeConfig { IncludeGems = false };
             assert(!OreClassifier.IsEligible(TileID.Diamond, noGems), "Diamond is NOT eligible when IncludeGems=false");
 
             assert(!OreClassifier.IsOre(TileID.Dirt), "Dirt is NOT classified as Ore");
             assert(!OreClassifier.IsEligible(TileID.Dirt, config), "Dirt is NOT eligible");
 
-            // 2. Matching
+            // 2. Matching & Vein Isolation
             assert(OreClassifier.IsMatching(TileID.Iron, TileID.Iron, config), "Iron matches Iron");
             assert(!OreClassifier.IsMatching(TileID.Iron, TileID.Gold, config), "Iron does not match Gold (strict)");
+            assert(OreClassifier.IsMatching(TileID.Silt, TileID.Silt, config), "Silt matches Silt");
+            assert(OreClassifier.IsMatching(TileID.Slush, TileID.Slush, config), "Slush matches Slush");
+            assert(!OreClassifier.IsMatching(TileID.Silt, TileID.Slush, config), "Silt does NOT match Slush (strict vein isolation)");
 
             // 3. BFS Vein Discovery in Grid
             Main.maxTilesX = 50;

@@ -38,7 +38,8 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
   "MaxBlocksPerActivation": 100,
   "AllowDiagonalConnections": false,
   "RequireSameOreType": true,
-  "IncludeGems": true
+  "IncludeGems": true,
+  "IncludeExtractables": true
 }
 ```
 
@@ -51,6 +52,7 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
 | `AllowDiagonalConnections` | `bool` | `false` | `true` / `false` | When `true`, searches 8-way neighbors; when `false`, restricts search to 4 orthogonal neighbors. |
 | `RequireSameOreType` | `bool` | `true` | `true` / `false` | When `true`, prevents mining adjacent ores of a different material type. |
 | `IncludeGems` | `bool` | `true` | `true` / `false` | When `true`, enables chain-mining for natural gemstones (Amethyst, Diamond, etc.) and Amber. |
+| `IncludeExtractables` | `bool` | `true` | `true` / `false` | When `true`, enables chain-mining for extractable blocks (Silt Block, Slush Block, Desert Fossil). |
 
 ---
 
