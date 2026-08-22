@@ -14,6 +14,7 @@
 packages/
 *.nupkg
 *.snupkg
+*.zip
 project.lock.json
 project.assets.json
 
