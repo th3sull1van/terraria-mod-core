@@ -21,20 +21,20 @@ namespace TerrariaModCore.Tests
                 {
                     isResolving = true;
                     var asmName = new AssemblyName(e.Name).Name;
-                    string gameDir = @"D:\Jogos\Steam\steamapps\common\Terraria";
+                    string gameDir = ResolveGameDirectory();
                     string appDir = AppDomain.CurrentDomain.BaseDirectory;
 
                     string[] searchPaths = {
                         Path.Combine(appDir, asmName + ".dll"),
                         Path.Combine(appDir, asmName + ".exe"),
-                        Path.Combine(gameDir, asmName + ".dll"),
-                        Path.Combine(gameDir, asmName + ".exe"),
+                        !string.IsNullOrEmpty(gameDir) ? Path.Combine(gameDir, asmName + ".dll") : null,
+                        !string.IsNullOrEmpty(gameDir) ? Path.Combine(gameDir, asmName + ".exe") : null,
                         Path.Combine(appDir, "TMC", asmName + ".dll")
                     };
 
                     foreach (var p in searchPaths)
                     {
-                        if (File.Exists(p)) return Assembly.LoadFrom(p);
+                        if (!string.IsNullOrEmpty(p) && File.Exists(p)) return Assembly.LoadFrom(p);
                     }
 
                     // Search embedded resources inside Terraria.exe
@@ -48,7 +48,7 @@ namespace TerrariaModCore.Tests
                         }
                     }
 
-                    if (terrariaAsm == null && File.Exists(Path.Combine(gameDir, "Terraria.exe")))
+                    if (terrariaAsm == null && !string.IsNullOrEmpty(gameDir) && File.Exists(Path.Combine(gameDir, "Terraria.exe")))
                     {
                         try { terrariaAsm = Assembly.LoadFrom(Path.Combine(gameDir, "Terraria.exe")); } catch { }
                     }
@@ -100,6 +100,7 @@ namespace TerrariaModCore.Tests
             }
             catch { }
 
+
             // 1. Dependency Resolver Tests
             DependencyResolverTests.Run(Assert);
 
@@ -120,6 +121,7 @@ namespace TerrariaModCore.Tests
             AutoBuffPluginTests.Run(Assert);
             AutoOpenPluginTests.Run(Assert);
             AutoResearchPluginTests.Run(Assert);
+            PiggyVaultPluginTests.Run(Assert);
 
             // 6. Mod Coexistence Matrix Tests
             ModCoexistenceTests.Run(Assert);
@@ -149,6 +151,35 @@ namespace TerrariaModCore.Tests
                 failed++;
             }
             Console.ResetColor();
+        }
+
+        private static string ResolveGameDirectory()
+        {
+            string envPath = Environment.GetEnvironmentVariable("TERRARIA_PATH");
+            if (!string.IsNullOrEmpty(envPath) && File.Exists(Path.Combine(envPath, "Terraria.exe")))
+            {
+                return envPath;
+            }
+
+            string[] candidates = {
+                @"D:\Jogos\Steam\steamapps\common\Terraria",
+                @"C:\Program Files (x86)\Steam\steamapps\common\Terraria",
+                @"C:\Program Files\Steam\steamapps\common\Terraria",
+                @"C:\GOG Games\Terraria",
+                @"D:\GOG Games\Terraria",
+                @"E:\Steam\steamapps\common\Terraria",
+                @"E:\Jogos\Steam\steamapps\common\Terraria"
+            };
+
+            foreach (var path in candidates)
+            {
+                if (File.Exists(Path.Combine(path, "Terraria.exe")))
+                {
+                    return path;
+                }
+            }
+
+            return candidates[0];
         }
     }
 }

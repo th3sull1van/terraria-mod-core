@@ -22,7 +22,8 @@ TerrariaModCore.sln
 │       ├── TurboExtractinator/         # High-speed Extractinator acceleration plugin
 │       ├── AutoBuff/                   # Automatic buff potion & food replenishment plugin
 │       ├── AutoOpen/                   # Rapid automated grab bag & container opener plugin
-│       └── AutoResearch/               # Automated Journey Mode item research & sacrifice plugin
+│       ├── AutoResearch/               # Automated Journey Mode item research & sacrifice plugin
+│       └── PiggyVault/                  # Void Bag capabilities & storage automation for Piggy Bank
 ├── tests/
 │   └── TerrariaModCore.Tests/      # Standalone 237-assertion automated test suite
 ├── docs/                           # Comprehensive technical documentation
@@ -36,7 +37,7 @@ TerrariaModCore.sln
 
 | Property | Value | Notes |
 | :--- | :--- | :--- |
-| **Target Game** | `Terraria 1.4.5.7` | Located at `D:\Jogos\Steam\steamapps\common\Terraria` |
+| **Target Game** | `Terraria 1.4.5.7` | Auto-detected Steam/GOG install or `$env:TERRARIA_PATH` |
 | **Target Framework** | `.NET Framework 4.8` | Target across all projects |
 | **Architecture** | `x86 (32-bit)` | Must target `Platform="x86"` (Terraria is a 32-bit application) |
 | **Memory Model** | `4 GB LAA` | PE Header flag `IMAGE_FILE_LARGE_ADDRESS_AWARE` (`0x0020`) |
@@ -67,6 +68,10 @@ TerrariaModCore.sln
 5. **Strict English Standards**:
    - All source code comments, XML docstrings, logs, commit messages, and markdown documentation must be written in clear, professional English (with optional `_pt-BR.md` localized counterparts).
 
+6. **Mandatory Post-Build Game Directory Deployment**:
+   - The assembled release distribution (`dist/`) **must always be copied/deployed** to the target game directory (`$env:TERRARIA_PATH` or auto-detected Steam/GOG directory) immediately after compilation.
+   - `build_dist.ps1` automatically performs this synchronization upon assembling `dist/`. When performing manual builds or isolated edits, contributors and AI agents **must** ensure the latest binaries, configs, and manifests are copied to the game folder so runtime testing is always accurate.
+
 ---
 
 ## 4. Known Domain Traps & Engine Quirks
@@ -90,10 +95,10 @@ TerrariaModCore.sln
 
 ## 5. Standard Development & Verification Workflows
 
-### 5.1 Build the Full Solution & Run Tests
+### 5.1 Build Full Solution, Run Tests & Auto-Deploy
 ```powershell
-# Compiles solution (Release|x86), runs 85-assertion test suite, and builds dist/
-powershell -ExecutionPolicy Bypass -File "d:\Programas\Projetos\terraria\terraria_mod_core\build_dist.ps1"
+# Compiles solution (Release|x86), runs test suite, builds dist/, and auto-deploys to game directory
+powershell -ExecutionPolicy Bypass -File ".\build_dist.ps1"
 ```
 
 ### 5.2 Direct Test Suite Execution
@@ -104,8 +109,8 @@ dotnet build tests/TerrariaModCore.Tests/TerrariaModCore.Tests.csproj -c Release
 
 ### 5.3 Deploying to Game Directory
 ```powershell
-$source = "d:\Programas\Projetos\terraria\terraria_mod_core\dist"
-$target = "D:\Jogos\Steam\steamapps\common\Terraria"
+$source = ".\dist"
+$target = if ($env:TERRARIA_PATH) { $env:TERRARIA_PATH } else { "D:\Jogos\Steam\steamapps\common\Terraria" }
 Copy-Item -Path "$source\*" -Destination $target -Recurse -Force
 ```
 
@@ -123,4 +128,5 @@ When implementing or editing a plugin:
 - [ ] Register all patches with `context.PatchManager.RegisterAll(context.Manifest.Id, assembly)`.
 - [ ] Include a dedicated, polished `README.md` inside the mod's folder (e.g. `src/mods/MyMod/README.md`).
 - [ ] Add corresponding unit and coexistence test cases to `TerrariaModCore.Tests`.
-- [ ] Verify that all 237+ tests pass with zero failures.
+- [ ] Verify that all 285+ tests pass with zero failures.
+- [ ] Confirm distribution is deployed to the target game directory.

@@ -7,11 +7,14 @@
     <PlatformTarget>x86</PlatformTarget>
     
     <!-- Terraria Path Detection -->
+    <TerrariaPath Condition="'$(TerrariaPath)' == '' and '$(TERRARIA_PATH)' != '' and Exists('$(TERRARIA_PATH)\Terraria.exe')">$(TERRARIA_PATH)</TerrariaPath>
     <TerrariaPath Condition="'$(TerrariaPath)' == '' and Exists('D:\Jogos\Steam\steamapps\common\Terraria\Terraria.exe')">D:\Jogos\Steam\steamapps\common\Terraria</TerrariaPath>
     <TerrariaPath Condition="'$(TerrariaPath)' == '' and Exists('C:\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe')">C:\Program Files (x86)\Steam\steamapps\common\Terraria</TerrariaPath>
     <TerrariaPath Condition="'$(TerrariaPath)' == '' and Exists('C:\Program Files\Steam\steamapps\common\Terraria\Terraria.exe')">C:\Program Files\Steam\steamapps\common\Terraria</TerrariaPath>
     <TerrariaPath Condition="'$(TerrariaPath)' == '' and Exists('C:\GOG Games\Terraria\Terraria.exe')">C:\GOG Games\Terraria</TerrariaPath>
     <TerrariaPath Condition="'$(TerrariaPath)' == '' and Exists('D:\GOG Games\Terraria\Terraria.exe')">D:\GOG Games\Terraria</TerrariaPath>
+    <TerrariaPath Condition="'$(TerrariaPath)' == '' and Exists('E:\Steam\steamapps\common\Terraria\Terraria.exe')">E:\Steam\steamapps\common\Terraria</TerrariaPath>
+    <TerrariaPath Condition="'$(TerrariaPath)' == '' and Exists('E:\Jogos\Steam\steamapps\common\Terraria\Terraria.exe')">E:\Jogos\Steam\steamapps\common\Terraria</TerrariaPath>
     <TerrariaPath Condition="'$(TerrariaPath)' == ''">D:\Jogos\Steam\steamapps\common\Terraria</TerrariaPath>
   </PropertyGroup>
 </Project>

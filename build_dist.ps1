@@ -48,6 +48,7 @@ New-Item -ItemType Directory -Path "$dist\mods\TurboExtractinator" -Force | Out-
 New-Item -ItemType Directory -Path "$dist\mods\AutoBuff" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoOpen" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoResearch" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\PiggyVault" -Force | Out-Null
 
 # Copy Launcher (TerrariaModded.exe)
 Copy-Item "$workspace\src\TerrariaModCore.Launcher\bin\Release\TerrariaModded.exe" "$dist\" -Force
@@ -167,6 +168,7 @@ $autoBuffConfig = @'
   "IncludeFood": true,
   "IncludeFlasks": true,
   "IncludeVoidBag": true,
+  "IncludePiggyBank": true,
   "MinBuffTimeThresholdTicks": 0,
   "ExcludedBuffIds": [
     18,
@@ -207,8 +209,6 @@ Copy-Item "$workspace\src\mods\AutoResearch\manifest.json" "$dist\mods\AutoResea
 $autoResearchConfig = @'
 {
   "Enabled": true,
-  "AutoResearchOnPickup": true,
-  "AutoResearchInventory": true,
   "ScanIntervalTicks": 1,
   "IncludeVoidBag": true,
   "PlaySound": true,
@@ -218,5 +218,58 @@ $autoResearchConfig = @'
 '@
 Set-Content -Path "$dist\mods\AutoResearch\config.json" -Value $autoResearchConfig -Encoding UTF8
 
+# Copy PiggyVault
+Copy-Item "$workspace\src\mods\PiggyVault\bin\Release\PiggyVault.dll" "$dist\mods\PiggyVault\" -Force
+Copy-Item "$workspace\src\mods\PiggyVault\bin\Release\PiggyVault.pdb" "$dist\mods\PiggyVault\" -Force
+Copy-Item "$workspace\src\mods\PiggyVault\manifest.json" "$dist\mods\PiggyVault\" -Force
+$piggyVaultConfig = @'
+{
+  "Enabled": true,
+  "RequirePiggyItemInInventory": true,
+  "AutoPickupToPiggyBank": true,
+  "CraftFromPiggyBank": true,
+  "QuickBuffFromPiggyBank": true,
+  "QuickHealFromPiggyBank": true,
+  "QuickManaFromPiggyBank": true,
+  "ConsumeAmmoAndBaitFromPiggyBank": true,
+  "InfoAccessoriesInPiggyBank": true,
+  "WormholePotionFromPiggyBank": true,
+  "PlayPickupSound": true,
+  "ShowPickupText": true
+}
+'@
+Set-Content -Path "$dist\mods\PiggyVault\config.json" -Value $piggyVaultConfig -Encoding UTF8
+
 Write-Host "`nDistribution assembled successfully in: $dist" -ForegroundColor Green
+
+# Dynamically resolve Terraria game directory
+$possibleGameDirs = @(
+    $env:TERRARIA_PATH,
+    "D:\Jogos\Steam\steamapps\common\Terraria",
+    "C:\Program Files (x86)\Steam\steamapps\common\Terraria",
+    "C:\Program Files\Steam\steamapps\common\Terraria",
+    "C:\GOG Games\Terraria",
+    "D:\GOG Games\Terraria",
+    "E:\Steam\steamapps\common\Terraria",
+    "E:\Jogos\Steam\steamapps\common\Terraria"
+)
+$gameDir = $null
+foreach ($dir in $possibleGameDirs) {
+    if (![string]::IsNullOrWhiteSpace($dir) -and (Test-Path (Join-Path $dir "Terraria.exe"))) {
+        $gameDir = $dir
+        break
+    }
+}
+
+if ($gameDir) {
+    Write-Host "`nDeploying distribution to game directory: $gameDir" -ForegroundColor Cyan
+    try {
+        Copy-Item -Path "$dist\*" -Destination $gameDir -Recurse -Force
+        Write-Host "Deployment to $gameDir completed successfully." -ForegroundColor Green
+    }
+    catch {
+        Write-Warning "Could not overwrite some files in $gameDir (the game may be running). Please close Terraria/TerrariaModded and re-run build_dist.ps1."
+    }
+}
+
 Get-ChildItem -Path $dist -Recurse | Select-Object FullName
