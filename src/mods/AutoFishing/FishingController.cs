@@ -7,18 +7,67 @@ namespace AutoFishing
 {
     /// <summary>
     /// Coordinates fishing state, bite detection, auto-casting, and auto-reeling in sync with vanilla Terraria tick cycle.
+    /// Automation only begins after the player makes their first manual cast click, and stops when manually reeled in.
     /// </summary>
     public static class FishingController
     {
+        [ThreadStatic]
+        private static bool _isInternalAction;
+
+        private static bool _isAutomating = false;
         private static int _castTimer = 0;
         private static int _reelTimer = 0;
+        private static int _lastSelectedItemIndex = -1;
 
         private static readonly MethodInfo PullBobbersMethod = typeof(Player).GetMethod(
             "ItemCheck_PullFishingBobbers",
             BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
 
+        /// <summary>
+        /// Indicates whether automated continuous fishing is currently active.
+        /// </summary>
+        public static bool IsAutomating
+        {
+            get => _isAutomating;
+            set => _isAutomating = value;
+        }
+
+        /// <summary>
+        /// Thread-static reentrancy flag indicating whether a cast or reel action was triggered internally by the mod.
+        /// </summary>
+        public static bool IsInternalAction
+        {
+            get => _isInternalAction;
+            set => _isInternalAction = value;
+        }
+
+        public static int CastTimer => _castTimer;
+        public static int ReelTimer => _reelTimer;
+
         public static void Reset()
         {
+            _isAutomating = false;
+            _castTimer = 0;
+            _reelTimer = 0;
+            _lastSelectedItemIndex = -1;
+        }
+
+        /// <summary>
+        /// Called when the player manually casts their fishing rod to engage automation.
+        /// </summary>
+        public static void OnManualCast(Player player, AutoFishingConfig config)
+        {
+            _isAutomating = true;
+            _castTimer = config != null ? config.CastDelayTicks : 30;
+            _reelTimer = 0;
+        }
+
+        /// <summary>
+        /// Called when the player manually reels in / pulls their fishing line to cancel automation.
+        /// </summary>
+        public static void OnManualPull(Player player, AutoFishingConfig config)
+        {
+            _isAutomating = false;
             _castTimer = 0;
             _reelTimer = 0;
         }
@@ -42,16 +91,19 @@ namespace AutoFishing
                 return;
             }
 
+            // Detect slot change and reset state
+            if (_lastSelectedItemIndex != player.selectedItem)
+            {
+                _lastSelectedItemIndex = player.selectedItem;
+                _isAutomating = false;
+                _castTimer = 0;
+                _reelTimer = 0;
+            }
+
             Item selectedItem = player.inventory[player.selectedItem];
             if (selectedItem == null || selectedItem.fishingPole <= 0)
             {
                 Reset();
-                return;
-            }
-
-            // Verify if player has bait when required
-            if (config.RequireBait && !HasBait(player))
-            {
                 return;
             }
 
@@ -80,10 +132,18 @@ namespace AutoFishing
                     _reelTimer++;
                     if (_reelTimer >= config.ReelDelayTicks)
                     {
-                        // Reel in using vanilla pull method
+                        // Reel in using vanilla pull method with internal action flag
                         if (PullBobbersMethod != null)
                         {
-                            PullBobbersMethod.Invoke(player, new object[] { selectedItem });
+                            try
+                            {
+                                _isInternalAction = true;
+                                PullBobbersMethod.Invoke(player, new object[] { selectedItem });
+                            }
+                            finally
+                            {
+                                _isInternalAction = false;
+                            }
                         }
                         _reelTimer = 0;
                         _castTimer = config.CastDelayTicks;
@@ -98,18 +158,33 @@ namespace AutoFishing
             {
                 _reelTimer = 0;
 
-                if (config.AutoCast)
+                // Only auto-cast if automation was started by user and AutoCast is enabled
+                if (_isAutomating && config.AutoCast)
                 {
+                    // Verify if player has bait when required
+                    if (config.RequireBait && !HasBait(player))
+                    {
+                        return;
+                    }
+
                     if (_castTimer > 0)
                     {
                         _castTimer--;
                     }
                     else
                     {
-                        // Trigger cast by simulating controlUseItem and executing ItemCheck
-                        player.controlUseItem = true;
-                        player.releaseUseItem = true;
-                        player.ItemCheck();
+                        try
+                        {
+                            _isInternalAction = true;
+                            // Trigger cast by simulating controlUseItem and executing ItemCheck
+                            player.controlUseItem = true;
+                            player.releaseUseItem = true;
+                            player.ItemCheck();
+                        }
+                        finally
+                        {
+                            _isInternalAction = false;
+                        }
                         _castTimer = config.CastDelayTicks;
                     }
                 }

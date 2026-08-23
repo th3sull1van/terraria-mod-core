@@ -17,6 +17,12 @@
 
 ## 🌟 Key Features
 
+- **🎮 User-Initiated Lifecycle (Manual Start / Manual Stop)**:
+  - Selecting a fishing rod in the hotbar will **not** cast automatically.
+  - Automation starts only after the user selects the rod and performs the first manual cast click.
+  - Automation stops immediately whenever the user manually clicks to reel in or cancel the line.
+  - Switching hotbar slots cleanly resets automation.
+
 - **⚡ Zero External Macros & Native Game Loop Sync**:
   - Executes directly inside `Player.Update` in synchronization with the engine's 60 TPS tick cycle.
   - Zero external mouse hooking or fragile screen-pixel reading.
@@ -58,7 +64,7 @@ The configuration file is located at `mods/AutoFishing/config.json`:
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `Enabled` | `bool` | `true` | Enables or disables all auto-fishing automation. |
-| `AutoCast` | `bool` | `true` | Automatically casts the rod when held and ready. |
+| `AutoCast` | `bool` | `true` | Automatically recasts the rod while automation is active. |
 | `AutoReel` | `bool` | `true` | Automatically reels in when a fish/item bites. |
 | `CastDelayTicks` | `int` | `30` | Delay in game ticks (60 ticks = 1 second) after reeling before recasting. |
 | `ReelDelayTicks` | `int` | `2` | Reaction delay in game ticks between bite detection and reeling in. |
@@ -71,6 +77,8 @@ The configuration file is located at `mods/AutoFishing/config.json`:
 | Target Class | Target Method | Hook Type | Purpose |
 | :--- | :--- | :--- | :--- |
 | `Terraria.Player` | `Update(int i)` | `Postfix` | Executes the fishing controller state machine for the local player (`i == Main.myPlayer`). |
+| `Terraria.Player` | `ItemCheck_Shoot(int i, Item sItem, int weaponDamage)` | `Postfix` | Intercepts manual casting to engage automation. |
+| `Terraria.Player` | `ItemCheck_PullFishingBobbers(Item sItem)` | `Prefix` | Intercepts manual reel-in to disengage automation. |
 
 ---
 

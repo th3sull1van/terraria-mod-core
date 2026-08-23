@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using AutoFishing;
 using Terraria;
 
@@ -54,8 +55,79 @@ namespace TerrariaModCore.Tests
             bool isBitingNow = (Main.projectile[10].ai[1] < 0f && Main.projectile[10].localAI[1] != 0f);
             assert(isBitingNow, "Bite successfully detected when ai[1] < 0 and localAI[1] != 0");
 
+            // 4. Automation Lifecycle & Manual Start/Stop
+            var config = new AutoFishingConfig
+            {
+                Enabled = true,
+                AutoCast = true,
+                AutoReel = true,
+                CastDelayTicks = 30,
+                ReelDelayTicks = 2,
+                RequireBait = true
+            };
+
+            FishingController.Reset();
+            assert(!FishingController.IsAutomating, "FishingController starts in inactive state (IsAutomating == false)");
+
+            // Select fishing rod
+            SetSelectedItem(player, 0);
+            player.inventory[0].fishingPole = 30; // Wood Fishing Pole
+            Main.projectile[10].active = false;   // No active bobbers
+
+            // Ticking while inactive should NOT trigger auto-cast
+            player.controlUseItem = false;
+            FishingController.Update(player, config);
+            assert(!FishingController.IsAutomating, "Holding fishing rod does not auto-activate automation without manual cast");
+            assert(!player.controlUseItem, "Holding fishing rod does not simulate use item before first user click");
+
+            // Simulate user manual cast
+            FishingController.OnManualCast(player, config);
+            assert(FishingController.IsAutomating, "Manual cast activates automation (IsAutomating == true)");
+            assert(FishingController.CastTimer == config.CastDelayTicks, "Cast timer initialized to CastDelayTicks on manual cast");
+
+            // Simulate user manual reel-in / cancel
+            FishingController.OnManualPull(player, config);
+            assert(!FishingController.IsAutomating, "Manual reel-in cancels automation (IsAutomating == false)");
+
+            // Verify no auto-cast after manual reel-in
+            player.controlUseItem = false;
+            FishingController.Update(player, config);
+            assert(!player.controlUseItem, "No auto-cast occurs after manual reel-in cancellation");
+
+            // Simulate manual cast followed by slot change
+            FishingController.OnManualCast(player, config);
+            assert(FishingController.IsAutomating, "Automation reactivated on subsequent manual cast");
+
+            SetSelectedItem(player, 1); // Switch to sword / different slot
+            FishingController.Update(player, config);
+            assert(!FishingController.IsAutomating, "Switching selected inventory slot resets automation");
+
             // Cleanup
+            FishingController.Reset();
             Main.projectile[10].active = false;
+        }
+
+        private static void SetSelectedItem(Player player, int slot)
+        {
+            var stateField = typeof(Player).GetField("selectedItemState", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            if (stateField != null)
+            {
+                var stateObj = stateField.GetValue(player);
+                if (stateObj != null)
+                {
+                    var selectedField = stateObj.GetType().GetField("selected", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (selectedField != null)
+                    {
+                        selectedField.SetValue(stateObj, slot);
+                    }
+                    var hotbarField = stateObj.GetType().GetField("hotbar", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (hotbarField != null)
+                    {
+                        hotbarField.SetValue(stateObj, slot);
+                    }
+                    stateField.SetValue(player, stateObj);
+                }
+            }
         }
     }
 }
