@@ -47,6 +47,7 @@ New-Item -ItemType Directory -Path "$dist\mods\FishingLinePlus" -Force | Out-Nul
 New-Item -ItemType Directory -Path "$dist\mods\TurboExtractinator" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoBuff" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoOpen" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\AutoResearch" -Force | Out-Null
 
 # Copy Launcher (TerrariaModded.exe)
 Copy-Item "$workspace\src\TerrariaModCore.Launcher\bin\Release\TerrariaModded.exe" "$dist\" -Force
@@ -198,6 +199,24 @@ $autoOpenConfig = @'
 }
 '@
 Set-Content -Path "$dist\mods\AutoOpen\config.json" -Value $autoOpenConfig -Encoding UTF8
+
+# Copy AutoResearch
+Copy-Item "$workspace\src\mods\AutoResearch\bin\Release\AutoResearch.dll" "$dist\mods\AutoResearch\" -Force
+Copy-Item "$workspace\src\mods\AutoResearch\bin\Release\AutoResearch.pdb" "$dist\mods\AutoResearch\" -Force
+Copy-Item "$workspace\src\mods\AutoResearch\manifest.json" "$dist\mods\AutoResearch\" -Force
+$autoResearchConfig = @'
+{
+  "Enabled": true,
+  "AutoResearchOnPickup": true,
+  "AutoResearchInventory": true,
+  "ScanIntervalTicks": 1,
+  "IncludeVoidBag": true,
+  "PlaySound": true,
+  "ShowNotifications": true,
+  "ExcludedItemIds": []
+}
+'@
+Set-Content -Path "$dist\mods\AutoResearch\config.json" -Value $autoResearchConfig -Encoding UTF8
 
 Write-Host "`nDistribution assembled successfully in: $dist" -ForegroundColor Green
 Get-ChildItem -Path $dist -Recurse | Select-Object FullName

@@ -119,6 +119,7 @@ namespace TerrariaModCore.Tests
             TurboExtractinatorPluginTests.Run(Assert);
             AutoBuffPluginTests.Run(Assert);
             AutoOpenPluginTests.Run(Assert);
+            AutoResearchPluginTests.Run(Assert);
 
             // 6. Mod Coexistence Matrix Tests
             ModCoexistenceTests.Run(Assert);

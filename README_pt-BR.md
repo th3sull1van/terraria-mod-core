@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Vanilla-Zero_tModLoader-06b6d4?style=for-the-badge" alt="Zero tModLoader">
   <img src="https://img.shields.io/badge/Memória-4GB_LAA_Ativo-f59e0b?style=for-the-badge" alt="4GB LAA Ativo">
-  <img src="https://img.shields.io/badge/Testes-183_Passando-10b981?style=for-the-badge" alt="183 Testes Passando">
+  <img src="https://img.shields.io/badge/Testes-226_Aprovados-10b981?style=for-the-badge" alt="226 Testes Aprovados">
   <img src="https://img.shields.io/badge/Licença-MIT-3b82f6?style=for-the-badge" alt="Licença MIT">
 </p>
 
@@ -65,6 +65,7 @@
 | **⚡ TurboExtractinator** | Acelera a velocidade de processamento do Extractinator e Chlorophyte Extractinator por um multiplicador configurável (padrão 5x) com suporte a lotes. | [TurboExtractinator README](src/mods/TurboExtractinator/README.md) |
 | **🧪 AutoBuff** | Toma poções de buff e come alimentos do inventário e Void Bag automaticamente quando os buffs expiram, garantindo tempo ativo contínuo sem desperdício. | [AutoBuff README](src/mods/AutoBuff/README.md) |
 | **📦 AutoOpen** | Abertura contínua e acelerada de bolsas de tesouro, caixas de pesca, ostras, presentes e baús trancados segurando o botão direito (estilo Extractinator). | [AutoOpen README](src/mods/AutoOpen/README.md) |
+| **🔬 AutoResearch** | Pesquisa e sacrifício automatizados de itens incompletos no modo Journey ao entrarem no inventário, preservando 100% das regras de quantidade vanilla sem cliques manuais. | [AutoResearch README](src/mods/AutoResearch/README.md) |
 
 ---
 

@@ -1,0 +1,17 @@
+{
+  "id": "autoresearch",
+  "name": "Auto Research",
+  "version": "1.0.0",
+  "author": "Silvio",
+  "description": "Automatically researches and sacrifices non-completed items in Journey Mode when they enter your inventory, preserving vanilla item quantity rules.",
+  "entryAssembly": "AutoResearch.dll",
+  "entryType": "AutoResearch.AutoResearchMod",
+  "targetGameVersion": "1.4.5.7",
+  "coreVersion": "1.0.0",
+  "dependencies": [],
+  "optionalDependencies": [],
+  "loadBefore": [],
+  "loadAfter": [],
+  "incompatibleWith": [],
+  "enabled": true
+}
