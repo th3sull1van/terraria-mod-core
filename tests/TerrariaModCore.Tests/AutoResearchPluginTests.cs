@@ -16,8 +16,6 @@ namespace TerrariaModCore.Tests
             // 1. Config Defaults & Boundaries
             var config = new AutoResearchConfig();
             assert(config.Enabled, "Default AutoResearchConfig Enabled is true");
-            assert(config.AutoResearchOnPickup, "Default AutoResearchOnPickup is true");
-            assert(config.AutoResearchInventory, "Default AutoResearchInventory is true");
             assert(config.ScanIntervalTicks == 1, "Default ScanIntervalTicks is 1 tick");
             assert(config.IncludeVoidBag, "Default IncludeVoidBag is true");
             assert(config.PlaySound, "Default PlaySound is true");
@@ -154,14 +152,13 @@ namespace TerrariaModCore.Tests
             assert(!ResearchController.TrySacrificeItem(airItem, player, config, out _, out _), "Air item returns false");
             assert(!ResearchController.TrySacrificeItem(null, player, config, out _, out _), "Null item returns false");
 
-            // 10. ProcessGetItem (Pickup hook logic)
-            var orePickup = new Item();
-            orePickup.type = ItemID.IronOre;
-            orePickup.stack = 25;
+            // 10. Inventory Entry Processing
+            player.inventory[5].type = ItemID.IronOre;
+            player.inventory[5].stack = 25;
 
-            bool pickupProcessed = ResearchController.ProcessGetItem(player, orePickup, config);
-            assert(pickupProcessed, "ProcessGetItem successfully processes unresearched Iron Ore");
-            assert(orePickup.IsAir || orePickup.stack == 0, "Iron Ore turned to air after full sacrifice via ProcessGetItem");
+            ResearchController.Reset();
+            ResearchController.UpdateInventoryScan(player, config);
+            assert(player.inventory[5].IsAir || player.inventory[5].stack == 0, "Iron Ore turned to air after full sacrifice via inventory scan");
             assert(Main.LocalPlayerCreativeTracker.ItemSacrifices.IsFullyResearched(ItemID.IronOre), "Iron Ore is now fully researched");
 
             // 11. Background Inventory & Void Bag Scan (Mouse item is preserved until placed in inventory)
@@ -172,9 +169,11 @@ namespace TerrariaModCore.Tests
             player.inventory[0].type = ItemID.DirtBlock;
             player.inventory[0].stack = 30;
 
-            // Place 20 dirt on cursor (crafted item held on mouse)
+            // Place 20 dirt on cursor (crafted item held on mouse in inventory[58] and Main.mouseItem)
             Main.mouseItem.type = ItemID.DirtBlock;
             Main.mouseItem.stack = 20;
+            player.inventory[58].type = ItemID.DirtBlock;
+            player.inventory[58].stack = 20;
 
             // Place 20 dirt in Void Bag
             player.bank4.item[0].type = ItemID.DirtBlock;
@@ -190,6 +189,7 @@ namespace TerrariaModCore.Tests
             assert(dirtHave == 50 && dirtNeed == 100, "Background scan researched 30 (inv) + 20 (void) = 50 Dirt");
             assert(player.inventory[0].IsAir || player.inventory[0].stack == 0, "Inventory Dirt consumed");
             assert(!Main.mouseItem.IsAir && Main.mouseItem.stack == 20, "Cursor Dirt preserved while being held on mouse");
+            assert(!player.inventory[58].IsAir && player.inventory[58].stack == 20, "inventory[58] preserved while being held on mouse");
             assert(player.bank4.item[0].IsAir || player.bank4.item[0].stack == 0, "Void Bag Dirt consumed");
 
             // Now place the cursor item into inventory[1]

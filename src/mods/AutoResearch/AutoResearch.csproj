@@ -63,7 +63,6 @@
     <Compile Include="AutoResearchMod.cs" />
     <Compile Include="AutoResearchConfig.cs" />
     <Compile Include="ResearchController.cs" />
-    <Compile Include="Patches\PlayerGetItemPatch.cs" />
     <Compile Include="Patches\PlayerResearchPatch.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -142,24 +142,11 @@ namespace AutoResearch
         }
 
         /// <summary>
-        /// Processes an item received during GetItem (e.g. pickup).
-        /// </summary>
-        public static bool ProcessGetItem(Player player, Item item, AutoResearchConfig config)
-        {
-            if (config == null || !config.Enabled || !config.AutoResearchOnPickup)
-            {
-                return false;
-            }
-
-            return TrySacrificeItem(item, player, config, out _, out _);
-        }
-
-        /// <summary>
-        /// Sweeps the player's inventory, cursor item, and void bag in the background.
+        /// Sweeps the player's real inventory and void bag in the background.
         /// </summary>
         public static void UpdateInventoryScan(Player player, AutoResearchConfig config)
         {
-            if (config == null || !config.Enabled || !config.AutoResearchInventory)
+            if (config == null || !config.Enabled)
             {
                 return;
             }
@@ -175,10 +162,11 @@ namespace AutoResearch
                 return;
             }
 
-            // 1. Scan Main Inventory (0..58)
+            // 1. Scan Main Inventory (0..57: hotbar/backpack 0..49, coins 50..53, ammo 54..57; slot 58 is InventoryMouseItem and is excluded)
             if (player.inventory != null)
             {
-                for (int i = 0; i < player.inventory.Length; i++)
+                int maxInventorySlot = Math.Min(player.inventory.Length, 58);
+                for (int i = 0; i < maxInventorySlot; i++)
                 {
                     var item = player.inventory[i];
                     if (item != null && !item.IsAir && item.type > 0 && item.stack > 0)

@@ -15,19 +15,7 @@ namespace AutoResearch
         public bool Enabled { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets whether items are immediately researched upon pickup / acquisition via GetItem.
-        /// Default is true.
-        /// </summary>
-        public bool AutoResearchOnPickup { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets whether inventory, cursor, and container items are automatically swept in the background.
-        /// Default is true.
-        /// </summary>
-        public bool AutoResearchInventory { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the background inventory scanning interval in game ticks. Default is 1 (every tick / instant).
+        /// Gets or sets the inventory scanning interval in game ticks. Default is 1 (every tick / instant).
         /// </summary>
         public int ScanIntervalTicks { get; set; } = 1;
 
@@ -44,7 +32,7 @@ namespace AutoResearch
         public bool PlaySound { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets whether in-game chat or popup notifications should be displayed when researching items.
+        /// Gets or sets whether in-game chat notifications should be displayed when researching items.
         /// Default is true.
         /// </summary>
         public bool ShowNotifications { get; set; } = true;

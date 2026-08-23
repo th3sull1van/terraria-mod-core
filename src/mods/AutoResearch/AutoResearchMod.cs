@@ -22,7 +22,7 @@ namespace AutoResearch
 
             // Load configuration via TMC ConfigManager
             Config = context.ConfigManager.Get<AutoResearchConfig>();
-            context.Logger.Info($"AutoResearch initialized (Enabled: {Config.Enabled}, PickupResearch: {Config.AutoResearchOnPickup}, InventoryResearch: {Config.AutoResearchInventory})");
+            context.Logger.Info($"AutoResearch initialized (Enabled: {Config.Enabled}, ScanInterval: {Config.ScanIntervalTicks} ticks, VoidBag: {Config.IncludeVoidBag})");
 
             // Register patches through central PatchManager
             context.PatchManager.RegisterAll(context.Manifest.Id, Assembly.GetExecutingAssembly());

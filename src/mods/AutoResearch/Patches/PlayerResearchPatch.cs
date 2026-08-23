@@ -20,7 +20,7 @@ namespace AutoResearch.Patches
             if (isUpdating) return;
 
             var mod = AutoResearchMod.Instance;
-            if (mod == null || mod.Config == null || !mod.Config.Enabled || !mod.Config.AutoResearchInventory)
+            if (mod == null || mod.Config == null || !mod.Config.Enabled)
             {
                 return;
             }
