@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace TerrariaModCore.Tests
@@ -100,11 +101,8 @@ namespace TerrariaModCore.Tests
             }
             catch { }
 
-
             // 1. Dependency Resolver Tests
             DependencyResolverTests.Run(Assert);
-
-            // 2. Patch Manager Tests
             PatchManagerTests.Run(Assert);
 
             // 3. Configuration & JSON Tests
@@ -122,6 +120,7 @@ namespace TerrariaModCore.Tests
             AutoOpenPluginTests.Run(Assert);
             AutoResearchPluginTests.Run(Assert);
             PiggyVaultPluginTests.Run(Assert);
+            TurboBucketPluginTests.Run(Assert);
 
             // 6. Mod Coexistence Matrix Tests
             ModCoexistenceTests.Run(Assert);

@@ -49,6 +49,7 @@ New-Item -ItemType Directory -Path "$dist\mods\AutoBuff" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoOpen" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoResearch" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\PiggyVault" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\TurboBucket" -Force | Out-Null
 
 # Copy Launcher (TerrariaModded.exe)
 Copy-Item "$workspace\src\TerrariaModCore.Launcher\bin\Release\TerrariaModded.exe" "$dist\" -Force
@@ -239,6 +240,24 @@ $piggyVaultConfig = @'
 }
 '@
 Set-Content -Path "$dist\mods\PiggyVault\config.json" -Value $piggyVaultConfig -Encoding UTF8
+
+# Copy TurboBucket
+Copy-Item "$workspace\src\mods\TurboBucket\bin\Release\TurboBucket.dll" "$dist\mods\TurboBucket\" -Force
+Copy-Item "$workspace\src\mods\TurboBucket\bin\Release\TurboBucket.pdb" "$dist\mods\TurboBucket\" -Force
+Copy-Item "$workspace\src\mods\TurboBucket\manifest.json" "$dist\mods\TurboBucket\" -Force
+$turboBucketConfig = @'
+{
+  "Enabled": true,
+  "SpeedMultiplier": 5,
+  "AffectsWater": true,
+  "AffectsLava": true,
+  "AffectsHoney": true,
+  "AffectsBottomlessBuckets": true,
+  "AffectsEmptyBuckets": false,
+  "AffectsSponges": false
+}
+'@
+Set-Content -Path "$dist\mods\TurboBucket\config.json" -Value $turboBucketConfig -Encoding UTF8
 
 Write-Host "`nDistribution assembled successfully in: $dist" -ForegroundColor Green
 

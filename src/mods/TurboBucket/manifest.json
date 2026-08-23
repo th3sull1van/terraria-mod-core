@@ -1,0 +1,14 @@
+{
+  "Id": "turbobucket",
+  "Name": "TurboBucket",
+  "Author": "TerrariaModCore Team",
+  "Version": "1.0.0",
+  "Description": "Accelerates pouring and emptying of Honey, Lava, Water, and Bottomless buckets.",
+  "EntryAssembly": "TurboBucket.dll",
+  "EntryType": "TurboBucket.TurboBucketMod",
+  "Dependencies": [],
+  "OptionalDependencies": [],
+  "LoadBefore": [],
+  "LoadAfter": [],
+  "IncompatibleWith": []
+}

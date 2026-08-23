@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoResearch", "src\mods\Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiggyVault", "src\mods\PiggyVault\PiggyVault.csproj", "{D8E9FAA1-0012-4000-8000-000000000012}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurboBucket", "src\mods\TurboBucket\TurboBucket.csproj", "{E4F5A6B7-0009-4000-8000-000000000009}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerrariaModCore.Tests", "tests\TerrariaModCore.Tests\TerrariaModCore.Tests.csproj", "{E1F2A3B4-0007-4000-8000-000000000007}"
 EndProject
 Global
@@ -76,6 +78,10 @@ Global
 		{D8E9FAA1-0012-4000-8000-000000000012}.Debug|x86.Build.0 = Debug|x86
 		{D8E9FAA1-0012-4000-8000-000000000012}.Release|x86.ActiveCfg = Release|x86
 		{D8E9FAA1-0012-4000-8000-000000000012}.Release|x86.Build.0 = Release|x86
+		{E4F5A6B7-0009-4000-8000-000000000009}.Debug|x86.ActiveCfg = Debug|x86
+		{E4F5A6B7-0009-4000-8000-000000000009}.Debug|x86.Build.0 = Debug|x86
+		{E4F5A6B7-0009-4000-8000-000000000009}.Release|x86.ActiveCfg = Release|x86
+		{E4F5A6B7-0009-4000-8000-000000000009}.Release|x86.Build.0 = Release|x86
 		{E1F2A3B4-0007-4000-8000-000000000007}.Debug|x86.ActiveCfg = Debug|x86
 		{E1F2A3B4-0007-4000-8000-000000000007}.Debug|x86.Build.0 = Debug|x86
 		{E1F2A3B4-0007-4000-8000-000000000007}.Release|x86.ActiveCfg = Release|x86

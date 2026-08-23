@@ -13,6 +13,7 @@ using TerrariaModCore.API;
 using TerrariaModCore.Configuration;
 using TerrariaModCore.Logging;
 using TerrariaModCore.Patching;
+using TurboBucket;
 using TurboExtractinator;
 
 namespace TerrariaModCore.Tests
@@ -49,24 +50,27 @@ namespace TerrariaModCore.Tests
             // Scenario 8: PiggyVault alone
             TestCombination(assert, "Scenario 8: PiggyVault alone", new[] { typeof(PiggyVaultMod) });
 
-            // Scenario 9: OreCascade + AutoFishing
-            TestCombination(assert, "Scenario 9: OreCascade + AutoFishing", new[] { typeof(OreCascadeMod), typeof(AutoFishingMod) });
+            // Scenario 9: TurboBucket alone
+            TestCombination(assert, "Scenario 9: TurboBucket alone", new[] { typeof(TurboBucketMod) });
 
-            // Scenario 10: AutoBuff + AutoFishing (Shared Player.Update hooks)
-            TestCombination(assert, "Scenario 10: AutoBuff + AutoFishing", new[] { typeof(AutoBuffMod), typeof(AutoFishingMod) });
+            // Scenario 10: OreCascade + AutoFishing
+            TestCombination(assert, "Scenario 10: OreCascade + AutoFishing", new[] { typeof(OreCascadeMod), typeof(AutoFishingMod) });
 
-            // Scenario 11: OreCascade + TurboExtractinator (Excavation & Extraction)
-            TestCombination(assert, "Scenario 11: OreCascade + TurboExtractinator", new[] { typeof(OreCascadeMod), typeof(TurboExtractinatorMod) });
+            // Scenario 11: AutoBuff + AutoFishing (Shared Player.Update hooks)
+            TestCombination(assert, "Scenario 11: AutoBuff + AutoFishing", new[] { typeof(AutoBuffMod), typeof(AutoFishingMod) });
 
-            // Scenario 12: AutoFishing + FishingLinePlus (Shared fishing hooks)
-            TestCombination(assert, "Scenario 12: AutoFishing + FishingLinePlus", new[] { typeof(AutoFishingMod), typeof(FishingLinePlusMod) });
+            // Scenario 12: OreCascade + TurboExtractinator (Excavation & Extraction)
+            TestCombination(assert, "Scenario 12: OreCascade + TurboExtractinator", new[] { typeof(OreCascadeMod), typeof(TurboExtractinatorMod) });
 
-            // Scenario 13: AutoBuff + PiggyVault (Shared Potion & Storage ecosystem)
-            TestCombination(assert, "Scenario 13: AutoBuff + PiggyVault", new[] { typeof(AutoBuffMod), typeof(PiggyVaultMod) });
+            // Scenario 13: AutoFishing + FishingLinePlus (Shared fishing hooks)
+            TestCombination(assert, "Scenario 13: AutoFishing + FishingLinePlus", new[] { typeof(AutoFishingMod), typeof(FishingLinePlusMod) });
 
-            // Scenario 14: All Eight production mods simultaneously
-            TestCombination(assert, "Scenario 14: All Eight (OreCascade + AutoFishing + FishingLinePlus + TurboExtractinator + AutoBuff + AutoOpen + AutoResearch + PiggyVault)",
-                new[] { typeof(OreCascadeMod), typeof(AutoFishingMod), typeof(FishingLinePlusMod), typeof(TurboExtractinatorMod), typeof(AutoBuffMod), typeof(AutoOpenMod), typeof(AutoResearchMod), typeof(PiggyVaultMod) });
+            // Scenario 14: AutoBuff + PiggyVault (Shared Potion & Storage ecosystem)
+            TestCombination(assert, "Scenario 14: AutoBuff + PiggyVault", new[] { typeof(AutoBuffMod), typeof(PiggyVaultMod) });
+
+            // Scenario 15: All Nine production mods simultaneously
+            TestCombination(assert, "Scenario 15: All Nine (OreCascade + AutoFishing + FishingLinePlus + TurboExtractinator + AutoBuff + AutoOpen + AutoResearch + PiggyVault + TurboBucket)",
+                new[] { typeof(OreCascadeMod), typeof(AutoFishingMod), typeof(FishingLinePlusMod), typeof(TurboExtractinatorMod), typeof(AutoBuffMod), typeof(AutoOpenMod), typeof(AutoResearchMod), typeof(PiggyVaultMod), typeof(TurboBucketMod) });
         }
 
         private static void TestCombination(Action<bool, string> assert, string scenarioName, Type[] modTypes)

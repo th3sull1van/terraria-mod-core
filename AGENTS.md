@@ -23,9 +23,10 @@ TerrariaModCore.sln
 │       ├── AutoBuff/                   # Automatic buff potion & food replenishment plugin
 │       ├── AutoOpen/                   # Rapid automated grab bag & container opener plugin
 │       ├── AutoResearch/               # Automated Journey Mode item research & sacrifice plugin
-│       └── PiggyVault/                  # Void Bag capabilities & storage automation for Piggy Bank
+│       ├── PiggyVault/                 # Void Bag capabilities & storage automation for Piggy Bank
+│       └── TurboBucket/                # High-speed liquid bucket pouring acceleration plugin
 ├── tests/
-│   └── TerrariaModCore.Tests/      # Standalone 237-assertion automated test suite
+│   └── TerrariaModCore.Tests/      # Standalone 300+ assertion automated test suite
 ├── docs/                           # Comprehensive technical documentation
 ├── dist/                           # Assembled release distribution
 └── build_dist.ps1                  # Master compilation, test execution, and packaging script
@@ -128,5 +129,5 @@ When implementing or editing a plugin:
 - [ ] Register all patches with `context.PatchManager.RegisterAll(context.Manifest.Id, assembly)`.
 - [ ] Include a dedicated, polished `README.md` inside the mod's folder (e.g. `src/mods/MyMod/README.md`).
 - [ ] Add corresponding unit and coexistence test cases to `TerrariaModCore.Tests`.
-- [ ] Verify that all 285+ tests pass with zero failures.
+- [ ] Verify that all 300+ tests pass with zero failures.
 - [ ] Confirm distribution is deployed to the target game directory.
