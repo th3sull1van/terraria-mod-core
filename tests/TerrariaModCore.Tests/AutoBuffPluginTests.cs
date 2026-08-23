@@ -130,9 +130,50 @@ namespace TerrariaModCore.Tests
             assert(burgerFood.stack == 1, "Food stack decremented by 1");
             assert(BuffController.HasActiveFoodBuff(player), "Player now has active food buff");
 
+            // 9. Piggy Bank Access Detection & Consumption
+            assert(config.IncludePiggyBank, "Default IncludePiggyBank is true");
+            player.inventory[0].TurnToAir();
+
+            if (player.bank.item == null) player.bank.item = new Item[40];
+            for (int i = 0; i < player.bank.item.Length; i++) player.bank.item[i] = new Item();
+
+            assert(!BuffController.CanAccessPiggyBank(player), "Cannot access piggy bank when empty inventory and not open");
+
+            // Open piggy bank or carry Money Trough
+            player.inventory[0].type = ItemID.MoneyTrough;
+            player.inventory[0].stack = 1;
+            assert(BuffController.CanAccessPiggyBank(player), "Can access piggy bank when carrying Money Trough");
+
+            // Place Regeneration potion and Cooked Fish in Piggy Bank
+            for (int i = 0; i < Player.maxBuffs; i++) { player.buffType[i] = 0; player.buffTime[i] = 0; }
+
+            player.bank.item[0].type = ItemID.CookedFish;
+            player.bank.item[0].stack = 3;
+            player.bank.item[0].buffType = BuffID.WellFed;
+            player.bank.item[0].buffTime = 18000;
+            player.bank.item[0].consumable = true;
+
+            player.bank.item[1].type = ItemID.RegenerationPotion;
+            player.bank.item[1].stack = 4;
+            player.bank.item[1].buffType = BuffID.Regeneration;
+            player.bank.item[1].buffTime = 28800;
+            player.bank.item[1].consumable = true;
+
+            // AutoBuff should detect and consume food from Piggy Bank
+            bool bankFoodConsumed = BuffController.TryConsumeBestFood(player, config);
+            assert(bankFoodConsumed, "Food consumed directly from Piggy Bank by AutoBuff");
+            assert(player.bank.item[0].stack == 2, "Piggy Bank food stack decremented (3 -> 2)");
+            assert(BuffController.HasActiveFoodBuff(player), "Player gained food buff from Piggy Bank");
+
+            // AutoBuff should detect and consume potion from Piggy Bank
+            BuffController.ProcessBuffPotions(player, config);
+            assert(player.FindBuffIndex(BuffID.Regeneration) >= 0, "Player gained Regeneration buff from Piggy Bank potion");
+            assert(player.bank.item[1].stack == 3, "Piggy Bank potion stack decremented (4 -> 3)");
+
             // Cleanup
             for (int i = 0; i < Player.maxBuffs; i++) { player.buffType[i] = 0; player.buffTime[i] = 0; }
             for (int i = 0; i < 59; i++) player.inventory[i] = new Item();
+            for (int i = 0; i < 40; i++) player.bank.item[i] = new Item();
             BuffController.Reset();
         }
     }

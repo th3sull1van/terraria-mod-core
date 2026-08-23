@@ -28,8 +28,8 @@
 - **🗡️ Automatic Weapon Imbue Refresh**:
   - Keeps melee weapon flasks (Ichor, Cursed Flames, Fire, Gold, Venom, Poison, Nanites, Confetti) active continuously.
 
-- **🎒 Deep Void Bag Integration**:
-  - Seamlessly searches items stored in the player's Void Bag / Void Vault (`bank4`) when active.
+- **🎒 Deep Void Bag & Piggy Bank Integration**:
+  - Seamlessly searches items stored in the player's Void Bag (`bank4`) and Piggy Bank (`bank`) when carried or open.
 
 - **🛡️ Configurable Blacklist & Safety Guards**:
   - Includes sensible default exclusions for hazardous or situational items (such as *Gravitation Potion* to prevent disorientation or *Red Potion* in standard worlds).
@@ -48,6 +48,7 @@ The configuration file is located at `mods/AutoBuff/config.json`:
   "IncludeFood": true,
   "IncludeFlasks": true,
   "IncludeVoidBag": true,
+  "IncludePiggyBank": true,
   "MinBuffTimeThresholdTicks": 0,
   "ExcludedBuffIds": [
     18,
@@ -70,6 +71,7 @@ The configuration file is located at `mods/AutoBuff/config.json`:
 | `IncludeFood` | `bool` | `true` | Automatically consumes best food item when Well-Fed runs out. |
 | `IncludeFlasks` | `bool` | `true` | Automatically refreshes melee weapon imbues / flasks. |
 | `IncludeVoidBag` | `bool` | `true` | Scans potions and food stored in the player's open Void Bag. |
+| `IncludePiggyBank` | `bool` | `true` | Scans potions and food stored in the player's Piggy Bank when carried or open. |
 | `MinBuffTimeThresholdTicks` | `int` | `0` | Re-applies buff if remaining duration is below this threshold (0 = only when expired). |
 | `ExcludedBuffIds` | `int[]` | `[18, 119, 120]` | List of Buff IDs excluded from auto-consumption. |
 | `ExcludedItemIds` | `int[]` | `[1344, 2756]` | List of Item IDs excluded from auto-consumption. |

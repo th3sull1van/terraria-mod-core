@@ -35,6 +35,11 @@ namespace AutoBuff
         public bool IncludeVoidBag { get; set; } = true;
 
         /// <summary>
+        /// Whether to scan the player's Piggy Bank (bank) if accessible or carried.
+        /// </summary>
+        public bool IncludePiggyBank { get; set; } = true;
+
+        /// <summary>
         /// Minimum remaining buff duration (in ticks) below which the potion should be re-applied.
         /// 0 means re-apply only when the buff is completely expired. Clamped between 0 and 3600.
         /// </summary>

@@ -165,7 +165,7 @@ namespace AutoBuff
         }
 
         /// <summary>
-        /// Selects the highest priority food item from player inventory and Void Bag.
+        /// Selects the highest priority food item from player inventory, Void Bag, and Piggy Bank.
         /// </summary>
         public static Item PickBestFoodItem(Player player, AutoBuffConfig config)
         {
@@ -174,6 +174,7 @@ namespace AutoBuff
             Item best = null;
             int bestPriority = 0;
 
+            // 1. Scan main inventory (slots 0..57)
             for (int i = 0; i < 58; i++)
             {
                 if (i >= player.inventory.Length) break;
@@ -196,7 +197,8 @@ namespace AutoBuff
                 }
             }
 
-            if (best == null && config != null && config.IncludeVoidBag)
+            // 2. Scan Void Bag if enabled and accessible
+            if (config != null && config.IncludeVoidBag)
             {
                 try
                 {
@@ -227,17 +229,49 @@ namespace AutoBuff
                 }
             }
 
+            // 3. Scan Piggy Bank if enabled and accessible
+            if (config != null && config.IncludePiggyBank)
+            {
+                try
+                {
+                    if (CanAccessPiggyBank(player) && player.bank?.item != null)
+                    {
+                        for (int i = 0; i < player.bank.item.Length; i++)
+                        {
+                            Item item = player.bank.item[i];
+                            if (item == null || item.IsAir || item.stack <= 0 || item.buffType <= 0) continue;
+
+                            if (config.ExcludedItemIds != null && config.ExcludedItemIds.Contains(item.type)) continue;
+                            if (config.ExcludedBuffIds != null && config.ExcludedBuffIds.Contains(item.buffType)) continue;
+
+                            if (!IsFoodBuff(item.buffType)) continue;
+
+                            int priority = item.buffType == BuffID.WellFed3 ? 3 : (item.buffType == BuffID.WellFed2 ? 2 : 1);
+                            if (priority > bestPriority)
+                            {
+                                best = item;
+                                bestPriority = priority;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // Fallback for tests
+                }
+            }
+
             return best;
         }
 
         /// <summary>
-        /// Iterates through player inventory and Void Bag to evaluate and consume eligible buff potions.
+        /// Iterates through player inventory, Void Bag, and Piggy Bank to evaluate and consume eligible buff potions.
         /// </summary>
         public static void ProcessBuffPotions(Player player, AutoBuffConfig config)
         {
             if (player?.inventory == null) return;
 
-            // Scan main inventory (slots 0..57)
+            // 1. Scan main inventory (slots 0..57)
             for (int i = 0; i < 58; i++)
             {
                 if (i >= player.inventory.Length) break;
@@ -247,7 +281,7 @@ namespace AutoBuff
                 TryProcessItem(player, item, config);
             }
 
-            // Scan Void Bag if enabled and accessible
+            // 2. Scan Void Bag if enabled and accessible
             if (config != null && config.IncludeVoidBag)
             {
                 try
@@ -268,6 +302,70 @@ namespace AutoBuff
                     // Test harness fallback
                 }
             }
+
+            // 3. Scan Piggy Bank if enabled and accessible
+            if (config != null && config.IncludePiggyBank)
+            {
+                try
+                {
+                    if (CanAccessPiggyBank(player) && player.bank?.item != null)
+                    {
+                        for (int i = 0; i < player.bank.item.Length; i++)
+                        {
+                            if (player.CountBuffs() >= Player.maxBuffs) return;
+
+                            Item item = player.bank.item[i];
+                            TryProcessItem(player, item, config);
+                        }
+                    }
+                }
+                catch
+                {
+                    // Test harness fallback
+                }
+            }
+        }
+
+        /// <summary>
+        /// Determines if the player has access to their Piggy Bank (open container or carrying Piggy Bank, Money Trough, or Chester).
+        /// </summary>
+        public static bool CanAccessPiggyBank(Player player)
+        {
+            if (player?.bank?.item == null) return false;
+
+            // 1. Currently opened container is Piggy Bank
+            if (player.chest == -2) return true;
+
+            // 2. Carried in inventory (slots 0..58 including mouse item)
+            if (player.inventory != null)
+            {
+                for (int i = 0; i < 59; i++)
+                {
+                    if (i >= player.inventory.Length) break;
+                    Item item = player.inventory[i];
+                    if (item == null || item.IsAir || item.stack <= 0) continue;
+
+                    if (item.type == ItemID.PiggyBank || item.type == ItemID.MoneyTrough || item.type == ItemID.ChesterPetItem)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            // 3. Equipped in pet / vanity accessory slots (Eyebone / Chester)
+            if (player.miscEquips != null)
+            {
+                for (int i = 0; i < player.miscEquips.Length; i++)
+                {
+                    Item item = player.miscEquips[i];
+                    if (item != null && !item.IsAir && item.stack > 0 && item.type == ItemID.ChesterPetItem)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
