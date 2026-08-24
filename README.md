@@ -190,12 +190,13 @@ terraria_mod_core/
 
 ## 📖 Extended Documentation
 
+- 📋 **[Master Technical Specification](SPECIFICATION.md)**: Formal architectural and technical specification based on framework standards.
 - 📐 **[Technical Architecture & Design](docs/ARCHITECTURE.md)**: Runtime injection, memory model, and patch management.
 - 📦 **[Dependency & Environment Requirements](docs/DEPENDENCIES.md)**: System prerequisites, .NET toolchains, packages, and mod manifest dependencies.
 - 🛠️ **[Mod Developer Guide](docs/MODDING.md)**: Complete walkthrough for building custom TMC plugins.
 - 🔍 **[Compatibility & Patch Matrix](docs/COMPATIBILITY.md)**: Intercepted IL methods and version validation.
 - ⚙️ **[Configuration Reference](docs/CONFIGURATION.md)**: Settings and presets for host and all plugins.
-- 🧪 **[Testing Strategy](docs/TESTING.md)**: 378-assertion automated test breakdown.
+- 🧪 **[Testing Strategy](docs/TESTING.md)**: 391-assertion automated test breakdown.
 - 🔧 **[Troubleshooting Guide](docs/TROUBLESHOOTING.md)**: Resolution for memory limits, startup issues, and log telemetry.
 
 ---
