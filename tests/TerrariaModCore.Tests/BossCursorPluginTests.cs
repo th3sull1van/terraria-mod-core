@@ -21,7 +21,8 @@ namespace TerrariaModCore.Tests
             assert(!config.HideOnScreen, "Default HideOnScreen is false");
             assert(config.CursorDistance == 150, "Default CursorDistance is 150 px");
             assert(Math.Abs(config.CursorSize - 1.0f) < 0.001f, "Default CursorSize is 1.0x");
-            assert(config.BlacklistPillars, "Default BlacklistPillars is true");
+            assert(Math.Abs(config.HeadOffset - 45f) < 0.001f, "Default HeadOffset is 45 px");
+            assert(config.BlacklistPillars == true, "Default BlacklistPillars is true");
             assert(config.ToggleKey == "B", "Default ToggleKey is 'B'");
             assert(config.ExcludedNpcIds != null && config.ExcludedNpcIds.Count == 0, "Default ExcludedNpcIds is empty");
             assert(config.IncludedNpcIds != null && config.IncludedNpcIds.Count == 0, "Default IncludedNpcIds is empty");
@@ -120,6 +121,7 @@ namespace TerrariaModCore.Tests
             assert(Math.Abs(alpha - (modifier * 0.9f)) < 0.001f, "Alpha is proportional to proximity modifier (modifier * 0.9)");
             assert(Math.Abs(scale - (modifier * 1.2f)) < 0.001f, "Scale is proportional to proximity modifier (modifier * 1.2)");
             assert(Math.Abs(arrowPos.X - 1150f) < 0.01f && Math.Abs(arrowPos.Y - 1000f) < 0.01f, "Arrow positioned 150px to the right of player");
+            assert(Math.Abs(headPos.X - 1105f) < 0.01f && Math.Abs(headPos.Y - 1000f) < 0.01f, "Boss head positioned 45px behind arrow (105px from player)");
 
             // Boss Directly Above
             Vector2 bossCenterAbove = new Vector2(1000, 500); // 500 px above

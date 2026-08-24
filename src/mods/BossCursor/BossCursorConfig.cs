@@ -32,6 +32,12 @@ namespace BossCursor
         public float CursorSize { get; set; } = 1.0f;
 
         /// <summary>
+        /// The radial offset distance (in pixels) between the cursor arrow and the boss head icon.
+        /// Defaults to 45 (range: 10 to 200).
+        /// </summary>
+        public float HeadOffset { get; set; } = 45f;
+
+        /// <summary>
         /// Whether to blacklist Celestial / Lunar Towers (Solar, Nebula, Vortex, Stardust).
         /// Defaults to true.
         /// </summary>

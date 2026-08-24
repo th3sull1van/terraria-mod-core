@@ -17,7 +17,8 @@ namespace BossCursor
     /// </summary>
     public static class BossCursorController
     {
-        public const float HeadDistance = 20f;
+        public const float DefaultHeadDistance = 45f;
+        public const float HeadDistance = 45f;
 
         // Celestial Pillars NPC IDs
         public const int PillarSolar = 422;
@@ -62,9 +63,9 @@ namespace BossCursor
         }
 
         /// <summary>
-        /// Determines if the specified NPC should be tracked by BossCursor.
+        /// Determines if an NPC is considered a boss according to the mod rules and active configurations.
         /// </summary>
-        public static bool IsBoss(NPC npc, BossCursorConfig config)
+        public static bool IsBoss(NPC npc, BossCursorConfig config = null)
         {
             if (npc == null || !npc.active || npc.dontCountMe)
                 return false;
@@ -102,16 +103,16 @@ namespace BossCursor
         }
 
         /// <summary>
-        /// Collects all currently active and tracked boss NPCs.
+        /// Scans all active NPCs in the world and returns a list of active bosses.
         /// </summary>
-        public static List<NPC> GetActiveBosses(BossCursorConfig config)
+        public static List<NPC> GetActiveBosses(BossCursorConfig config = null)
         {
             var result = new List<NPC>();
             if (Main.npc == null) return result;
 
             for (int i = 0; i < Main.maxNPCs; i++)
             {
-                var npc = Main.npc[i];
+                NPC npc = Main.npc[i];
                 if (IsBoss(npc, config))
                 {
                     result.Add(npc);
@@ -161,7 +162,8 @@ namespace BossCursor
             out float alpha,
             out float scale,
             out Vector2 arrowPos,
-            out Vector2 headPos)
+            out Vector2 headPos,
+            float headDistance = DefaultHeadDistance)
         {
             bossVector = bossCenter - playerCenter;
 
@@ -190,7 +192,7 @@ namespace BossCursor
             float posScaleFactor = 1f / effectiveUiScale;
 
             arrowPos = (playerScreenPos + dir * cursorDistance) * posScaleFactor;
-            headPos = (playerScreenPos + dir * (cursorDistance - (HeadDistance * effectiveUiScale) * cursorSize)) * posScaleFactor;
+            headPos = (playerScreenPos + dir * (cursorDistance - (headDistance * effectiveUiScale) * cursorSize)) * posScaleFactor;
         }
 
         /// <summary>
@@ -366,6 +368,8 @@ namespace BossCursor
                 if (config.HideOnScreen && IsOnScreen(boss))
                     continue;
 
+                float headOffset = config.HeadOffset > 0f ? config.HeadOffset : DefaultHeadDistance;
+
                 CalculateCursorTransform(
                     playerCenter,
                     boss.Center,
@@ -382,25 +386,10 @@ namespace BossCursor
                     out float alpha,
                     out float scale,
                     out Vector2 arrowPos,
-                    out Vector2 headPos);
+                    out Vector2 headPos,
+                    headOffset);
 
-                // 1. Draw Directional Arrow
-                if (cursorTex != null)
-                {
-                    Vector2 origin = new Vector2(cursorTex.Width * 0.5f, cursorTex.Height * 0.5f);
-                    spriteBatch.Draw(
-                        cursorTex,
-                        arrowPos,
-                        null,
-                        Color.White * alpha,
-                        rotation,
-                        origin,
-                        1.2f * config.CursorSize,
-                        SpriteEffects.None,
-                        0f);
-                }
-
-                // 2. Draw Boss Head Icon
+                // 1. Draw Boss Head Icon (rendered underneath the arrow)
                 Texture2D headTex = GetHeadTexture(boss);
                 if (headTex != null)
                 {
@@ -414,6 +403,22 @@ namespace BossCursor
                         headOrigin,
                         scale * config.CursorSize,
                         boss.GetBossHeadSpriteEffects(),
+                        0f);
+                }
+
+                // 2. Draw Directional Arrow (rendered on top in front of the boss head icon)
+                if (cursorTex != null)
+                {
+                    Vector2 origin = new Vector2(cursorTex.Width * 0.5f, cursorTex.Height * 0.5f);
+                    spriteBatch.Draw(
+                        cursorTex,
+                        arrowPos,
+                        null,
+                        Color.White * alpha,
+                        rotation,
+                        origin,
+                        1.2f * config.CursorSize,
+                        SpriteEffects.None,
                         0f);
                 }
             }
