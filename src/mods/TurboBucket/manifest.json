@@ -1,4 +1,4 @@
-{
+﻿{
   "Id": "turbobucket",
   "Name": "TurboBucket",
   "Author": "TerrariaModCore Team",
@@ -12,3 +12,4 @@
   "LoadAfter": [],
   "IncompatibleWith": []
 }
+

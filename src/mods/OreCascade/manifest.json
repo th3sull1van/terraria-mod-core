@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "ore_cascade",
   "name": "Ore Cascade",
   "version": "1.0.0",
@@ -6,7 +6,7 @@
   "description": "Chain-mines connected ore and gem veins automatically on single-block break.",
   "entryAssembly": "OreCascade.dll",
   "entryType": "OreCascade.OreCascadeMod",
-  "targetGameVersion": "1.4.5.7",
+  "targetGameVersion": "1.4.5.8",
   "coreVersion": "1.0.0",
   "dependencies": [],
   "optionalDependencies": [],
@@ -15,3 +15,4 @@
   "incompatibleWith": [],
   "enabled": true
 }
+

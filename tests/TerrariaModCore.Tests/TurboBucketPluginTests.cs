@@ -120,7 +120,7 @@ namespace TerrariaModCore.Tests
             var modLogger = new TerrariaModCore.Logging.ModLogger(coreLogger, "turbobucket");
             var patchManager = new TerrariaModCore.Patching.PatchManager(coreLogger);
             var configManager = new TerrariaModCore.Configuration.ModConfigManager(testDir, modLogger);
-            var context = new ModContext(manifest, testDir, testDir, modLogger, configManager, patchManager, null, null, "1.4.5.7");
+            var context = new ModContext(manifest, testDir, testDir, modLogger, configManager, patchManager, null, null, "1.4.5.8");
 
             var mod = new TurboBucketMod();
             mod.Initialize(context);

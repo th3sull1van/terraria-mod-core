@@ -15,7 +15,7 @@ namespace TerrariaModCore.API
         public string Description { get; set; } = string.Empty;
         public string EntryAssembly { get; set; } = string.Empty;
         public string EntryType { get; set; } = string.Empty;
-        public string TargetGameVersion { get; set; } = "1.4.5.7";
+        public string TargetGameVersion { get; set; } = "1.4.5.8";
         public string CoreVersion { get; set; } = "1.0.0";
         public bool Enabled { get; set; } = true;
 

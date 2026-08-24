@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "piggy_vault",
   "name": "Piggy Vault",
   "version": "1.0.0",
@@ -6,7 +6,7 @@
   "description": "Empowers the Piggy Bank with full Void Bag capabilities (overflow auto-pickup, direct crafting, quick-buff/heal/mana, ammo/bait consumption, info accessories, and unity potions) with zero loss of Piggy Bank functionality.",
   "entryAssembly": "PiggyVault.dll",
   "entryType": "PiggyVault.PiggyVaultMod",
-  "targetGameVersion": "1.4.5.7",
+  "targetGameVersion": "1.4.5.8",
   "coreVersion": "1.0.0",
   "dependencies": [],
   "optionalDependencies": [],
@@ -15,3 +15,4 @@
   "incompatibleWith": [],
   "enabled": true
 }
+

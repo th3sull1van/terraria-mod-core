@@ -54,6 +54,12 @@ namespace TerrariaModCore.Tests
             var reloaded = new ModConfigManager(testDir, null).Get<SampleConfig>();
             assert(reloaded.Count == 1000, "Reloaded config reflects modified count: 1000");
 
+            // Test 4: GameVersionChecker
+            assert(TerrariaModCore.Compatibility.GameVersionChecker.TargetTerrariaVersion == "1.4.5.8", "TargetTerrariaVersion is 1.4.5.8");
+            assert(TerrariaModCore.Compatibility.GameVersionChecker.SupportedTerrariaVersions.Length >= 2, "SupportedTerrariaVersions includes multiple 1.4.5.x hotfixes");
+            bool validVer = TerrariaModCore.Compatibility.GameVersionChecker.ValidateTerrariaVersion(out string detectedVer);
+            assert(validVer, $"GameVersionChecker successfully validated Terraria assembly version (Detected: {detectedVer})");
+
             try { Directory.Delete(testDir, true); } catch { }
         }
     }

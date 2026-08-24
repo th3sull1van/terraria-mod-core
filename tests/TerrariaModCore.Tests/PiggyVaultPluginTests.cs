@@ -142,7 +142,7 @@ namespace TerrariaModCore.Tests
                 EntryType = typeof(PiggyVaultMod).FullName,
                 Enabled = true
             };
-            var context = new ModContext(manifest, tempDir, tempDir, modLogger, configManager, patchManager, null, null, "1.4.5.7");
+            var context = new ModContext(manifest, tempDir, tempDir, modLogger, configManager, patchManager, null, null, "1.4.5.8");
 
             var modInstance = new PiggyVaultMod();
             modInstance.Initialize(context);

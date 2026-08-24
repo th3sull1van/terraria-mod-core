@@ -81,7 +81,7 @@ namespace TerrariaModCore.Tests
                     patchManager,
                     null,
                     null,
-                    "1.4.5.7"
+                    "1.4.5.8"
                 );
 
                 var mod = new TurboExtractinatorMod();

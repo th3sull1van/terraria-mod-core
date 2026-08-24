@@ -9,7 +9,8 @@ namespace TerrariaModCore.Compatibility
     /// </summary>
     public static class GameVersionChecker
     {
-        public const string TargetTerrariaVersion = "1.4.5.7";
+        public const string TargetTerrariaVersion = "1.4.5.8";
+        public static readonly string[] SupportedTerrariaVersions = new[] { "1.4.5.8", "1.4.5.7" };
 
         public static bool ValidateTerrariaVersion(out string detectedVersion)
         {
@@ -45,16 +46,25 @@ namespace TerrariaModCore.Compatibility
                 Version asmVer = terrariaAsm.GetName().Version;
                 detectedVersion = asmVer != null ? $"{asmVer.Major}.{asmVer.Minor}.{asmVer.Build}.{asmVer.Revision}" : "Unknown";
 
-                if (detectedVersion.StartsWith(TargetTerrariaVersion, StringComparison.OrdinalIgnoreCase))
+                foreach (var supported in SupportedTerrariaVersions)
                 {
-                    return true;
+                    if (detectedVersion.StartsWith(supported, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
                 }
 
                 var fileVerAttr = terrariaAsm.GetCustomAttribute<AssemblyFileVersionAttribute>();
-                if (fileVerAttr != null && fileVerAttr.Version.StartsWith(TargetTerrariaVersion, StringComparison.OrdinalIgnoreCase))
+                if (fileVerAttr != null)
                 {
-                    detectedVersion = fileVerAttr.Version;
-                    return true;
+                    foreach (var supported in SupportedTerrariaVersions)
+                    {
+                        if (fileVerAttr.Version.StartsWith(supported, StringComparison.OrdinalIgnoreCase))
+                        {
+                            detectedVersion = fileVerAttr.Version;
+                            return true;
+                        }
+                    }
                 }
 
                 return false;
