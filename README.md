@@ -76,7 +76,7 @@
 
 ### 1. Build from Source
 ```powershell
-# Compiles solution (Release|x86), executes all 378 tests, and builds distribution
+# Compiles solution (Release|x86), executes all 391 tests, and builds distribution
 powershell -ExecutionPolicy Bypass -File "build_dist.ps1"
 ```
 
@@ -167,7 +167,7 @@ terraria_mod_core/
 │       └── BossCursor/                 # Directional arrow & boss head pointer plugin
 │
 └── tests/
-    └── TerrariaModCore.Tests/          # 378-Assertion Automated Test Suite
+    └── TerrariaModCore.Tests/          # 391-Assertion Automated Test Suite
         ├── Program.cs                  # Standalone test runner
         ├── DependencyResolverTests.cs  # Dependency ordering & cycle tests
         ├── PatchManagerTests.cs        # Harmony prefix/postfix/unpatch tests

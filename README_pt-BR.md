@@ -76,7 +76,7 @@
 
 ### 1. Compilar a partir do Código-Fonte
 ```powershell
-# Compila a solução (Release|x86), executa a suíte com 378 testes e monta o pacote dist
+# Compila a solução (Release|x86), executa a suíte com 391 testes e monta o pacote dist
 powershell -ExecutionPolicy Bypass -File "build_dist.ps1"
 ```
 
@@ -167,7 +167,7 @@ terraria_mod_core/
 │       └── BossCursor/                 # Plugin de seta indicadora de bosses em tempo real
 │
 └── tests/
-    └── TerrariaModCore.Tests/          # Suíte Automatizada com 378 Testes
+    └── TerrariaModCore.Tests/          # Suíte Automatizada com 391 Asserções
         ├── Program.cs                  # Executor autônomo de testes
         ├── DependencyResolverTests.cs  # Testes de resolução de dependências e ciclos
         ├── PatchManagerTests.cs        # Testes de prefix/postfix e reversão Harmony

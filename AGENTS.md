@@ -11,6 +11,7 @@ This document establishes the mandatory architecture guidelines, engineering sta
 ### Component Hierarchy
 ```text
 TerrariaModCore.sln
+├── SPECIFICATION.md                # Master formal architectural & technical specification
 ├── src/
 │   ├── TerrariaModCore.API/        # Pure contracts, interfaces, and shared models (No 3rd-party deps)
 │   ├── TerrariaModCore/            # Core host engine (ModLoader, DependencyResolver, PatchManager)
@@ -27,7 +28,7 @@ TerrariaModCore.sln
 │       ├── TurboBucket/                # High-speed liquid bucket pouring acceleration plugin
 │       └── BossCursor/                 # Real-time directional indicator & boss head pointer plugin
 ├── tests/
-│   └── TerrariaModCore.Tests/      # Standalone 370+ assertion automated test suite
+│   └── TerrariaModCore.Tests/      # Standalone 391-assertion automated test suite
 ├── docs/                           # Comprehensive technical documentation
 ├── dist/                           # Assembled release distribution
 └── build_dist.ps1                  # Master compilation, test execution, and packaging script
@@ -39,7 +40,7 @@ TerrariaModCore.sln
 
 | Property | Value | Notes |
 | :--- | :--- | :--- |
-| **Target Game** | `Terraria 1.4.5.8` (1.4.5.x) | Auto-detected Steam/GOG install or `$env:TERRARIA_PATH` |
+| **Target Game** | `Terraria 1.4.5.8 / 1.4.5.7` (1.4.5.x) | Auto-detected Steam/GOG install or `$env:TERRARIA_PATH` |
 | **Target Framework** | `.NET Framework 4.8` | Target across all projects |
 | **Architecture** | `x86 (32-bit)` | Must target `Platform="x86"` (Terraria is a 32-bit application) |
 | **Memory Model** | `4 GB LAA` | PE Header flag `IMAGE_FILE_LARGE_ADDRESS_AWARE` (`0x0020`) |
@@ -124,11 +125,12 @@ Check `<TerrariaDirectory>/TMC/logs/tmc.log` for initialization output and mod l
 ## 6. Mod Creation Checklist
 
 When implementing or editing a plugin:
+- [ ] Consult [`SPECIFICATION.md`](SPECIFICATION.md) for master architecture, hook contracts, and invariant rules.
 - [ ] Create `manifest.json` with unique lowercase `Id`, `EntryAssembly`, and `EntryType`.
 - [ ] Implement `IMod` (`Initialize`, `Load`, `Unload`).
 - [ ] Bind configuration via `context.ConfigManager.Get<TConfig>()`.
 - [ ] Register all patches with `context.PatchManager.RegisterAll(context.Manifest.Id, assembly)`.
 - [ ] Include a dedicated, polished `README.md` inside the mod's folder (e.g. `src/mods/MyMod/README.md`).
 - [ ] Add corresponding unit and coexistence test cases to `TerrariaModCore.Tests`.
-- [ ] Verify that all 300+ tests pass with zero failures.
+- [ ] Verify that all 391 tests pass with zero failures.
 - [ ] Confirm distribution is deployed to the target game directory.
