@@ -44,12 +44,6 @@ namespace BossCursor
         public bool BlacklistPillars { get; set; } = true;
 
         /// <summary>
-        /// The keyboard key used to toggle Boss Cursor on/off in-game.
-        /// Defaults to "B". Set to "None" or empty to disable keybinding.
-        /// </summary>
-        public string ToggleKey { get; set; } = "B";
-
-        /// <summary>
         /// Custom list of NPC IDs that should never have a cursor drawn (Blacklist).
         /// </summary>
         public List<int> ExcludedNpcIds { get; set; } = new List<int>();

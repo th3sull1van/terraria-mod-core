@@ -69,7 +69,6 @@
     <Compile Include="BossCursorController.cs" />
     <Compile Include="BossCursorAPI.cs" />
     <Compile Include="Patches\CursorDrawPatch.cs" />
-    <Compile Include="Patches\PlayerUpdatePatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Cursor.png" />

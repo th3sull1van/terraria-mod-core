@@ -22,7 +22,7 @@ namespace BossCursor
 
             // Load configuration via TMC ConfigManager
             Config = context.ConfigManager.Get<BossCursorConfig>();
-            context.Logger.Info($"BossCursor initialized (Enabled: {Config.Enabled}, Distance: {Config.CursorDistance}, Size: {Config.CursorSize}, ToggleKey: {Config.ToggleKey})");
+            context.Logger.Info($"BossCursor initialized (Enabled: {Config.Enabled}, Distance: {Config.CursorDistance}, Size: {Config.CursorSize})");
 
             // Register patches through central PatchManager
             context.PatchManager.RegisterAll(context.Manifest.Id, Assembly.GetExecutingAssembly());

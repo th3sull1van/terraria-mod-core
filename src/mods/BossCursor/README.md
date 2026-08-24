@@ -22,10 +22,9 @@ Ported from the popular tModLoader mod by **kgoyo** ([Steam Workshop #2816694149
 4. **Fullscreen Map Suppression**:
    - Automatically hides the indicators whenever the fullscreen overlay map is open (`Main.mapStyle == 2`).
 
-5. **In-Game Toggle Hotkey**:
-   - Toggle the cursor on/off anytime with key **`B`** (configurable in `config.json`).
-   - Displays clear on-screen confirmation (`Boss Cursor enabled` / `Boss Cursor disabled`).
-   - Automatically ignores inputs while typing in chat, editing signs, or in the game menu.
+5. **Always Active & Seamless**:
+   - Runs continuously in the background whenever bosses/mini-bosses are present in the world.
+   - Zero keybind clutter or accidental toggle interruptions.
 
 6. **Customizable Whitelist & Blacklist**:
    - Blacklists Celestial / Lunar Towers (Solar, Nebula, Vortex, Stardust) by default.
@@ -46,8 +45,8 @@ Located at `<Terraria>/mods/BossCursor/config.json`:
   "HideOnScreen": false,
   "CursorDistance": 150,
   "CursorSize": 1.0,
+  "HeadOffset": 45.0,
   "BlacklistPillars": true,
-  "ToggleKey": "B",
   "ExcludedNpcIds": [],
   "IncludedNpcIds": []
 }
@@ -55,12 +54,12 @@ Located at `<Terraria>/mods/BossCursor/config.json`:
 
 | Setting | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `Enabled` | `bool` | `true` | Master switch to enable or disable Boss Cursor. |
+| `Enabled` | `bool` | `true` | Master switch to enable or disable Boss Cursor (always active while true). |
 | `HideOnScreen` | `bool` | `false` | When `true`, hides the cursor if the boss is currently visible within the camera view. |
 | `CursorDistance` | `int` | `150` | Radial distance (in pixels) from player center to cursor (range: `0` to `500`). |
 | `CursorSize` | `float` | `1.0` | Scale multiplier for the arrow and boss head icon (range: `0.1` to `2.0`). |
+| `HeadOffset` | `float` | `45.0` | Radial separation in pixels between pointer arrow and boss head icon. |
 | `BlacklistPillars` | `bool` | `true` | When `true`, excludes the four Celestial / Lunar Towers. |
-| `ToggleKey` | `string` | `"B"` | Keyboard key name to toggle on/off in-game (set to `"None"` to disable). |
 | `ExcludedNpcIds` | `int[]` | `[]` | Custom list of NPC IDs that should never display a cursor. |
 | `IncludedNpcIds` | `int[]` | `[]` | Custom list of NPC IDs that should always display a cursor (mini-bosses, events). |
 
@@ -96,4 +95,4 @@ BossCursorAPI.SetEnabled(true);
 - **Target Engine**: Terraria 1.4.5.8 / 1.4.5.7 (Steam & GOG)
 - **Runtime Framework**: .NET Framework 4.8 / x86
 - **Vanilla File Integrity**: 100% untouched on disk.
-- **Harmony Hooks**: `Main.DrawInterface_36_Cursor` (Postfix) and `Player.Update` (Postfix).
+- **Harmony Hooks**: `Main.DrawInterface_36_Cursor` (Postfix).

@@ -23,7 +23,6 @@ namespace TerrariaModCore.Tests
             assert(Math.Abs(config.CursorSize - 1.0f) < 0.001f, "Default CursorSize is 1.0x");
             assert(Math.Abs(config.HeadOffset - 45f) < 0.001f, "Default HeadOffset is 45 px");
             assert(config.BlacklistPillars == true, "Default BlacklistPillars is true");
-            assert(config.ToggleKey == "B", "Default ToggleKey is 'B'");
             assert(config.ExcludedNpcIds != null && config.ExcludedNpcIds.Count == 0, "Default ExcludedNpcIds is empty");
             assert(config.IncludedNpcIds != null && config.IncludedNpcIds.Count == 0, "Default IncludedNpcIds is empty");
 

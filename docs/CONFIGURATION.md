@@ -298,8 +298,8 @@ Controls continuous rapid right-click opening and automated grab bag and contain
   "HideOnScreen": false,
   "CursorDistance": 150,
   "CursorSize": 1.0,
+  "HeadOffset": 45.0,
   "BlacklistPillars": true,
-  "ToggleKey": "B",
   "ExcludedNpcIds": [],
   "IncludedNpcIds": []
 }
@@ -309,13 +309,14 @@ Controls continuous rapid right-click opening and automated grab bag and contain
 
 | Setting | Type | Default | Range / Format | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle for boss directional indicator cursors. |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle for boss directional indicator cursors (always active while true). |
 | `HideOnScreen` | `bool` | `false` | `true` / `false` | Hides cursor indicator when the boss is already visible on the screen. |
 | `CursorDistance` | `int` | `150` | `0` – `500` | Radial distance in pixels from player center to cursor pointer. |
 | `CursorSize` | `float` | `1.0` | `0.1` – `2.0` | Scale multiplier for pointer arrow and boss head icon. |
+| `HeadOffset` | `float` | `45.0` | `10.0` – `200.0` | Radial separation in pixels between pointer arrow and boss head icon. |
 | `BlacklistPillars` | `bool` | `true` | `true` / `false` | Excludes the 4 Celestial Pillars from cursor tracking. |
-| `ToggleKey` | `string` | `"B"` | Key string | Keyboard keybind to toggle Boss Cursor on and off in-game. |
 | `ExcludedNpcIds` | `List<int>` | `[]` | Array of integers | Custom list of NPC IDs excluded from cursor tracking. |
 | `IncludedNpcIds` | `List<int>` | `[]` | Array of integers | Custom list of NPC IDs always tracked as bosses (mini-bosses, events). |
+
 
 

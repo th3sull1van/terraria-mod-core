@@ -272,8 +272,8 @@ $bossCursorConfig = @'
   "HideOnScreen": false,
   "CursorDistance": 150,
   "CursorSize": 1.0,
+  "HeadOffset": 45.0,
   "BlacklistPillars": true,
-  "ToggleKey": "B",
   "ExcludedNpcIds": [],
   "IncludedNpcIds": []
 }

@@ -423,34 +423,5 @@ namespace BossCursor
                 }
             }
         }
-
-        /// <summary>
-        /// Evaluates keyboard input to handle hotkey toggling.
-        /// </summary>
-        public static void UpdateInput()
-        {
-            if (Main.gameMenu || Main.dedServ || Main.drawingPlayerChat || Main.editSign || Main.editChest)
-                return;
-
-            var config = BossCursorMod.Instance?.Config;
-            if (config == null || string.IsNullOrWhiteSpace(config.ToggleKey) || config.ToggleKey.Equals("None", StringComparison.OrdinalIgnoreCase))
-                return;
-
-            if (Enum.TryParse<Keys>(config.ToggleKey, true, out var key))
-            {
-                if (Main.keyState.IsKeyDown(key) && !Main.oldKeyState.IsKeyDown(key))
-                {
-                    config.Enabled = !config.Enabled;
-                    try
-                    {
-                        BossCursorMod.Instance.Context?.ConfigManager?.Save(config);
-                    }
-                    catch { }
-
-                    string msg = config.Enabled ? "Boss Cursor enabled" : "Boss Cursor disabled";
-                    Main.NewText(msg, Color.Cyan);
-                }
-            }
-        }
     }
 }

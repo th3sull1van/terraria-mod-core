@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Vanilla-Zero_tModLoader-06b6d4?style=for-the-badge" alt="Zero tModLoader">
   <img src="https://img.shields.io/badge/Memória-4GB_LAA_Ativo-f59e0b?style=for-the-badge" alt="4GB LAA Ativo">
-  <img src="https://img.shields.io/badge/Testes-392_Aprovados-10b981?style=for-the-badge" alt="392 Testes Aprovados">
+  <img src="https://img.shields.io/badge/Testes-391_Aprovados-10b981?style=for-the-badge" alt="391 Testes Aprovados">
   <img src="https://img.shields.io/badge/Licença-MIT-3b82f6?style=for-the-badge" alt="Licença MIT">
 </p>
 
