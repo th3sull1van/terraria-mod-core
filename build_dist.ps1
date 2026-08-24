@@ -312,4 +312,14 @@ if ($gameDir) {
     }
 }
 
+# Package Release Archive
+$zipPath = Join-Path $workspace "TerrariaModCore-v1.1.0.zip"
+Write-Host "`nPackaging release archive: $zipPath..." -ForegroundColor Cyan
+if (Test-Path $zipPath) {
+    Remove-Item $zipPath -Force
+}
+Compress-Archive -Path "$dist\*" -DestinationPath $zipPath -Force
+Write-Host "Release archive packaged successfully: $zipPath" -ForegroundColor Green
+
 Get-ChildItem -Path $dist -Recurse | Select-Object FullName
+

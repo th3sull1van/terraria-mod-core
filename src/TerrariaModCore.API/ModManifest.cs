@@ -10,13 +10,13 @@ namespace TerrariaModCore.API
     {
         public string Id { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        public string Version { get; set; } = "1.0.0";
+        public string Version { get; set; } = "1.1.0";
         public string Author { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string EntryAssembly { get; set; } = string.Empty;
         public string EntryType { get; set; } = string.Empty;
         public string TargetGameVersion { get; set; } = "1.4.5.8";
-        public string CoreVersion { get; set; } = "1.0.0";
+        public string CoreVersion { get; set; } = "1.1.0";
         public bool Enabled { get; set; } = true;
 
         public List<string> Dependencies { get; set; } = new List<string>();

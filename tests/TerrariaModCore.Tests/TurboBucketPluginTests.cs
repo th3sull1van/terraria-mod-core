@@ -110,7 +110,7 @@ namespace TerrariaModCore.Tests
             {
                 Id = "turbobucket",
                 Name = "TurboBucket",
-                Version = "1.0.0",
+                Version = "1.1.0",
                 EntryAssembly = "TurboBucket.dll",
                 EntryType = typeof(TurboBucketMod).FullName,
                 Enabled = true

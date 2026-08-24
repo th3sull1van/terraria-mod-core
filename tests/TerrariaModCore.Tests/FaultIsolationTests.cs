@@ -56,7 +56,7 @@ namespace TerrariaModCore.Tests
             {
                 Id = "broken_test_mod",
                 Name = "Broken Test Mod",
-                Version = "1.0.0",
+                Version = "1.1.0",
                 EntryAssembly = asmFile,
                 EntryType = typeof(BrokenTestMod).FullName,
                 Enabled = true
@@ -66,7 +66,7 @@ namespace TerrariaModCore.Tests
             {
                 Id = "healthy_test_mod",
                 Name = "Healthy Test Mod",
-                Version = "1.0.0",
+                Version = "1.1.0",
                 EntryAssembly = asmFile,
                 EntryType = typeof(HealthyTestMod).FullName,
                 Enabled = true

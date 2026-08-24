@@ -18,7 +18,7 @@ namespace TerrariaModCore
         public IEventBus EventBus { get; }
         public IGameServices GameServices { get; }
         public string GameVersion { get; }
-        public string CoreVersion => "1.0.0";
+        public string CoreVersion => ModEngine.Version;
 
         public ModContext(
             ModManifest manifest,

@@ -97,7 +97,7 @@ namespace TerrariaModCore.Tests
                     {
                         Id = modId,
                         Name = modType.Namespace,
-                        Version = "1.0.0",
+                        Version = "1.1.0",
                         EntryAssembly = modType.Assembly.GetName().Name + ".dll",
                         EntryType = modType.FullName,
                         Enabled = true

@@ -1,13 +1,13 @@
-﻿{
+{
   "id": "bosscursor",
   "name": "Boss Cursor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "kgoyo (Original), Silvio (TMC Port)",
   "description": "Draws directional indicators and boss head icons around the player pointing toward active bosses and mini-bosses.",
   "entryAssembly": "BossCursor.dll",
   "entryType": "BossCursor.BossCursorMod",
   "targetGameVersion": "1.4.5.8",
-  "coreVersion": "1.0.0",
+  "coreVersion": "1.1.0",
   "dependencies": [],
   "optionalDependencies": [],
   "loadBefore": [],

@@ -137,7 +137,7 @@ namespace TerrariaModCore.Tests
             {
                 Id = "piggy_vault",
                 Name = "PiggyVault",
-                Version = "1.0.0",
+                Version = "1.1.0",
                 EntryAssembly = "PiggyVault.dll",
                 EntryType = typeof(PiggyVaultMod).FullName,
                 Enabled = true

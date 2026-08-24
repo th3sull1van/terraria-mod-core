@@ -1,6 +1,6 @@
 # 📐 TerrariaModCore (TMC) — Master Architectural & Technical Specification
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Target Game:** Vanilla Terraria `1.4.5.8` / `1.4.5.7` (Steam & GOG Releases)  
 **Target Framework:** `.NET Framework 4.8` (`net48`) | **Architecture:** `x86 (32-bit)` with `IMAGE_FILE_LARGE_ADDRESS_AWARE` (4GB Virtual Memory)  
 **Core Patching Engine:** `Lib.Harmony 2.4.2` | **Inspection Engine:** `Mono.Cecil 0.11.5`  
@@ -824,3 +824,4 @@ namespace CustomSampleMod.Patches
 | Revision | Date | Author / Agent | Changes & Notes |
 | :---: | :---: | :---: | :--- |
 | **1.0.0** | 2026-08-24 | TMC Engineering Team / Antigravity | Initial formal architectural and technical specification established from `PROMPT.md` and repository implementation. |
+| **1.1.0** | 2026-08-24 | TMC Engineering Team / Antigravity | Production release v1.1.0: Added BossCursor plugin, Terraria 1.4.5.8 multi-version compatibility, PiggyVault real-time informational accessories, .editorconfig/.gitattributes standardization, and 391 verified test assertions. |

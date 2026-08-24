@@ -17,7 +17,7 @@ namespace TerrariaModCore
     /// </summary>
     public class ModEngine
     {
-        public const string Version = "1.0.0";
+        public const string Version = "1.1.0";
 
         public CoreLogger Logger { get; }
         public CoreConfig Config { get; }

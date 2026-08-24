@@ -66,7 +66,7 @@ namespace TerrariaModCore.Tests
                 {
                     Id = "turbo_extractinator",
                     Name = "TurboExtractinator",
-                    Version = "1.0.0",
+                    Version = "1.1.0",
                     EntryAssembly = "TurboExtractinator.dll",
                     EntryType = "TurboExtractinator.TurboExtractinatorMod",
                     Enabled = true
