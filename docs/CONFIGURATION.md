@@ -24,7 +24,7 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
 | :--- | :--- | :--- | :--- |
 | `LogLevel` | `string` | `"Info"` | Controls log verbosity written to console and `TMC/logs/tmc.log`. Options: `"Trace"`, `"Debug"`, `"Info"`, `"Warn"`, `"Error"`, `"Fatal"`. |
 | `DiagnosticBannerOnStartup` | `bool` | `true` | When `true`, prints a diagnostic summary banner showing game version and active mod counts during startup. |
-| `StrictCompatibilityCheck` | `bool` | `true` | When `true`, verifies that the loaded `Terraria.exe` version matches target `1.4.5.7`. |
+| `StrictCompatibilityCheck` | `bool` | `true` | When `true`, verifies that the loaded `Terraria.exe` version matches target `1.4.5.8 / 1.4.5.7`. |
 | `SafeModeOnModFailure` | `bool` | `true` | When `true`, prevents a single failing mod from crashing the game; the failing mod is isolated and healthy mods continue loading. |
 | `ModsDirectoryName` | `string` | `"mods"` | The directory name relative to the game root where plugins are scanned and loaded. |
 
@@ -62,10 +62,9 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
 {
   "Enabled": true,
   "AutoCast": true,
-  "AutoReel": true,
   "CastDelayTicks": 30,
-  "ReelDelayTicks": 2,
-  "RequireBait": true
+  "AutoReel": true,
+  "ReelDelayTicks": 5
 }
 ```
 
@@ -196,4 +195,127 @@ Controls continuous rapid right-click opening and automated grab bag and contain
 | `AutoOpenIntervalTicks` | `int` | `10` | `1` – `120` | Interval in game ticks between background inventory scans. |
 | `IncludeVoidBag` | `bool` | `true` | `true` / `false` | Scans and opens containers inside the player's Void Bag. |
 | `ExcludedItemIds` | `List<int>` | `[]` | Array of integers | List of Item IDs excluded from automated opening. |
+
+---
+
+## 8. AutoResearch Configuration (`mods/AutoResearch/config.json`)
+
+```json
+{
+  "Enabled": true,
+  "ScanIntervalTicks": 1,
+  "IncludeVoidBag": true,
+  "PlaySound": true,
+  "ShowTextFeedback": true,
+  "ExcludedItemIds": []
+}
+```
+
+### Options Breakdown
+
+| Setting | Type | Default | Range / Format | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle enabling or disabling AutoResearch. |
+| `ScanIntervalTicks` | `int` | `1` | `1` – `60` | Delay in ticks between automatic Journey Mode sacrifice scans. |
+| `IncludeVoidBag` | `bool` | `true` | `true` / `false` | Sacrifices eligible research items from the Void Bag. |
+| `PlaySound` | `bool` | `true` | `true` / `false` | Plays research completion sound effects. |
+| `ShowTextFeedback` | `bool` | `true` | `true` / `false` | Displays combat text / feedback when items are researched. |
+| `ExcludedItemIds` | `List<int>` | `[]` | Array of integers | List of Item IDs excluded from auto-research. |
+
+---
+
+## 9. PiggyVault Configuration (`mods/PiggyVault/config.json`)
+
+```json
+{
+  "Enabled": true,
+  "RequirePiggyItemInInventory": true,
+  "AutoPickupToPiggyBank": true,
+  "CraftFromPiggyBank": true,
+  "QuickBuffFromPiggyBank": true,
+  "QuickHealFromPiggyBank": true,
+  "QuickManaFromPiggyBank": true,
+  "ConsumeAmmoAndBaitFromPiggyBank": true,
+  "InfoAccessoriesInPiggyBank": true,
+  "WormholePotionFromPiggyBank": true,
+  "PlayPickupSound": true,
+  "ShowPickupText": true
+}
+```
+
+### Options Breakdown
+
+| Setting | Type | Default | Range / Format | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle for PiggyVault capabilities. |
+| `RequirePiggyItemInInventory` | `bool` | `true` | `true` / `false` | Requires Piggy Bank, Money Trough, or Eyebone/Chester to activate features. |
+| `AutoPickupToPiggyBank` | `bool` | `true` | `true` / `false` | Automatically routes surplus inventory item pickups to Piggy Bank. |
+| `CraftFromPiggyBank` | `bool` | `true` | `true` / `false` | Allows crafting using materials stored in the Piggy Bank. |
+| `QuickBuffFromPiggyBank` | `bool` | `true` | `true` / `false` | Uses potions and food stored in Piggy Bank during Quick Buff. |
+| `QuickHealFromPiggyBank` | `bool` | `true` | `true` / `false` | Uses healing potions from Piggy Bank during Quick Heal. |
+| `QuickManaFromPiggyBank` | `bool` | `true` | `true` / `false` | Uses mana potions from Piggy Bank during Quick Mana. |
+| `ConsumeAmmoAndBaitFromPiggyBank` | `bool` | `true` | `true` / `false` | Consumes ammunition and bait directly from Piggy Bank. |
+| `InfoAccessoriesInPiggyBank` | `bool` | `true` | `true` / `false` | Enables informational accessory displays from items inside Piggy Bank. |
+| `WormholePotionFromPiggyBank` | `bool` | `true` | `true` / `false` | Enables Wormhole Potion teleportation using potions in Piggy Bank. |
+
+---
+
+## 10. TurboBucket Configuration (`mods/TurboBucket/config.json`)
+
+```json
+{
+  "Enabled": true,
+  "SpeedMultiplier": 5,
+  "AffectsWater": true,
+  "AffectsLava": true,
+  "AffectsHoney": true,
+  "AffectsBottomlessBuckets": true,
+  "AffectsEmptyBuckets": false,
+  "AffectsSponges": false
+}
+```
+
+### Options Breakdown
+
+| Setting | Type | Default | Range / Format | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle for bucket acceleration. |
+| `SpeedMultiplier` | `int` | `5` | `1` – `10` | Pouring acceleration multiplier (5 = 2 ticks per pour; 10 = 60 TPS). |
+| `AffectsWater` | `bool` | `true` | `true` / `false` | Accelerates water bucket pouring. |
+| `AffectsLava` | `bool` | `true` | `true` / `false` | Accelerates lava bucket pouring. |
+| `AffectsHoney` | `bool` | `true` | `true` / `false` | Accelerates honey bucket pouring. |
+| `AffectsBottomlessBuckets` | `bool` | `true` | `true` / `false` | Accelerates bottomless bucket continuous pouring. |
+| `AffectsEmptyBuckets` | `bool` | `false` | `true` / `false` | Accelerates liquid scooping with empty buckets. |
+| `AffectsSponges` | `bool` | `false` | `true` / `false` | Accelerates liquid absorption with sponges. |
+
+---
+
+## 11. BossCursor Configuration (`mods/BossCursor/config.json`)
+
+```json
+{
+  "Enabled": true,
+  "HideOnScreen": false,
+  "CursorDistance": 150,
+  "CursorSize": 1.0,
+  "BlacklistPillars": true,
+  "ToggleKey": "B",
+  "ExcludedNpcIds": [],
+  "IncludedNpcIds": []
+}
+```
+
+### Options Breakdown
+
+| Setting | Type | Default | Range / Format | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `Enabled` | `bool` | `true` | `true` / `false` | Master toggle for boss directional indicator cursors. |
+| `HideOnScreen` | `bool` | `false` | `true` / `false` | Hides cursor indicator when the boss is already visible on the screen. |
+| `CursorDistance` | `int` | `150` | `0` – `500` | Radial distance in pixels from player center to cursor pointer. |
+| `CursorSize` | `float` | `1.0` | `0.1` – `2.0` | Scale multiplier for pointer arrow and boss head icon. |
+| `BlacklistPillars` | `bool` | `true` | `true` / `false` | Excludes the 4 Celestial Pillars from cursor tracking. |
+| `ToggleKey` | `string` | `"B"` | Key string | Keyboard keybind to toggle Boss Cursor on and off in-game. |
+| `ExcludedNpcIds` | `List<int>` | `[]` | Array of integers | Custom list of NPC IDs excluded from cursor tracking. |
+| `IncludedNpcIds` | `List<int>` | `[]` | Array of integers | Custom list of NPC IDs always tracked as bosses (mini-bosses, events). |
+
 

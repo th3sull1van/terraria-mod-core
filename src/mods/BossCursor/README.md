@@ -1,6 +1,6 @@
 # 🎯 Boss Cursor — TerrariaModCore (TMC) Plugin
 
-**Boss Cursor** adds real-time visual directional indicator arrows and boss head icons around your character that point toward active bosses and mini-bosses in **Vanilla Terraria 1.4.5.7**.
+**Boss Cursor** adds real-time visual directional indicator arrows and boss head icons around your character that point toward active bosses and mini-bosses in **Vanilla Terraria 1.4.5.8 / 1.4.5.7**.
 
 Ported from the popular tModLoader mod by **kgoyo** ([Steam Workshop #2816694149](https://steamcommunity.com/sharedfiles/filedetails/?id=2816694149)), this version runs natively inside **TerrariaModCore (TMC)** with zero tModLoader dependency, zero disk modification, and pure memory IL injection.
 
@@ -93,7 +93,7 @@ BossCursorAPI.SetEnabled(true);
 
 ## 🛡️ Engineering & Compatibility
 
-- **Target Engine**: Terraria 1.4.5.7 (Steam & GOG)
+- **Target Engine**: Terraria 1.4.5.8 / 1.4.5.7 (Steam & GOG)
 - **Runtime Framework**: .NET Framework 4.8 / x86
 - **Vanilla File Integrity**: 100% untouched on disk.
 - **Harmony Hooks**: `Main.DrawInterface_36_Cursor` (Postfix) and `Player.Update` (Postfix).

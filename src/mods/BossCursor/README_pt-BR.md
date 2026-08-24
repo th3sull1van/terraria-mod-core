@@ -1,6 +1,6 @@
 # 🎯 Boss Cursor — Plugin para TerrariaModCore (TMC)
 
-O **Boss Cursor** adiciona setas indicadoras de direção e ícones da cabeça dos bosses ao redor do seu personagem em tempo real, apontando para bosses e mini-bosses ativos no **Vanilla Terraria 1.4.5.7**.
+O **Boss Cursor** adiciona setas indicadoras de direção e ícones da cabeça dos bosses ao redor do seu personagem em tempo real, apontando para bosses e mini-bosses ativos no **Vanilla Terraria 1.4.5.8 / 1.4.5.7**.
 
 Portado do popular mod de tModLoader criado por **kgoyo** ([Steam Workshop #2816694149](https://steamcommunity.com/sharedfiles/filedetails/?id=2816694149)), esta versão roda nativamente dentro do **TerrariaModCore (TMC)** com zero dependência de tModLoader, zero modificação de arquivos no disco e injeção puramente em memória via Harmony IL.
 

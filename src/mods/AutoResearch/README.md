@@ -5,7 +5,7 @@
 **Zero-effort, automatic Journey Mode item researching whenever unresearched items enter your inventory, preserving 100% of vanilla quantity rules with zero disk modification.**
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.7">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Type-TMC_Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
   <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="License MIT">

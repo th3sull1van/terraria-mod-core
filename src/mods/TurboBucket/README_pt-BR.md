@@ -1,6 +1,6 @@
 # 🪣 TurboBucket — Aceleração de Baldes de Líquido em Alta Velocidade para Terraria
 
-O **TurboBucket** acelera a velocidade de despejamento e posicionamento de baldes de líquidos e baldes sem fundo no **Vanilla Terraria 1.4.5.7**, permitindo o esvaziamento contínuo e rápido de líquidos em até **60 TPS** sem lag ou dessincronização.
+O **TurboBucket** acelera a velocidade de despejamento e posicionamento de baldes de líquidos e baldes sem fundo no **Vanilla Terraria 1.4.5.8 / 1.4.5.7**, permitindo o esvaziamento contínuo e rápido de líquidos em até **60 TPS** sem lag ou dessincronização.
 
 ---
 

@@ -8,7 +8,7 @@ This guide walks you through creating, configuring, testing, and deploying custo
 
 ### Required Tools
 - **Visual Studio 2022** or **.NET SDK 10.0+** with .NET Framework 4.8 targeting pack (see [Dependency Guide](DEPENDENCIES.md)).
-- Terraria 1.4.5.7 installation.
+- Terraria 1.4.5.8 / 1.4.5.7 installation.
 
 ### Project Template (`.csproj`)
 Create a new Class Library targeting **.NET Framework 4.8** on **x86 Platform**:
@@ -74,7 +74,7 @@ Every mod must declare a `manifest.json` file in its root directory:
   "Description": "Adds custom mechanics to vanilla Terraria.",
   "EntryAssembly": "MyCustomMod.dll",
   "EntryType": "MyCustomMod.MyModEntry",
-  "TargetGameVersion": "1.4.5.7",
+  "TargetGameVersion": "1.4.5.8",
   "Enabled": true,
   "Dependencies": [],
   "OptionalDependencies": [],

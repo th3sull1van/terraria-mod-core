@@ -9,7 +9,7 @@ This document provides an exhaustive technical specification of the **TerrariaMo
 TMC enforces a layered, decoupled architecture with strict separation of concerns between core infrastructure, runtime hooks, and mod gameplay modules:
 
 ```text
-               Terraria.exe (Vanilla Release 1.4.5.7)
+               Terraria.exe (Vanilla Release 1.4.5.8 / 1.4.5.7)
                               ▲
                               │ Dynamic Runtime Injection
                       TerrariaModded.exe (Bootstrapper)

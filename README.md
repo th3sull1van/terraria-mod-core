@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌌 TerrariaModCore (TMC) — High-Performance Modding Framework for Vanilla Terraria 1.4.5.7
+# 🌌 TerrariaModCore (TMC) — High-Performance Modding Framework for Vanilla Terraria 1.4.5.8 / 1.4.5.7
 
 **A robust, modular, zero-tModLoader plugin framework and runtime injector with Harmony patch isolation, dependency resolution, 4GB LAA memory management, and built-in mods.**
 
@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.7">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Vanilla-Zero_tModLoader-06b6d4?style=for-the-badge" alt="Zero tModLoader">
   <img src="https://img.shields.io/badge/Memory-4GB_LAA_Enabled-f59e0b?style=for-the-badge" alt="4GB LAA Enabled">
-  <img src="https://img.shields.io/badge/Tests-375_Passing-10b981?style=for-the-badge" alt="375 Tests Passing">
+  <img src="https://img.shields.io/badge/Tests-378_Passing-10b981?style=for-the-badge" alt="378 Tests Passing">
   <img src="https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge" alt="License MIT">
 </p>
 
@@ -32,7 +32,7 @@
 ## 🌟 Key Architecture & Capabilities
 
 - **⚡ Zero tModLoader Dependency & 100% Vanilla File Integrity**:
-  - Operates directly on the official **Terraria 1.4.5.7** release (Steam & GOG).
+  - Operates directly on the official **Terraria 1.4.5.8 / 1.4.5.7** release (Steam & GOG).
   - Original `Terraria.exe` remains **100% untouched and unpatched on disk** (SHA256 verified).
   - Clean separation: launch `TerrariaModded.exe` to play with mods, or `Terraria.exe` for pure vanilla gameplay.
 
@@ -76,7 +76,7 @@
 
 ### 1. Build from Source
 ```powershell
-# Compiles solution (Release|x86), executes all 85 tests, and builds distribution
+# Compiles solution (Release|x86), executes all 378 tests, and builds distribution
 powershell -ExecutionPolicy Bypass -File "build_dist.ps1"
 ```
 
@@ -110,7 +110,7 @@ Copy-Item -Path "dist\*" -Destination "D:\Jogos\Steam\steamapps\common\Terraria"
 | :--- | :--- | :--- | :--- |
 | `LogLevel` | `string` | `"Info"` | Logging verbosity: `"Trace"`, `"Debug"`, `"Info"`, `"Warn"`, `"Error"`, `"Fatal"`. |
 | `DiagnosticBannerOnStartup` | `bool` | `true` | Displays startup diagnostic banner with active mod counts and versions. |
-| `StrictCompatibilityCheck` | `bool` | `true` | Verifies Terraria version matches target 1.4.5.7 before booting. |
+| `StrictCompatibilityCheck` | `bool` | `true` | Verifies Terraria version matches target 1.4.5.8 / 1.4.5.7 before booting. |
 | `SafeModeOnModFailure` | `bool` | `true` | Isolates failing mods and continues loading healthy mods. |
 | `ModsDirectoryName` | `string` | `"mods"` | Folder name containing plugin subdirectories. |
 
@@ -132,7 +132,7 @@ terraria_mod_core/
 │   ├── MODDING.md                      # Developer guide for creating TMC plugins
 │   ├── COMPATIBILITY.md                # Hook matrix and runtime version verification
 │   ├── CONFIGURATION.md                # Configuration reference for Core and all mods
-│   ├── TESTING.md                      # 85-assertion automated test suite breakdown
+│   ├── TESTING.md                      # 378-assertion automated test suite breakdown
 │   └── TROUBLESHOOTING.md              # Diagnostics for memory, graphics, and runtime errors
 │
 ├── src/
@@ -158,19 +158,32 @@ terraria_mod_core/
 │       ├── OreCascade/                 # VeinMiner / Ore Excavator plugin
 │       ├── AutoFishing/                # Smart fishing automation plugin
 │       ├── FishingLinePlus/            # Multi-line / multi-bobber fishing plugin
-│       └── TurboExtractinator/         # High-speed Extractinator acceleration plugin
+│       ├── TurboExtractinator/         # High-speed Extractinator acceleration plugin
+│       ├── AutoBuff/                   # Automatic buff & potion replenishment plugin
+│       ├── AutoOpen/                   # Rapid container & grab bag opener plugin
+│       ├── AutoResearch/               # Automated Journey Mode research plugin
+│       ├── PiggyVault/                 # Piggy Bank Void Bag capabilities plugin
+│       ├── TurboBucket/                # High-speed liquid bucket pouring plugin
+│       └── BossCursor/                 # Directional arrow & boss head pointer plugin
 │
 └── tests/
-    └── TerrariaModCore.Tests/          # 97-Assertion Automated Test Suite
+    └── TerrariaModCore.Tests/          # 378-Assertion Automated Test Suite
         ├── Program.cs                  # Standalone test runner
         ├── DependencyResolverTests.cs  # Dependency ordering & cycle tests
         ├── PatchManagerTests.cs        # Harmony prefix/postfix/unpatch tests
         ├── FaultIsolationTests.cs      # Crash containment & SafeMode tests
+        ├── ConfigManagerTests.cs       # Config serialization & GameVersionChecker tests
         ├── OreCascadePluginTests.cs    # BFS vein-mining & pickaxe power tests
         ├── AutoFishingPluginTests.cs   # Fishing state machine & bite detection tests
         ├── FishingLinePlusPluginTests.cs # Spread physics & multi-catch tests
         ├── TurboExtractinatorPluginTests.cs # Speed scaling & batch extraction tests
-        └── ModCoexistenceTests.cs      # 8 multi-mod coexistence scenarios
+        ├── AutoBuffPluginTests.cs      # Potion selection & buff replenishment tests
+        ├── AutoOpenPluginTests.cs      # Grab bag opening & extractinator-style tests
+        ├── AutoResearchPluginTests.cs  # Journey Mode sacrifice & inventory scan tests
+        ├── PiggyVaultPluginTests.cs    # Piggy Bank pickup, crafting, and action tests
+        ├── TurboBucketPluginTests.cs   # Instant bucket pouring & sponge tests
+        ├── BossCursorPluginTests.cs    # Boss detection, proximity, and pointer tests
+        └── ModCoexistenceTests.cs      # 16 multi-mod coexistence scenarios
 ```
 
 ---
@@ -182,7 +195,7 @@ terraria_mod_core/
 - 🛠️ **[Mod Developer Guide](docs/MODDING.md)**: Complete walkthrough for building custom TMC plugins.
 - 🔍 **[Compatibility & Patch Matrix](docs/COMPATIBILITY.md)**: Intercepted IL methods and version validation.
 - ⚙️ **[Configuration Reference](docs/CONFIGURATION.md)**: Settings and presets for host and all plugins.
-- 🧪 **[Testing Strategy](docs/TESTING.md)**: 85-assertion automated test breakdown.
+- 🧪 **[Testing Strategy](docs/TESTING.md)**: 378-assertion automated test breakdown.
 - 🔧 **[Troubleshooting Guide](docs/TROUBLESHOOTING.md)**: Resolution for memory limits, startup issues, and log telemetry.
 
 ---

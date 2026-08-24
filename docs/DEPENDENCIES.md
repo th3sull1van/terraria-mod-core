@@ -11,7 +11,7 @@ To play Terraria with TMC and its mods installed, your machine needs:
 | Component | Minimum Version | Recommended | Notes |
 | :--- | :--- | :--- | :--- |
 | **Operating System** | Windows 7 SP1 / 8.1 / 10 | **Windows 10 / 11 (64-bit)** | 64-bit Windows allows the 32-bit game to utilize the full **4GB LAA memory space**. |
-| **Vanilla Game** | **Terraria 1.4.5.7** | Steam or GOG release | Standard Terraria installation folder (Steam / GOG) or specified via `$env:TERRARIA_PATH`. |
+| **Vanilla Game** | **Terraria 1.4.5.8 / 1.4.5.7** | Steam or GOG release | Standard Terraria installation folder (Steam / GOG) or specified via `$env:TERRARIA_PATH`. |
 | **.NET Runtime** | **.NET Framework 4.8** | .NET Framework 4.8.1 | Pre-installed on Windows 10 (May 2019+) and Windows 11. |
 | **Graphics Runtime** | **Microsoft XNA Framework 4.0** | XNA Redistributable 4.0 | Automatically installed with Terraria through Steam/GOG. |
 

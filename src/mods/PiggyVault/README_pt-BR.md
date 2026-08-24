@@ -5,7 +5,7 @@
 **Concede ao Porquinho (`player.bank`) todas as funcionalidades modernas da Void Bag (`player.bank4`) — incluindo coleta automática por transbordamento (vácuo), criação direta de itens (crafting), Quick Buff/Cura/Mana, consumo de munições/iscas e acessórios de informação — preservando 100% das funções clássicas do Porquinho e integridade dos arquivos.**
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.7">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Type-Plugin_TMC-06b6d4?style=for-the-badge" alt="Plugin TMC">
   <img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-10b981?style=for-the-badge" alt="Licença MIT">

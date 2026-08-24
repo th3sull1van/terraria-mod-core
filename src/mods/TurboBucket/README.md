@@ -1,6 +1,6 @@
 # 🪣 TurboBucket — High-Speed Liquid Bucket Acceleration Mod for Terraria
 
-**TurboBucket** accelerates the pouring and placement speed of liquid buckets and bottomless buckets in **Vanilla Terraria 1.4.5.7**, allowing continuous liquid dumping and rapid tank filling at up to **60 TPS** without lag or engine desync.
+**TurboBucket** accelerates the pouring and placement speed of liquid buckets and bottomless buckets in **Vanilla Terraria 1.4.5.8 / 1.4.5.7**, allowing continuous liquid dumping and rapid tank filling at up to **60 TPS** without lag or engine desync.
 
 ---
 
