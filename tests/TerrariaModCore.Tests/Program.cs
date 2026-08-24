@@ -121,6 +121,7 @@ namespace TerrariaModCore.Tests
             AutoResearchPluginTests.Run(Assert);
             PiggyVaultPluginTests.Run(Assert);
             TurboBucketPluginTests.Run(Assert);
+            BossCursorPluginTests.Run(Assert);
 
             // 6. Mod Coexistence Matrix Tests
             ModCoexistenceTests.Run(Assert);

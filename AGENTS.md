@@ -6,7 +6,7 @@ This document establishes the mandatory architecture guidelines, engineering sta
 
 ## 1. Project Mission & Architecture
 
-**TerrariaModCore (TMC)** is a high-performance, modular runtime modding framework for **Vanilla Terraria 1.4.5.7** (Steam & GOG) that requires **zero tModLoader dependency** and preserves **100% vanilla disk integrity**.
+**TerrariaModCore (TMC)** is a high-performance, modular runtime modding framework for **Vanilla Terraria 1.4.5.8 / 1.4.5.7** (Steam & GOG) that requires **zero tModLoader dependency** and preserves **100% vanilla disk integrity**.
 
 ### Component Hierarchy
 ```text
@@ -24,9 +24,10 @@ TerrariaModCore.sln
 │       ├── AutoOpen/                   # Rapid automated grab bag & container opener plugin
 │       ├── AutoResearch/               # Automated Journey Mode item research & sacrifice plugin
 │       ├── PiggyVault/                 # Void Bag capabilities & storage automation for Piggy Bank
-│       └── TurboBucket/                # High-speed liquid bucket pouring acceleration plugin
+│       ├── TurboBucket/                # High-speed liquid bucket pouring acceleration plugin
+│       └── BossCursor/                 # Real-time directional indicator & boss head pointer plugin
 ├── tests/
-│   └── TerrariaModCore.Tests/      # Standalone 300+ assertion automated test suite
+│   └── TerrariaModCore.Tests/      # Standalone 370+ assertion automated test suite
 ├── docs/                           # Comprehensive technical documentation
 ├── dist/                           # Assembled release distribution
 └── build_dist.ps1                  # Master compilation, test execution, and packaging script
@@ -38,7 +39,7 @@ TerrariaModCore.sln
 
 | Property | Value | Notes |
 | :--- | :--- | :--- |
-| **Target Game** | `Terraria 1.4.5.7` | Auto-detected Steam/GOG install or `$env:TERRARIA_PATH` |
+| **Target Game** | `Terraria 1.4.5.8` (1.4.5.x) | Auto-detected Steam/GOG install or `$env:TERRARIA_PATH` |
 | **Target Framework** | `.NET Framework 4.8` | Target across all projects |
 | **Architecture** | `x86 (32-bit)` | Must target `Platform="x86"` (Terraria is a 32-bit application) |
 | **Memory Model** | `4 GB LAA` | PE Header flag `IMAGE_FILE_LARGE_ADDRESS_AWARE` (`0x0020`) |

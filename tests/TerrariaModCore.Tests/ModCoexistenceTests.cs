@@ -7,6 +7,7 @@ using AutoFishing;
 using FishingLinePlus;
 using AutoOpen;
 using AutoResearch;
+using BossCursor;
 using OreCascade;
 using PiggyVault;
 using TerrariaModCore.API;
@@ -53,24 +54,27 @@ namespace TerrariaModCore.Tests
             // Scenario 9: TurboBucket alone
             TestCombination(assert, "Scenario 9: TurboBucket alone", new[] { typeof(TurboBucketMod) });
 
-            // Scenario 10: OreCascade + AutoFishing
-            TestCombination(assert, "Scenario 10: OreCascade + AutoFishing", new[] { typeof(OreCascadeMod), typeof(AutoFishingMod) });
+            // Scenario 10: BossCursor alone
+            TestCombination(assert, "Scenario 10: BossCursor alone", new[] { typeof(BossCursorMod) });
 
-            // Scenario 11: AutoBuff + AutoFishing (Shared Player.Update hooks)
-            TestCombination(assert, "Scenario 11: AutoBuff + AutoFishing", new[] { typeof(AutoBuffMod), typeof(AutoFishingMod) });
+            // Scenario 11: OreCascade + AutoFishing
+            TestCombination(assert, "Scenario 11: OreCascade + AutoFishing", new[] { typeof(OreCascadeMod), typeof(AutoFishingMod) });
 
-            // Scenario 12: OreCascade + TurboExtractinator (Excavation & Extraction)
-            TestCombination(assert, "Scenario 12: OreCascade + TurboExtractinator", new[] { typeof(OreCascadeMod), typeof(TurboExtractinatorMod) });
+            // Scenario 12: AutoBuff + AutoFishing (Shared Player.Update hooks)
+            TestCombination(assert, "Scenario 12: AutoBuff + AutoFishing", new[] { typeof(AutoBuffMod), typeof(AutoFishingMod) });
 
-            // Scenario 13: AutoFishing + FishingLinePlus (Shared fishing hooks)
-            TestCombination(assert, "Scenario 13: AutoFishing + FishingLinePlus", new[] { typeof(AutoFishingMod), typeof(FishingLinePlusMod) });
+            // Scenario 13: OreCascade + TurboExtractinator (Excavation & Extraction)
+            TestCombination(assert, "Scenario 13: OreCascade + TurboExtractinator", new[] { typeof(OreCascadeMod), typeof(TurboExtractinatorMod) });
 
-            // Scenario 14: AutoBuff + PiggyVault (Shared Potion & Storage ecosystem)
-            TestCombination(assert, "Scenario 14: AutoBuff + PiggyVault", new[] { typeof(AutoBuffMod), typeof(PiggyVaultMod) });
+            // Scenario 14: AutoFishing + FishingLinePlus (Shared fishing hooks)
+            TestCombination(assert, "Scenario 14: AutoFishing + FishingLinePlus", new[] { typeof(AutoFishingMod), typeof(FishingLinePlusMod) });
 
-            // Scenario 15: All Nine production mods simultaneously
-            TestCombination(assert, "Scenario 15: All Nine (OreCascade + AutoFishing + FishingLinePlus + TurboExtractinator + AutoBuff + AutoOpen + AutoResearch + PiggyVault + TurboBucket)",
-                new[] { typeof(OreCascadeMod), typeof(AutoFishingMod), typeof(FishingLinePlusMod), typeof(TurboExtractinatorMod), typeof(AutoBuffMod), typeof(AutoOpenMod), typeof(AutoResearchMod), typeof(PiggyVaultMod), typeof(TurboBucketMod) });
+            // Scenario 15: AutoBuff + PiggyVault (Shared Potion & Storage ecosystem)
+            TestCombination(assert, "Scenario 15: AutoBuff + PiggyVault", new[] { typeof(AutoBuffMod), typeof(PiggyVaultMod) });
+
+            // Scenario 16: All Ten production mods simultaneously
+            TestCombination(assert, "Scenario 16: All Ten (OreCascade + AutoFishing + FishingLinePlus + TurboExtractinator + AutoBuff + AutoOpen + AutoResearch + PiggyVault + TurboBucket + BossCursor)",
+                new[] { typeof(OreCascadeMod), typeof(AutoFishingMod), typeof(FishingLinePlusMod), typeof(TurboExtractinatorMod), typeof(AutoBuffMod), typeof(AutoOpenMod), typeof(AutoResearchMod), typeof(PiggyVaultMod), typeof(TurboBucketMod), typeof(BossCursorMod) });
         }
 
         private static void TestCombination(Action<bool, string> assert, string scenarioName, Type[] modTypes)
@@ -104,7 +108,7 @@ namespace TerrariaModCore.Tests
 
                     var modLogger = new ModLogger(logger, modId);
                     var modConfigMgr = new ModConfigManager(modDir, modLogger);
-                    var context = new ModContext(manifest, modDir, modDir, modLogger, modConfigMgr, patchManager, null, null, "1.4.5.7");
+                    var context = new ModContext(manifest, modDir, modDir, modLogger, modConfigMgr, patchManager, null, null, "1.4.5.8");
 
                     var modInstance = (IMod)Activator.CreateInstance(modType);
                     modInstance.Initialize(context);

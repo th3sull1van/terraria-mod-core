@@ -50,6 +50,8 @@ New-Item -ItemType Directory -Path "$dist\mods\AutoOpen" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\AutoResearch" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\PiggyVault" -Force | Out-Null
 New-Item -ItemType Directory -Path "$dist\mods\TurboBucket" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\BossCursor" -Force | Out-Null
+New-Item -ItemType Directory -Path "$dist\mods\BossCursor\UI" -Force | Out-Null
 
 # Copy Launcher (TerrariaModded.exe)
 Copy-Item "$workspace\src\TerrariaModCore.Launcher\bin\Release\TerrariaModded.exe" "$dist\" -Force
@@ -258,6 +260,25 @@ $turboBucketConfig = @'
 }
 '@
 Set-Content -Path "$dist\mods\TurboBucket\config.json" -Value $turboBucketConfig -Encoding UTF8
+
+# Copy BossCursor
+Copy-Item "$workspace\src\mods\BossCursor\bin\Release\BossCursor.dll" "$dist\mods\BossCursor\" -Force
+Copy-Item "$workspace\src\mods\BossCursor\bin\Release\BossCursor.pdb" "$dist\mods\BossCursor\" -Force
+Copy-Item "$workspace\src\mods\BossCursor\manifest.json" "$dist\mods\BossCursor\" -Force
+Copy-Item "$workspace\src\mods\BossCursor\UI\Cursor.png" "$dist\mods\BossCursor\UI\" -Force
+$bossCursorConfig = @'
+{
+  "Enabled": true,
+  "HideOnScreen": false,
+  "CursorDistance": 150,
+  "CursorSize": 1.0,
+  "BlacklistPillars": true,
+  "ToggleKey": "B",
+  "ExcludedNpcIds": [],
+  "IncludedNpcIds": []
+}
+'@
+Set-Content -Path "$dist\mods\BossCursor\config.json" -Value $bossCursorConfig -Encoding UTF8
 
 Write-Host "`nDistribution assembled successfully in: $dist" -ForegroundColor Green
 

@@ -39,6 +39,10 @@
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Graphics\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>..\..\packages\Lib.Harmony.2.4.2\lib\net48\0Harmony.dll</HintPath>
       <Private>True</Private>
@@ -96,6 +100,10 @@
       <Project>{E4F5A6B7-0009-4000-8000-000000000009}</Project>
       <Name>TurboBucket</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\mods\BossCursor\BossCursor.csproj">
+      <Project>{D9EAFBB2-0013-4000-8000-000000000013}</Project>
+      <Name>BossCursor</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -112,6 +120,7 @@
     <Compile Include="AutoResearchPluginTests.cs" />
     <Compile Include="PiggyVaultPluginTests.cs" />
     <Compile Include="TurboBucketPluginTests.cs" />
+    <Compile Include="BossCursorPluginTests.cs" />
     <Compile Include="ModCoexistenceTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

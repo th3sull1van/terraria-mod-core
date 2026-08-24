@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
   <img src="https://img.shields.io/badge/Vanilla-Zero_tModLoader-06b6d4?style=for-the-badge" alt="Zero tModLoader">
   <img src="https://img.shields.io/badge/Memory-4GB_LAA_Enabled-f59e0b?style=for-the-badge" alt="4GB LAA Enabled">
-  <img src="https://img.shields.io/badge/Tests-237_Passing-10b981?style=for-the-badge" alt="237 Tests Passing">
+  <img src="https://img.shields.io/badge/Tests-375_Passing-10b981?style=for-the-badge" alt="375 Tests Passing">
   <img src="https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge" alt="License MIT">
 </p>
 
@@ -66,6 +66,9 @@
 | **🧪 AutoBuff** | Automatically consumes buff potions and food from inventory and Void Bag when buff durations expire, ensuring continuous uptime with zero waste. | [AutoBuff README](src/mods/AutoBuff/README.md) |
 | **📦 AutoOpen** | Continuous, rapid automated opening of grab bags, fishing crates, oysters, boss bags, lockboxes, and presents on hold-right-click (Extractinator-style). | [AutoOpen README](src/mods/AutoOpen/README.md) |
 | **🔬 AutoResearch** | Automated Journey Mode item sacrifice/research upon inventory entry, preserving 100% of vanilla quantity requirements with zero manual sacrifice clicks. | [AutoResearch README](src/mods/AutoResearch/README.md) |
+| **🐷 PiggyVault** | Void Bag-like auto-pickup, direct crafting, quick actions, and info accessory capabilities directly for the Piggy Bank. | [PiggyVault README](src/mods/PiggyVault/README.md) |
+| **🪣 TurboBucket** | Instant 60 TPS liquid bucket pouring, continuous flow, and accelerated bottomless bucket operations. | [TurboBucket README](src/mods/TurboBucket/README.md) |
+| **🎯 BossCursor** | Real-time directional indicator arrows and boss head icons pointing toward active bosses and mini-bosses with proximity scaling. | [BossCursor README](src/mods/BossCursor/README.md) |
 
 ---
 
