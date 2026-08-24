@@ -6,7 +6,7 @@ This document describes the automated test architecture, test suites, and assert
 
 ## 1. Overview & Test Runner
 
-TMC includes a standalone test suite (`TerrariaModCore.Tests.exe`) that executes **378 comprehensive assertions** covering core infrastructure, isolated plugin behaviors, and multi-mod coexistence scenarios.
+TMC includes a standalone test suite (`TerrariaModCore.Tests.exe`) that executes **392 comprehensive assertions** covering core infrastructure, isolated plugin behaviors, and multi-mod coexistence scenarios.
 
 ### Running the Test Suite
 ```powershell
@@ -23,7 +23,7 @@ dotnet build tests/TerrariaModCore.Tests/TerrariaModCore.Tests.csproj -c Release
 ==========================================
      TerrariaModCore (TMC) Test Suite     
 ==========================================
-RESULTS: 378 PASSED, 0 FAILED
+RESULTS: 392 PASSED, 0 FAILED
 ==========================================
 ```
 

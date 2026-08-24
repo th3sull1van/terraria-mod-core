@@ -218,16 +218,52 @@ namespace TerrariaModCore.Tests
             PiggyTakeUnityPotionPatch.Postfix(player);
             assert(player.bank.item[7].stack == 2, "TakeUnityPotion consumed 1 Wormhole Potion from Piggy Bank (3 -> 2)");
 
-            // 11. Informational Accessories UI Activation
+            // 11. Informational Accessories UI Activation (UpdateEquips & RefreshInfoAccs)
             player.bank.item[8].type = ItemID.Compass;
             player.bank.item[8].stack = 1;
             player.bank.item[9].type = ItemID.DepthMeter;
             player.bank.item[9].stack = 1;
+            player.bank.item[10].type = ItemID.DPSMeter;
+            player.bank.item[10].stack = 1;
+            player.bank.item[11].type = ItemID.GoldWatch;
+            player.bank.item[11].stack = 1;
+            player.bank.item[12].type = ItemID.Stopwatch;
+            player.bank.item[12].stack = 1;
+            player.bank.item[13].type = ItemID.LifeformAnalyzer;
+            player.bank.item[13].stack = 1;
+            player.bank.item[14].type = ItemID.TallyCounter;
+            player.bank.item[14].stack = 1;
+            player.bank.item[15].type = ItemID.MetalDetector;
+            player.bank.item[15].stack = 1;
+            player.bank.item[16].type = ItemID.Radar;
+            player.bank.item[16].stack = 1;
 
-            assert(player.accCompass == 0 && player.accDepthMeter == 0, "Info accessories initially 0");
+            assert(player.accCompass == 0 && player.accDepthMeter == 0 && !player.accDreamCatcher && player.accWatch == 0, "Info accessories initially 0");
+            
+            // Test UpdateEquips runtime tick
+            PiggyUpdateEquipsPatch.Postfix(player, 0);
+            assert(player.accCompass > 0, "accCompass active from Compass via UpdateEquips");
+            assert(player.accDepthMeter > 0, "accDepthMeter active from Depth Meter via UpdateEquips");
+            assert(player.accDreamCatcher, "accDreamCatcher (DPS Meter) active via UpdateEquips");
+            assert(player.accWatch > 0, "accWatch active from Gold Watch via UpdateEquips");
+            assert(player.accStopwatch, "accStopwatch active from Stopwatch via UpdateEquips");
+            assert(player.accThirdEye, "accThirdEye active from Lifeform Analyzer via UpdateEquips");
+            assert(player.accJarOfSouls, "accJarOfSouls active from Tally Counter via UpdateEquips");
+            assert(player.accOreFinder, "accOreFinder active from Metal Detector via UpdateEquips");
+            assert(player.accCritterGuide, "accCritterGuide active from Radar via UpdateEquips");
+
+            // Reset and test RefreshInfoAccs (paused game tick)
+            player.accCompass = 0;
+            player.accDepthMeter = 0;
+            player.accDreamCatcher = false;
+            player.accWatch = 0;
+            player.accStopwatch = false;
             PiggyInfoAccessoriesPatch.Postfix(player);
-            assert(player.accCompass > 0, "accCompass active from Compass stored in Piggy Bank");
-            assert(player.accDepthMeter > 0, "accDepthMeter active from Depth Meter stored in Piggy Bank");
+            assert(player.accCompass > 0, "accCompass active from Compass via RefreshInfoAccs");
+            assert(player.accDepthMeter > 0, "accDepthMeter active from Depth Meter via RefreshInfoAccs");
+            assert(player.accDreamCatcher, "accDreamCatcher (DPS Meter) active via RefreshInfoAccs");
+            assert(player.accWatch > 0, "accWatch active from Gold Watch via RefreshInfoAccs");
+            assert(player.accStopwatch, "accStopwatch active from Stopwatch via RefreshInfoAccs");
 
             // Cleanup & Unload
             modInstance.Unload();

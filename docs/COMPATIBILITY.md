@@ -18,7 +18,7 @@ This document provides a comprehensive compatibility matrix, runtime hook catalo
 
 ## 2. Complete Hook & Patch Catalog
 
-The table below catalogs every vanilla method intercepted across TMC Core and the 10 production plugins (28 total runtime patches):
+The table below catalogs every vanilla method intercepted across TMC Core and the 10 production plugins (29 total runtime patches):
 
 | Component | Target Type | Target Method | Patch Type | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
@@ -48,7 +48,8 @@ The table below catalogs every vanilla method intercepted across TMC Core and th
 | **PiggyVault** | `Player` | `ConsumeItem(...)` | `Postfix` | Consumes ammo and bait from Piggy Bank when firing or fishing. |
 | **PiggyVault** | `Player` | `HasUnityPotion()` | `Postfix` | Checks Piggy Bank for Wormhole Potions during multiplayer map teleports. |
 | **PiggyVault** | `Player` | `TakeUnityPotion()` | `Prefix` & `Postfix` | Consumes Wormhole Potion from Piggy Bank upon teleportation. |
-| **PiggyVault** | `Player` | `RefreshInfoAccs()` | `Postfix` | Applies informational accessory data (GPS, Watch, DPS, Compass) stored inside Piggy Bank. |
+| **PiggyVault** | `Player` | `UpdateEquips(int)` | `Postfix` | Applies informational (GPS, Watch, DPS, Compass, Radar, etc.) and mechanical accessory data during active gameplay. |
+| **PiggyVault** | `Player` | `RefreshInfoAccs()` | `Postfix` | Applies informational accessory data stored inside Piggy Bank when paused. |
 | **TurboBucket** | `Player` | `ItemCheck_UseBuckets(...)` | `Postfix` | Reduces bucket `itemTime`/`itemAnimation` to 60 TPS and accelerates bottomless buckets and sponges. |
 | **BossCursor** | `Main` | `DrawInterface_36_Cursor()` | `Postfix` | Renders directional pointer arrows and boss head icons with proximity scaling. |
 | **BossCursor** | `Player` | `Update(int)` | `Postfix` | Processes 'B' keybind hotkey toggling with debounce and chat guard. |
@@ -68,12 +69,12 @@ All 16 combinations of production mods have been tested and verified for conflic
 | **5** | AutoBuff alone | 1 | ✅ Verified Clean |
 | **6** | AutoOpen alone | 2 | ✅ Verified Clean |
 | **7** | AutoResearch alone | 1 | ✅ Verified Clean |
-| **8** | PiggyVault alone | 12 | ✅ Verified Clean |
+| **8** | PiggyVault alone | 13 | ✅ Verified Clean |
 | **9** | TurboBucket alone | 1 | ✅ Verified Clean |
 | **10** | BossCursor alone | 2 | ✅ Verified Clean |
 | **11** | OreCascade + AutoFishing | 5 | ✅ Verified Clean |
 | **12** | OreCascade + TurboExtractinator | 3 | ✅ Verified Clean |
 | **13** | AutoFishing + FishingLinePlus | 6 | ✅ Verified Clean |
-| **14** | AutoBuff + PiggyVault | 13 | ✅ Verified Clean |
+| **14** | AutoBuff + PiggyVault | 14 | ✅ Verified Clean |
 | **15** | AutoOpen + AutoResearch | 3 | ✅ Verified Clean |
-| **16** | **All Ten Simultaneously** | **28** | **✅ Verified Clean** |
+| **16** | **All Ten Simultaneously** | **29** | **✅ Verified Clean** |
