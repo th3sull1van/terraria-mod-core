@@ -55,7 +55,8 @@ namespace TerrariaModCore
                     var modInfo = new ModInfo
                     {
                         Manifest = manifest,
-                        State = manifest.Enabled ? ModState.Discovered : ModState.Disabled
+                        State = manifest.Enabled ? ModState.Discovered : ModState.Disabled,
+                        Directory = dir
                     };
 
                     _registry.Register(modInfo);

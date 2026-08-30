@@ -18,7 +18,6 @@ namespace TerrariaModCore.Patching
 
         private readonly Harmony _harmony;
         private readonly ILogger _logger;
-        private readonly ConflictDetector _conflictDetector;
         private readonly object _lock = new object();
 
         private readonly List<PatchInfo> _allPatches = new List<PatchInfo>();
@@ -29,7 +28,6 @@ namespace TerrariaModCore.Patching
         public PatchManager(ILogger logger)
         {
             _logger = logger;
-            _conflictDetector = new ConflictDetector(logger);
             _harmony = new Harmony(CentralHarmonyId);
         }
 
@@ -90,47 +88,9 @@ namespace TerrariaModCore.Patching
 
                         _harmony.Patch(target, hPrefix, hPostfix, hTranspiler);
 
-                        if (prefixMethod != null)
-                        {
-                            var info = new PatchInfo
-                            {
-                                ModId = modId,
-                                TargetMethod = target,
-                                PatchMethod = prefixMethod,
-                                PatchType = "Prefix",
-                                Priority = (PatchPriority)priority,
-                                Description = $"{type.Name}.{prefixMethod.Name}"
-                            };
-                            RegisterInternal(info);
-                        }
-
-                        if (postfixMethod != null)
-                        {
-                            var info = new PatchInfo
-                            {
-                                ModId = modId,
-                                TargetMethod = target,
-                                PatchMethod = postfixMethod,
-                                PatchType = "Postfix",
-                                Priority = (PatchPriority)priority,
-                                Description = $"{type.Name}.{postfixMethod.Name}"
-                            };
-                            RegisterInternal(info);
-                        }
-
-                        if (transpilerMethod != null)
-                        {
-                            var info = new PatchInfo
-                            {
-                                ModId = modId,
-                                TargetMethod = target,
-                                PatchMethod = transpilerMethod,
-                                PatchType = "Transpiler",
-                                Priority = (PatchPriority)priority,
-                                Description = $"{type.Name}.{transpilerMethod.Name}"
-                            };
-                            RegisterInternal(info);
-                        }
+                        TrackPatch(modId, target, "Prefix", type, priority, prefixMethod);
+                        TrackPatch(modId, target, "Postfix", type, priority, postfixMethod);
+                        TrackPatch(modId, target, "Transpiler", type, priority, transpilerMethod);
 
                         _logger?.Debug($"[Patch Manager] Successfully patched {target.DeclaringType?.Name}.{target.Name} for mod '{modId}'.");
                     }
@@ -144,71 +104,38 @@ namespace TerrariaModCore.Patching
         }
 
         public void RegisterPrefix(string modId, MethodBase original, MethodInfo prefix, PatchPriority priority = PatchPriority.Normal)
-        {
-            if (original == null) throw new ArgumentNullException(nameof(original));
-            if (prefix == null) throw new ArgumentNullException(nameof(prefix));
-
-            lock (_lock)
-            {
-                var hMethod = new HarmonyMethod(prefix, (int)priority);
-                _harmony.Patch(original, prefix: hMethod);
-
-                var info = new PatchInfo
-                {
-                    ModId = modId,
-                    TargetMethod = original,
-                    PatchMethod = prefix,
-                    PatchType = "Prefix",
-                    Priority = priority,
-                    Description = $"{prefix.DeclaringType?.Name}.{prefix.Name}"
-                };
-                RegisterInternal(info);
-            }
-        }
+            => RegisterPatch(modId, original, prefix, "Prefix", priority);
 
         public void RegisterPostfix(string modId, MethodBase original, MethodInfo postfix, PatchPriority priority = PatchPriority.Normal)
-        {
-            if (original == null) throw new ArgumentNullException(nameof(original));
-            if (postfix == null) throw new ArgumentNullException(nameof(postfix));
-
-            lock (_lock)
-            {
-                var hMethod = new HarmonyMethod(postfix, (int)priority);
-                _harmony.Patch(original, postfix: hMethod);
-
-                var info = new PatchInfo
-                {
-                    ModId = modId,
-                    TargetMethod = original,
-                    PatchMethod = postfix,
-                    PatchType = "Postfix",
-                    Priority = priority,
-                    Description = $"{postfix.DeclaringType?.Name}.{postfix.Name}"
-                };
-                RegisterInternal(info);
-            }
-        }
+            => RegisterPatch(modId, original, postfix, "Postfix", priority);
 
         public void RegisterTranspiler(string modId, MethodBase original, MethodInfo transpiler, PatchPriority priority = PatchPriority.Normal)
+            => RegisterPatch(modId, original, transpiler, "Transpiler", priority);
+
+        private void RegisterPatch(string modId, MethodBase original, MethodInfo patchMethod, string patchType, PatchPriority priority)
         {
             if (original == null) throw new ArgumentNullException(nameof(original));
-            if (transpiler == null) throw new ArgumentNullException(nameof(transpiler));
+            if (patchMethod == null) throw new ArgumentNullException(nameof(patchMethod));
 
             lock (_lock)
             {
-                var hMethod = new HarmonyMethod(transpiler, (int)priority);
-                _harmony.Patch(original, transpiler: hMethod);
+                var hMethod = new HarmonyMethod(patchMethod, (int)priority);
+                switch (patchType)
+                {
+                    case "Prefix": _harmony.Patch(original, prefix: hMethod); break;
+                    case "Postfix": _harmony.Patch(original, postfix: hMethod); break;
+                    default: _harmony.Patch(original, transpiler: hMethod); break;
+                }
 
-                var info = new PatchInfo
+                RegisterInternal(new PatchInfo
                 {
                     ModId = modId,
                     TargetMethod = original,
-                    PatchMethod = transpiler,
-                    PatchType = "Transpiler",
+                    PatchMethod = patchMethod,
+                    PatchType = patchType,
                     Priority = priority,
-                    Description = $"{transpiler.DeclaringType?.Name}.{transpiler.Name}"
-                };
-                RegisterInternal(info);
+                    Description = $"{patchMethod.DeclaringType?.Name}.{patchMethod.Name}"
+                });
             }
         }
 
@@ -258,17 +185,35 @@ namespace TerrariaModCore.Patching
             }
         }
 
-        public IReadOnlyList<PatchInfo> GetPatchesByTarget(MethodBase target)
+        private void TrackPatch(string modId, MethodBase target, string patchType, Type patchClass, int priority, MethodInfo method)
         {
-            lock (_lock)
+            if (method == null) return;
+
+            RegisterInternal(new PatchInfo
             {
-                return _allPatches.Where(p => p.TargetMethod == target).ToList();
-            }
+                ModId = modId,
+                TargetMethod = target,
+                PatchMethod = method,
+                PatchType = patchType,
+                Priority = (PatchPriority)priority,
+                Description = $"{patchClass.Name}.{method.Name}"
+            });
         }
 
         private void RegisterInternal(PatchInfo info)
         {
-            _conflictDetector.CheckConflict(info, _allPatches);
+            // Shared-hook notice: Harmony resolves overlaps by priority; logged for traceability.
+            var otherMods = _allPatches
+                .Where(p => p.TargetMethod == info.TargetMethod && !string.Equals(p.ModId, info.ModId, StringComparison.OrdinalIgnoreCase))
+                .Select(p => p.ModId)
+                .Distinct()
+                .ToList();
+            if (otherMods.Count > 0)
+            {
+                string methodName = $"{info.TargetMethod.DeclaringType?.Name}.{info.TargetMethod.Name}";
+                _logger?.Info($"[Patch Manager] Shared hook on '{methodName}'. Active mods touching this method: [{string.Join(", ", otherMods)}, {info.ModId}]. Resolution: Priority-based execution order.");
+            }
+
             _allPatches.Add(info);
 
             if (!_patchesByMod.TryGetValue(info.ModId, out var list))

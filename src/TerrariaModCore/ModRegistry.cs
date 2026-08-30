@@ -42,17 +42,5 @@ namespace TerrariaModCore
             _mods.TryGetValue(id, out var info);
             return info;
         }
-
-        public bool IsLoaded(string id)
-        {
-            if (string.IsNullOrEmpty(id)) return false;
-            return _mods.TryGetValue(id, out var info) && info.State == ModState.Loaded;
-        }
-
-        public bool IsEnabled(string id)
-        {
-            if (string.IsNullOrEmpty(id)) return false;
-            return _mods.TryGetValue(id, out var info) && info.Manifest != null && info.Manifest.Enabled;
-        }
     }
 }

@@ -47,10 +47,5 @@ namespace TerrariaModCore.API
         /// Gets all patches registered by a specific mod.
         /// </summary>
         IReadOnlyList<PatchInfo> GetPatchesByMod(string modId);
-
-        /// <summary>
-        /// Gets all patches targeting a specific method.
-        /// </summary>
-        IReadOnlyList<PatchInfo> GetPatchesByTarget(MethodBase target);
     }
 }

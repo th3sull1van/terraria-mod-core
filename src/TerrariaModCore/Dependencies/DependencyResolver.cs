@@ -13,7 +13,6 @@ namespace TerrariaModCore.Dependencies
         public bool Success { get; set; }
         public List<ModManifest> OrderedMods { get; set; } = new List<ModManifest>();
         public List<string> Errors { get; set; } = new List<string>();
-        public List<string> Warnings { get; set; } = new List<string>();
     }
 
     /// <summary>
@@ -21,13 +20,6 @@ namespace TerrariaModCore.Dependencies
     /// </summary>
     public class DependencyResolver
     {
-        private readonly ILogger _logger;
-
-        public DependencyResolver(ILogger logger)
-        {
-            _logger = logger;
-        }
-
         public ResolutionResult Resolve(IEnumerable<ModManifest> manifests)
         {
             var result = new ResolutionResult();
@@ -48,10 +40,19 @@ namespace TerrariaModCore.Dependencies
                 manifestMap[m.Id] = m;
             }
 
-            var graph = new DependencyGraph();
+            // Adjacency: parent -> children (parent must load first) and child -> parents (in-degree)
+            var edges = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+            var reverseEdges = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
             foreach (var kvp in manifestMap)
             {
-                graph.AddNode(kvp.Value);
+                edges[kvp.Key] = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                reverseEdges[kvp.Key] = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            void AddEdge(string fromParent, string toChild)
+            {
+                edges[fromParent].Add(toChild);
+                reverseEdges[toChild].Add(fromParent);
             }
 
             // 2. Validate mandatory dependencies, optional dependencies, and incompatibilities
@@ -83,7 +84,7 @@ namespace TerrariaModCore.Dependencies
                         }
                         else
                         {
-                            graph.AddEdge(dep, modId); // dep must load before modId
+                            AddEdge(dep, modId); // dep must load before modId
                         }
                     }
                 }
@@ -95,7 +96,7 @@ namespace TerrariaModCore.Dependencies
                     {
                         if (manifestMap.ContainsKey(optDep))
                         {
-                            graph.AddEdge(optDep, modId);
+                            AddEdge(optDep, modId);
                         }
                     }
                 }
@@ -107,7 +108,7 @@ namespace TerrariaModCore.Dependencies
                     {
                         if (manifestMap.ContainsKey(after))
                         {
-                            graph.AddEdge(after, modId);
+                            AddEdge(after, modId);
                         }
                     }
                 }
@@ -119,7 +120,7 @@ namespace TerrariaModCore.Dependencies
                     {
                         if (manifestMap.ContainsKey(before))
                         {
-                            graph.AddEdge(modId, before);
+                            AddEdge(modId, before);
                         }
                     }
                 }
@@ -133,9 +134,9 @@ namespace TerrariaModCore.Dependencies
 
             // 3. Topological Sort (Kahn's Algorithm)
             var inDegree = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-            foreach (var node in graph.Nodes.Keys)
+            foreach (var node in manifestMap.Keys)
             {
-                inDegree[node] = graph.ReverseEdges.ContainsKey(node) ? graph.ReverseEdges[node].Count : 0;
+                inDegree[node] = reverseEdges[node].Count;
             }
 
             var queue = new Queue<string>();
@@ -153,21 +154,18 @@ namespace TerrariaModCore.Dependencies
                 string current = queue.Dequeue();
                 ordered.Add(manifestMap[current]);
 
-                if (graph.Edges.TryGetValue(current, out var children))
+                foreach (var child in edges[current])
                 {
-                    foreach (var child in children)
+                    inDegree[child]--;
+                    if (inDegree[child] == 0)
                     {
-                        inDegree[child]--;
-                        if (inDegree[child] == 0)
-                        {
-                            queue.Enqueue(child);
-                        }
+                        queue.Enqueue(child);
                     }
                 }
             }
 
             // 4. Cycle Detection
-            if (ordered.Count < graph.Nodes.Count)
+            if (ordered.Count < manifestMap.Count)
             {
                 var cycleMembers = inDegree.Where(kvp => kvp.Value > 0).Select(kvp => kvp.Key).ToList();
                 result.Errors.Add($"Circular dependency detected involving mods: [{string.Join(", ", cycleMembers)}]");

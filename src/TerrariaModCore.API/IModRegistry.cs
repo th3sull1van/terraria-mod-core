@@ -12,6 +12,7 @@ namespace TerrariaModCore.API
         public IModContext Context { get; set; }
         public ModState State { get; set; }
         public string ErrorDetails { get; set; }
+        public string Directory { get; set; }
     }
 
     /// <summary>
@@ -28,15 +29,5 @@ namespace TerrariaModCore.API
         /// Gets a specific mod entry by its mod ID.
         /// </summary>
         ModInfo GetMod(string id);
-
-        /// <summary>
-        /// Checks whether a mod is currently loaded and active.
-        /// </summary>
-        bool IsLoaded(string id);
-
-        /// <summary>
-        /// Checks whether a mod is enabled in its manifest.
-        /// </summary>
-        bool IsEnabled(string id);
     }
 }
