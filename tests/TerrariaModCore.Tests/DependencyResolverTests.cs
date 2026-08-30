@@ -11,7 +11,7 @@ namespace TerrariaModCore.Tests
         public static void Run(Action<bool, string> assert)
         {
             Console.WriteLine("\n--- Testing DependencyResolver ---");
-            var resolver = new DependencyResolver(null);
+            var resolver = new DependencyResolver();
 
             // Test 1: Linear Dependency A -> B -> C
             var mA = new ModManifest { Id = "mod_a", Name = "Mod A", Enabled = true, Dependencies = new List<string> { "mod_b" } };

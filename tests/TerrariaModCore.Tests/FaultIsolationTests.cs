@@ -76,8 +76,8 @@ namespace TerrariaModCore.Tests
             registry.Register(new ModInfo { Manifest = healthyManifest, State = ModState.Discovered });
 
             string dir = AppDomain.CurrentDomain.BaseDirectory;
-            var brokenCtx = new ModContext(brokenManifest, dir, dir, new ModLogger(logger, brokenManifest.Id), null, patchManager, null, null, "1.4.5.8");
-            var healthyCtx = new ModContext(healthyManifest, dir, dir, new ModLogger(logger, healthyManifest.Id), null, patchManager, null, null, "1.4.5.8");
+            var brokenCtx = new ModContext(brokenManifest, dir, dir, new ModLogger(logger, brokenManifest.Id), null, patchManager, "1.4.5.8");
+            var healthyCtx = new ModContext(healthyManifest, dir, dir, new ModLogger(logger, healthyManifest.Id), null, patchManager, "1.4.5.8");
 
             // 1. Load Broken Mod
             bool brokenResult = loader.LoadMod(brokenManifest, dir, brokenCtx, out IMod brokenInst);

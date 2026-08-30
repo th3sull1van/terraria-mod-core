@@ -108,7 +108,7 @@ namespace TerrariaModCore.Tests
 
                     var modLogger = new ModLogger(logger, modId);
                     var modConfigMgr = new ModConfigManager(modDir, modLogger);
-                    var context = new ModContext(manifest, modDir, modDir, modLogger, modConfigMgr, patchManager, null, null, "1.4.5.8");
+                    var context = new ModContext(manifest, modDir, modDir, modLogger, modConfigMgr, patchManager, "1.4.5.8");
 
                     var modInstance = (IMod)Activator.CreateInstance(modType);
                     modInstance.Initialize(context);

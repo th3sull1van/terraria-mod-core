@@ -79,8 +79,6 @@ namespace TerrariaModCore.Tests
                     modLogger,
                     configMgr,
                     patchManager,
-                    null,
-                    null,
                     "1.4.5.8"
                 );
 
