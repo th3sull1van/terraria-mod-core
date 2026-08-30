@@ -6,7 +6,6 @@ using TerrariaModCore.Compatibility;
 using TerrariaModCore.Configuration;
 using TerrariaModCore.Dependencies;
 using TerrariaModCore.Diagnostics;
-using TerrariaModCore.Events;
 using TerrariaModCore.Logging;
 using TerrariaModCore.Patching;
 
@@ -17,15 +16,13 @@ namespace TerrariaModCore
     /// </summary>
     public class ModEngine
     {
-        public const string Version = "1.1.0";
+        public const string Version = "1.2.0";
 
         public CoreLogger Logger { get; }
         public CoreConfig Config { get; }
         public ModRegistry Registry { get; }
         public ModLoader Loader { get; }
         public PatchManager PatchManager { get; }
-        public EventBus EventBus { get; }
-        public GameServices GameServices { get; }
         public DependencyResolver DependencyResolver { get; }
 
         public string BaseDirectory { get; }
@@ -44,9 +41,7 @@ namespace TerrariaModCore
             Registry = new ModRegistry();
             Loader = new ModLoader(Logger, Registry);
             PatchManager = new PatchManager(Logger);
-            EventBus = new EventBus(Logger);
-            GameServices = new GameServices();
-            DependencyResolver = new DependencyResolver(Logger);
+            DependencyResolver = new DependencyResolver();
 
             // Load Core Config
             string coreConfigPath = Path.Combine(TmcDirectory, "config", "core.json");
@@ -89,27 +84,7 @@ namespace TerrariaModCore
             // 4. Load Resolved Mods
             foreach (var manifest in resolution.OrderedMods)
             {
-                string modDir = Path.Combine(ModsDirectory, manifest.Id);
-                if (!Directory.Exists(modDir))
-                {
-                    // Search if directory name differs from mod id
-                    foreach (var dir in Directory.GetDirectories(ModsDirectory))
-                    {
-                        if (File.Exists(Path.Combine(dir, "manifest.json")))
-                        {
-                            try
-                            {
-                                var m = SimpleJson.Deserialize<ModManifest>(File.ReadAllText(Path.Combine(dir, "manifest.json")));
-                                if (m != null && string.Equals(m.Id, manifest.Id, StringComparison.OrdinalIgnoreCase))
-                                {
-                                    modDir = dir;
-                                    break;
-                                }
-                            }
-                            catch { }
-                        }
-                    }
-                }
+                string modDir = Registry.GetMod(manifest.Id).Directory;
 
                 var modLogger = new ModLogger(Logger, manifest.Id);
                 var modConfigManager = new ModConfigManager(modDir, modLogger);
@@ -120,8 +95,6 @@ namespace TerrariaModCore
                     modLogger,
                     modConfigManager,
                     PatchManager,
-                    EventBus,
-                    GameServices,
                     detectedVersion);
 
                 Loader.LoadMod(manifest, modDir, modContext, out _);

@@ -15,8 +15,6 @@ namespace TerrariaModCore
         public ILogger Logger { get; }
         public IConfigManager ConfigManager { get; }
         public IPatchManager PatchManager { get; }
-        public IEventBus EventBus { get; }
-        public IGameServices GameServices { get; }
         public string GameVersion { get; }
         public string CoreVersion => ModEngine.Version;
 
@@ -27,8 +25,6 @@ namespace TerrariaModCore
             ILogger logger,
             IConfigManager configManager,
             IPatchManager patchManager,
-            IEventBus eventBus,
-            IGameServices gameServices,
             string gameVersion)
         {
             Manifest = manifest;
@@ -38,8 +34,6 @@ namespace TerrariaModCore
             Logger = logger;
             ConfigManager = configManager;
             PatchManager = patchManager;
-            EventBus = eventBus;
-            GameServices = gameServices;
             GameVersion = gameVersion;
         }
     }

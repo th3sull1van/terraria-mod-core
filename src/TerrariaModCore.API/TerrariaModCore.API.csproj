@@ -43,8 +43,6 @@
     <Compile Include="IConfigManager.cs" />
     <Compile Include="IPatchManager.cs" />
     <Compile Include="IModRegistry.cs" />
-    <Compile Include="IEventBus.cs" />
-    <Compile Include="IGameServices.cs" />
     <Compile Include="ModManifest.cs" />
     <Compile Include="ModState.cs" />
     <Compile Include="LogLevel.cs" />

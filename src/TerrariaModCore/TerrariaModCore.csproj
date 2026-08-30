@@ -62,13 +62,9 @@
     <Compile Include="Configuration\ModConfigManager.cs" />
     <Compile Include="Configuration\SimpleJson.cs" />
     <Compile Include="Patching\PatchManager.cs" />
-    <Compile Include="Patching\ConflictDetector.cs" />
     <Compile Include="Patching\CoreFixPatches.cs" />
-    <Compile Include="Dependencies\DependencyGraph.cs" />
     <Compile Include="Dependencies\DependencyResolver.cs" />
     <Compile Include="Compatibility\GameVersionChecker.cs" />
-    <Compile Include="Compatibility\GameServices.cs" />
-    <Compile Include="Events\EventBus.cs" />
     <Compile Include="Diagnostics\StartupDiagnostics.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

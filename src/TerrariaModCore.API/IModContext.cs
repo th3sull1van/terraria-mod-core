@@ -3,7 +3,7 @@ using System;
 namespace TerrariaModCore.API
 {
     /// <summary>
-    /// Provides controlled access to mod metadata, isolation paths, logging, configuration, patching, and events.
+    /// Provides controlled access to mod metadata, isolation paths, logging, configuration, and patching.
     /// </summary>
     public interface IModContext
     {
@@ -41,16 +41,6 @@ namespace TerrariaModCore.API
         /// Gets the centralized patch manager for registering Harmony patches.
         /// </summary>
         IPatchManager PatchManager { get; }
-
-        /// <summary>
-        /// Gets the event bus for subscribing to and publishing cross-mod / game events.
-        /// </summary>
-        IEventBus EventBus { get; }
-
-        /// <summary>
-        /// Gets shared game services.
-        /// </summary>
-        IGameServices GameServices { get; }
 
         /// <summary>
         /// Gets the detected Terraria game version string.
