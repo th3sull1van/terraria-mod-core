@@ -11,10 +11,7 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
 ```json
 {
   "LogLevel": "Info",
-  "DiagnosticBannerOnStartup": true,
-  "StrictCompatibilityCheck": true,
-  "SafeModeOnModFailure": true,
-  "ModsDirectoryName": "mods"
+  "DiagnosticBannerOnStartup": true
 }
 ```
 
@@ -24,9 +21,8 @@ The core configuration controls host engine diagnostics, logging, and mod loadin
 | :--- | :--- | :--- | :--- |
 | `LogLevel` | `string` | `"Info"` | Controls log verbosity written to console and `TMC/logs/tmc.log`. Options: `"Trace"`, `"Debug"`, `"Info"`, `"Warn"`, `"Error"`, `"Fatal"`. |
 | `DiagnosticBannerOnStartup` | `bool` | `true` | When `true`, prints a diagnostic summary banner showing game version and active mod counts during startup. |
-| `StrictCompatibilityCheck` | `bool` | `true` | When `true`, verifies that the loaded `Terraria.exe` version matches target `1.4.5.8 / 1.4.5.7`. |
-| `SafeModeOnModFailure` | `bool` | `true` | When `true`, prevents a single failing mod from crashing the game; the failing mod is isolated and healthy mods continue loading. |
-| `ModsDirectoryName` | `string` | `"mods"` | The directory name relative to the game root where plugins are scanned and loaded. |
+
+Note: Terraria version validation and per-mod failure isolation are unconditional core behaviors (no toggle).
 
 ---
 

@@ -99,10 +99,7 @@ Copy-Item -Path "dist\*" -Destination "D:\Jogos\Steam\steamapps\common\Terraria"
 ```json
 {
   "LogLevel": "Info",
-  "DiagnosticBannerOnStartup": true,
-  "StrictCompatibilityCheck": true,
-  "SafeModeOnModFailure": true,
-  "ModsDirectoryName": "mods"
+  "DiagnosticBannerOnStartup": true
 }
 ```
 
@@ -110,9 +107,8 @@ Copy-Item -Path "dist\*" -Destination "D:\Jogos\Steam\steamapps\common\Terraria"
 | :--- | :--- | :--- | :--- |
 | `LogLevel` | `string` | `"Info"` | Nível de detalhamento do log: `"Trace"`, `"Debug"`, `"Info"`, `"Warn"`, `"Error"`, `"Fatal"`. |
 | `DiagnosticBannerOnStartup` | `bool` | `true` | Exibe banner de diagnóstico no console com a contagem de mods ativos. |
-| `StrictCompatibilityCheck` | `bool` | `true` | Valida se a versão do Terraria é 1.4.5.8 / 1.4.5.7 antes de iniciar. |
-| `SafeModeOnModFailure` | `bool` | `true` | Isola mods com erro e continua carregando os mods saudáveis. |
-| `ModsDirectoryName` | `string` | `"mods"` | Nome da pasta que contém os diretórios dos mods. |
+
+Nota: a validação de versão do Terraria e o isolamento de falhas por mod são comportamentos sempre ativos do core.
 
 ---
 

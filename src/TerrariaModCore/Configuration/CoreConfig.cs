@@ -10,8 +10,5 @@ namespace TerrariaModCore.Configuration
     {
         public LogLevel LogLevel { get; set; } = LogLevel.Info;
         public bool DiagnosticBannerOnStartup { get; set; } = true;
-        public bool StrictCompatibilityCheck { get; set; } = true;
-        public bool SafeModeOnModFailure { get; set; } = true;
-        public string ModsDirectoryName { get; set; } = "mods";
     }
 }
