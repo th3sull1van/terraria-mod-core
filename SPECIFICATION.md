@@ -1,6 +1,6 @@
 # 📐 TerrariaModCore (TMC) — Master Architectural & Technical Specification
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Target Game:** Vanilla Terraria `1.4.5.8` / `1.4.5.7` (Steam & GOG Releases)  
 **Target Framework:** `.NET Framework 4.8` (`net48`) | **Architecture:** `x86 (32-bit)` with `IMAGE_FILE_LARGE_ADDRESS_AWARE` (4GB Virtual Memory)  
 **Core Patching Engine:** `Lib.Harmony 2.4.2` | **Inspection Engine:** `Mono.Cecil 0.11.5`  
@@ -120,7 +120,7 @@ The TMC platform is structured in a four-tier decoupled architecture:
 +-------------------------------------------------------------------------+
 |                  Tier 3: Public API (TerrariaModCore.API)               |
 |  - Contracts: IMod, IModContext, IPatchManager, IConfigManager          |
-|  - Services: ILogger, IEventBus, IGameServices, IModRegistry            |
+|  - Services: ILogger, IModRegistry                                      |
 |  - Models: ModManifest, ModState, PatchInfo, PatchPriority              |
 +-------------------------------------------------------------------------+
                                      │
@@ -209,8 +209,6 @@ public interface IModContext
     ILogger Logger { get; }
     IConfigManager ConfigManager { get; }
     IPatchManager PatchManager { get; }
-    IEventBus EventBus { get; }
-    IGameServices GameServices { get; }
     string GameVersion { get; }
     string CoreVersion { get; }
 }
@@ -224,7 +222,6 @@ public interface IPatchManager
     void UnpatchAll(string modId);
     IReadOnlyList<PatchInfo> GetAllPatches();
     IReadOnlyList<PatchInfo> GetPatchesByMod(string modId);
-    IReadOnlyList<PatchInfo> GetPatchesByTarget(MethodBase target);
 }
 
 public interface IConfigManager
@@ -825,3 +822,4 @@ namespace CustomSampleMod.Patches
 | :---: | :---: | :---: | :--- |
 | **1.0.0** | 2026-08-24 | TMC Engineering Team / Antigravity | Initial formal architectural and technical specification established from `PROMPT.md` and repository implementation. |
 | **1.1.0** | 2026-08-24 | TMC Engineering Team / Antigravity | Production release v1.1.0: Added BossCursor plugin, Terraria 1.4.5.8 multi-version compatibility, PiggyVault real-time informational accessories, .editorconfig/.gitattributes standardization, and 391 verified test assertions. |
+| **1.2.0** | 2026-08-29 | TMC Engineering Team | Release v1.2.0: Removed unused public API surface (`IEventBus`/`EventBus`, `IGameServices`/`GameServices`, `IPatchManager.GetPatchesByTarget`, `IModRegistry.IsLoaded/IsEnabled`, dead `CoreConfig` flags), inlined `DependencyGraph` into `DependencyResolver`, deduplicated `PatchManager` registration paths, eliminated redundant manifest re-parsing at load time, and trimmed dead constants. 391 verified test assertions. |

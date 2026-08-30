@@ -7,7 +7,7 @@
   "entryAssembly": "AutoBuff.dll",
   "entryType": "AutoBuff.AutoBuffMod",
   "targetGameVersion": "1.4.5.8",
-  "coreVersion": "1.1.0",
+  "coreVersion": "1.2.0",
   "dependencies": [],
   "optionalDependencies": [],
   "loadBefore": [],

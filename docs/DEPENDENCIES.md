@@ -41,7 +41,7 @@ TMC uses a strictly controlled set of external dependencies to ensure zero runti
   - **Role**: Provides in-memory IL patching, method interception, prefixes, postfixes, and transpilers.
   - **Distribution**: Deployed to `<GameRoot>/0Harmony.dll` and `<GameRoot>/TMC/0Harmony.dll`.
 
-- **`TerrariaModCore.API` (v1.1.0)**:
+- **`TerrariaModCore.API` (v1.2.0)**:
   - **Path**: `src/TerrariaModCore.API/bin/Release/TerrariaModCore.API.dll`
   - **Role**: Zero-dependency interface layer providing `IMod`, `IModContext`, `IPatchManager`, `IConfigManager`, `ILogger`, and lifecycle events.
 
