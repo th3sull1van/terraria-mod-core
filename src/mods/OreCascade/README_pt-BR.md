@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⛏️ OreCascade — Mineração em Cadeia e Escavação de Minérios para Terraria Vanilla
+# OreCascade
 
 **Mineração instantânea em cadeia para minérios e pedras preciosas com injeção IL em runtime, isolamento estrito de veios, preservação legítima de drops e zero modificação de arquivos.**
 
@@ -10,40 +10,40 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
-  <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
-  <img src="https://img.shields.io/badge/Type-TMC_Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
-  <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="License MIT">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8%20%7C%201.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
+  <img src="https://img.shields.io/badge/Framework-Harmony%202.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
+  <img src="https://img.shields.io/badge/Tipo-Plugin%20TMC-06b6d4?style=for-the-badge" alt="Plugin TMC">
+  <img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-3b82f6?style=for-the-badge" alt="Licença MIT">
 </p>
 
 </div>
 
 ---
 
-## 🌟 Principais Funcionalidades
+## Principais Recursos
 
-- **⚡ Zero Dependência de tModLoader e 100% de Integridade dos Arquivos Vanilla**:
+- **Zero Dependência de tModLoader & Integridade 100% dos Arquivos**:
   - Executa nativamente através do framework **TerrariaModCore (TMC)** no Terraria oficial 1.4.5.8 / 1.4.5.7.
-  - O executável original `Terraria.exe` permanece 100% intacto em disco.
+  - O executável original `Terraria.exe` permanece 100% intacto no disco.
 
-- **🚀 Busca em Largura Iterativa (BFS)**:
+- **Busca em Largura Iterativa (BFS)**:
   - Descobre veios de minério contíguos dinamicamente com complexidade temporal e espacial $O(V)$.
-  - **Isolamento Estrito de Veios**: Veios adjacentes de materiais diferentes (ex: Ouro encostado em Cobre) são rigorosamente isolados quando `RequireSameOreType` está ativo.
-  - **Conexão Diagonal**: Suporte a exploração em 8 direções para formações complexas de veios.
+  - **Isolamento Estrito de Veios**: Veios adjacentes de materiais diferentes (ex.: Ouro encostado em Cobre) são rigorosamente isolados quando `RequireSameOreType` está ativo.
+  - **Conexão Diagonal**: Suporte a exploração opcional em 8 direções para formações complexas de veios.
 
-- **🛡️ Drops Legítimos do Motor Vanilla e Checagem de Picareta**:
-  - Blocos são destruídos via `WorldGen.KillTile`, preservando drops legítimos, moedas da sorte, partículas, conquistas e sons.
-  - Respeita rigorosamente o poder de picareta vanilla (ex: Cobalto requer 100% de picareta, Clorofita requer 200%).
-  - Guard de reentrância `[ThreadStatic]` elimina riscos de recursão infinita.
+- **Drops Legítimos do Motor Vanilla & Segurança de Picareta**:
+  - Blocos são destruídos via `WorldGen.KillTile`, preservando tabelas de drop vanilla, moedas da sorte, partículas, conquistas e efeitos sonoros.
+  - Respeita rigorosamente o poder de picareta vanilla (ex.: Cobalto requer 100% de picareta, Clorofita requer 200%).
+  - Guard de reentrância `[ThreadStatic] bool _isCascading` elimina riscos de recursão infinita.
 
-- **🌐 Sincronizado no Multiplayer**:
-  - Transmite automaticamente pacotes de manipulação de blocos (`NetMessage.SendData(17, ...)`) em sessões multiplayer.
+- **Sincronizado no Multiplayer**:
+  - Transmite automaticamente pacotes de manipulação de blocos (`NetMessage.SendData(17, ...)`) em sessões multiplayer de clientes, sincronizando a destruição em tempo real.
 
 ---
 
-## ⚙️ Configuração (`config.json`)
+## Referência de Configuração
 
-O arquivo de configuração está localizado em `mods/OreCascade/config.json`:
+Localizado em `mods/OreCascade/config.json`:
 
 ```json
 {
@@ -56,20 +56,18 @@ O arquivo de configuração está localizado em `mods/OreCascade/config.json`:
 }
 ```
 
-### Referência de Opções
-
 | Opção | Tipo | Padrão | Descrição |
 | :--- | :--- | :--- | :--- |
 | `Enabled` | `bool` | `true` | Ativa ou desativa todas as funções de mineração em cascata. |
 | `MaxBlocksPerActivation` | `int` | `100` | Número máximo de blocos minerados por ativação (limitado de 1 a 500). |
 | `AllowDiagonalConnections` | `bool` | `false` | Quando `true`, pesquisa vizinhos em 8 direções em vez de apenas 4 ortogonais. |
-| `RequireSameOreType` | `bool` | `true` | Quando `true`, restringe a mineração estritamente ao mesmo tipo de minério. |
+| `RequireSameOreType` | `bool` | `true` | Quando `true`, restringe a mineração estritamente ao mesmo tipo de minério e identidade de frame. |
 | `IncludeGems` | `bool` | `true` | Quando `true`, ativa a mineração em cadeia para pedras preciosas (Ametista, Diamante, Âmbar, etc.). |
 | `IncludeExtractables` | `bool` | `true` | Quando `true`, ativa mineração em cadeia para blocos extraíveis (Lodo, Neve com Terra, Fóssil do Deserto). |
 
 ---
 
-## 💎 Minérios, Gemas e Extraíveis Suportados
+## Minérios, Gemas e Extraíveis Suportados
 
 | Categoria | Blocos Incluídos |
 | :--- | :--- |
@@ -81,7 +79,7 @@ O arquivo de configuração está localizado em `mods/OreCascade/config.json`:
 
 ---
 
-## 🔧 Métodos em Runtime Interceptados
+## Métodos em Runtime Interceptados
 
 | Classe Alvo | Método Alvo | Tipo de Hook | Função |
 | :--- | :--- | :--- | :--- |
@@ -89,7 +87,7 @@ O arquivo de configuração está localizado em `mods/OreCascade/config.json`:
 
 ---
 
-## 📁 Estrutura do Plugin
+## Estrutura do Plugin
 
 ```text
 mods/OreCascade/
@@ -100,3 +98,9 @@ mods/OreCascade/
 ├── README_pt-BR.md     # Documentação em português
 └── config.json         # Configurações em tempo de execução
 ```
+
+---
+
+## Licença
+
+MIT © [th3sull1van](https://github.com/th3sull1van)

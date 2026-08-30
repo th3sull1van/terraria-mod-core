@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🎣 AutoFishing — Automação Inteligente de Pesca para Terraria Vanilla
+# AutoFishing
 
-**Lançamento automatizado inteligente, detecção precisa de mordidas e recolhimento no Terraria Vanilla com máquina de estados nativa e zero modificação de arquivos.**
+**Automação inteligente de pesca com arremesso automático, detecção nativa de fisgada e recolhimento no Vanilla Terraria com máquina de estados e zero modificação de arquivos.**
 
 <p align="center">
   <a href="README.md"><b>English</b></a> •
@@ -10,45 +10,48 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
-  <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
-  <img src="https://img.shields.io/badge/Type-TMC_Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
-  <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="License MIT">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8%20%7C%201.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
+  <img src="https://img.shields.io/badge/Framework-Harmony%202.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
+  <img src="https://img.shields.io/badge/Tipo-Plugin%20TMC-06b6d4?style=for-the-badge" alt="Plugin TMC">
+  <img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-3b82f6?style=for-the-badge" alt="Licença MIT">
 </p>
 
 </div>
 
 ---
 
-## 🌟 Principais Funcionalidades
+## Principais Recursos
 
-- **🎮 Ciclo de Vida Iniciado pelo Jogador (Início/Parada Manual)**:
-  - Selecionar a vara de pesca no hotbar **não** lança automaticamente.
-  - A automação inicia somente após o jogador selecionar a vara e realizar o primeiro clique manual de lançamento.
-  - A automação para imediatamente assim que o jogador clica manualmente para recolher ou cancelar a linha.
-  - Trocar de item no hotbar reinicia o estado de automação.
+- **Ciclo de Vida Iniciado pelo Jogador (Início & Parada Manuais)**:
+  - Selecionar uma vara de pescar na hotbar **não** arremessa automaticamente.
+  - A automação inicia apenas após o jogador selecionar a vara e realizar o primeiro clique de arremesso manual.
+  - A automação é interrompida imediatamente sempre que o jogador clica para puxar a linha ou cancelá-la.
+  - Trocar o slot selecionado na hotbar redefine a automação com segurança.
 
-- **⚡ Zero Macros Externos e Sincronia a 60 TPS**:
-  - Executa diretamente dentro do método nativo `Player.Update` sincronizado ao ciclo de 60 TPS do jogo.
-  - Sem leituras frágeis de pixels ou macros externos de mouse.
+- **Zero Macros Externos & Sincronização Nativa com o Game Loop**:
+  - Executa diretamente dentro de `Player.Update`, em sincronia com o ciclo de 60 TPS do motor do jogo.
+  - Zero captura externa de mouse ou leitura instável de pixels da tela.
 
-- **🎯 Detecção Precisa de Mordidas em Engine**:
+- **Detecção Precisa de Fisgada no Motor Vanilla**:
   - Monitora as boias ativas pertencentes ao jogador local (`bobber.ai[1] < 0f && bobber.localAI[1] != 0f`).
-  - Fisga o peixe no instante exato em que o motor de física do Terraria confirma a mordida.
+  - Pesca o item no instante exato em que a física vanilla confirma a fisgada.
 
-- **🛡️ Verificação de Iscas no Inventário**:
-  - Escaneia os slots de inventário 0–57 em busca de iscas válidas antes de lançar.
-  - Pausa a automação de forma segura caso a isca acabe quando `RequireBait` estiver ativo.
+- **Verificação de Iscas no Inventário**:
+  - Varre automaticamente os slots 0–57 do inventário em busca de iscas válidas antes de cada arremesso.
+  - Pausa a automação de forma segura caso as iscas acabem quando `RequireBait` estiver ativo.
 
-- **⏱️ Temporizadores Naturais de Reação**:
-  - Atraso configurável para puxar a linha (`ReelDelayTicks`), simulando tempos de reação humanos.
-  - Cooldown configurável entre capturas (`CastDelayTicks`) antes de relançar a linha.
+- **Temporizadores Naturais de Reação Configuráveis**:
+  - Tempo de atraso para recolhimento (`ReelDelayTicks`) simulando reflexo humano.
+  - Cooldown configurável entre capturas (`CastDelayTicks`) antes do próximo arremesso.
+
+- **Totalmente Compatível com Múltiplas Linhas**:
+  - Integração perfeita com `FishingLinePlus`. Monitora todas as boias ativas na água e recolhe assim que qualquer boia fisgar um item.
 
 ---
 
-## ⚙️ Configuração (`config.json`)
+## Referência de Configuração
 
-O arquivo de configuração está localizado em `mods/AutoFishing/config.json`:
+Localizado em `mods/AutoFishing/config.json`:
 
 ```json
 {
@@ -61,30 +64,28 @@ O arquivo de configuração está localizado em `mods/AutoFishing/config.json`:
 }
 ```
 
-### Referência de Opções
-
 | Opção | Tipo | Padrão | Descrição |
 | :--- | :--- | :--- | :--- |
-| `Enabled` | `bool` | `true` | Ativa ou desativa toda a funcionalidade do mod. |
-| `AutoCast` | `bool` | `true` | Relança a linha automaticamente após cada captura. |
-| `AutoReel` | `bool` | `true` | Puxa a linha automaticamente quando uma mordida é detectada. |
-| `CastDelayTicks` | `int` | `30` | Tempo de espera (em frames a 60 TPS, 30 ticks = 0,5s) antes de relançar. |
-| `ReelDelayTicks` | `int` | `2` | Atraso (em ticks) entre a mordida e o recolhimento. |
-| `RequireBait` | `bool` | `true` | Verifica se o jogador possui isca antes de realizar novo lançamento. |
+| `Enabled` | `bool` | `true` | Ativa ou desativa toda a automação de pesca. |
+| `AutoCast` | `bool` | `true` | Arremessa a vara de pescar automaticamente enquanto a automação estiver ativa. |
+| `AutoReel` | `bool` | `true` | Recolhe a linha automaticamente quando um peixe ou item fisgar. |
+| `CastDelayTicks` | `int` | `30` | Intervalo em ticks de jogo (60 ticks = 1 segundo) após o recolhimento antes de arremessar novamente. |
+| `ReelDelayTicks` | `int` | `2` | Tempo de reação em ticks entre a detecção de fisgada e o recolhimento. |
+| `RequireBait` | `bool` | `true` | Impede novos arremessos caso não haja iscas no inventário do jogador. |
 
 ---
 
-## 🔧 Métodos em Runtime Interceptados
+## Métodos em Runtime Interceptados
 
 | Classe Alvo | Método Alvo | Tipo de Hook | Função |
 | :--- | :--- | :--- | :--- |
-| `Terraria.Player` | `Update(int i)` | `Postfix` | Processa a máquina de estados de pesca para o jogador local. |
-| `Terraria.Player` | `ItemCheck_Shoot(...)` | `Postfix` | Detecta o lançamento inicial para registrar a boia no controlador. |
-| `Terraria.Player` | `ItemCheck_PullFishingBobbers(Item)` | `Prefix` | Executa o recolhimento automático da boia com captura de item. |
+| `Terraria.Player` | `Update(int i)` | `Postfix` | Executa a máquina de estados do controlador de pesca para o jogador local (`i == Main.myPlayer`). |
+| `Terraria.Player` | `ItemCheck_Shoot(int i, Item sItem, int weaponDamage)` | `Postfix` | Intercepta o arremesso manual para ativar a automação. |
+| `Terraria.Player` | `ItemCheck_PullFishingBobbers(Item sItem)` | `Prefix` | Intercepta o recolhimento manual para desativar a automação. |
 
 ---
 
-## 📁 Estrutura do Plugin
+## Estrutura do Plugin
 
 ```text
 mods/AutoFishing/
@@ -95,3 +96,9 @@ mods/AutoFishing/
 ├── README_pt-BR.md     # Documentação em português
 └── config.json         # Configurações em tempo de execução
 ```
+
+---
+
+## Licença
+
+MIT © [th3sull1van](https://github.com/th3sull1van)

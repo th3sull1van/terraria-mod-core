@@ -1,8 +1,8 @@
 <div align="center">
 
-# 📦 AutoOpen — Abertura Rápida e Automatizada de Recipientes para Terraria Vanilla
+# AutoOpen
 
-**Abertura rápida e contínua de bolsas de itens, caixas de pesca, ostras, bolsas de bosses, baús trancados e presentes ao segurar o botão direito (estilo Extrator) com zero modificação de arquivos vanilla.**
+**Abertura contínua e acelerada de recipientes, caixas de pesca, ostras, bolsas de tesouro, caixas trancadas e presentes ao segurar o botão direito (estilo Extractinator) com zero modificação de arquivos.**
 
 <p align="center">
   <a href="README.md"><b>English</b></a> •
@@ -10,35 +10,43 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
-  <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
-  <img src="https://img.shields.io/badge/Type-TMC_Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
-  <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="License MIT">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8%20%7C%201.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
+  <img src="https://img.shields.io/badge/Framework-Harmony%202.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
+  <img src="https://img.shields.io/badge/Tipo-Plugin%20TMC-06b6d4?style=for-the-badge" alt="Plugin TMC">
+  <img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-3b82f6?style=for-the-badge" alt="Licença MIT">
 </p>
 
 </div>
 
 ---
 
-## 🌟 Principais Funcionalidades
+## Principais Recursos
 
-- **⚡ Abertura Rápida Contínua ao Segurar o Clique**:
-  - Elimina a necessidade frustrante do jogo vanilla de soltar e clicar o botão direito do mouse repetidamente centenas de vezes.
-  - Basta manter pressionado o botão direito sobre qualquer pilha de caixas ou bolsas para abri-las continuamente em alta velocidade.
+- **Abertura Contínua Rápida ao Segurar o Botão**:
+  - Elimina a exigência de clicar e soltar repetidamente o botão do mouse.
+  - Basta segurar o Botão Direito sobre qualquer pilha de caixas ou bolsas para abri-las continuamente em alta velocidade (estilo Extractinator).
 
-- **📦 Amplo Suporte a Recipientes**:
-  - **Caixas de Pesca**: Madeira, Ferro, Ouro, Sagrada, Masmorra, Oceano, Selva, Céu, Corrupção, Carmesim e variantes do Hardmode.
-  - **Bolsas de Bosses**: Todas as bolsas de tesouro do modo Expert / Master.
-  - **Recipientes e Sorteios**: Ostras, Bolsas de Ervas, Bolsas de Pesca, Presentes, Caixas Trancadas da Masmorra Dourada e Masmorra de Obsidiana.
+- **Amplo Suporte a Recipientes**:
+  - **Caixas de Pesca**: Madeira, Ferro, Ouro, Sagrada, Calabouço, Oceano, Selva, Céu, Corrupção, Carmim e variantes do Hardmode.
+  - **Bolsas de Tesouro de Bosses**: Todas as bolsas de chefes do modo Perito e Mestre.
+  - **Bolsas Especiais e Recipientes**: Bolsa de Ervas, Lata de Minhocas, Ostras, Bolsas de Brindes, Presentes e Ovos de Chillet.
+  - **Caixas Trancadas**: Caixas Trancadas Douradas (consome Chaves Douradas automaticamente) e Caixas Trancadas de Obsidiana (requer Chave das Sombras no inventário ou Void Bag).
 
-- **🛡️ Drops 100% Legítimos com Áudio Nativo**:
-  - Os itens são gerados utilizando as chamadas nativas de desempacotamento do Terraria, preservando todas as probabilidades de itens, moedas, pets e efeitos sonoros originais.
+- **Suporte a Processamento em Lote**:
+  - `BatchSize` configurável para processar múltiplos recipientes por ciclo de tick para descompactação instantânea de pilhas.
+
+- **Modo Opcional Mãos Livres de Auto-Abertura**:
+  - Modo `AutoOpenInventory` descompacta automaticamente bolsas no inventário ou Void Bag em segundo plano sem necessidade de cliques.
+
+- **Segurança de Chaves & Lista de Exclusão**:
+  - Interrompe a abertura de forma segura caso chaves obrigatórias (ex.: Chaves Douradas) acabem.
+  - Lista de exclusão personalizada `ExcludedItemIds` no `config.json` para reservar recipientes específicos.
 
 ---
 
-## ⚙️ Configuração (`config.json`)
+## Referência de Configuração
 
-O arquivo de configuração está localizado em `mods/AutoOpen/config.json`:
+Localizado em `mods/AutoOpen/config.json`:
 
 ```json
 {
@@ -54,30 +62,30 @@ O arquivo de configuração está localizado em `mods/AutoOpen/config.json`:
 }
 ```
 
-### Referência de Opções
-
 | Opção | Tipo | Padrão | Descrição |
 | :--- | :--- | :--- | :--- |
-| `Enabled` | `bool` | `true` | Ativa ou desativa o mod de abertura de recipientes. |
-| `RapidRightClickOpen` | `bool` | `true` | Ativa o modo contínuo de abertura ao manter o clique direito pressionado. |
-| `OpenDelayTicks` | `int` | `3` | Intervalo em ticks entre aberturas (3 ticks = 20 recipientes abertos por segundo). |
-| `BatchSize` | `int` | `1` | Quantidade de recipientes abertos por ciclo. |
-| `PlaySound` | `bool` | `true` | Reproduz os efeitos sonoros originais ao abrir recipientes. |
-| `IncludeVoidBag` | `bool` | `true` | Permite desempacotar recipientes armazenados na Void Bag. |
-| `ExcludedItemIds` | `int[]` | `[]` | Lista de IDs de itens excluídos da abertura rápida. |
+| `Enabled` | `bool` | `true` | Chave geral para ativar ou desativar o AutoOpen. |
+| `RapidRightClickOpen` | `bool` | `true` | Ativa a abertura contínua e rápida ao segurar o botão direito. |
+| `OpenDelayTicks` | `int` | `3` | Intervalo em ticks entre aberturas ao segurar o botão direito (3 ticks = 20 aberturas/seg). |
+| `BatchSize` | `int` | `1` | Quantidade de recipientes abertos por ciclo (1 a 50). |
+| `PlaySound` | `bool` | `true` | Toca o efeito sonoro vanilla de abertura de recipiente. |
+| `AutoOpenInventory` | `bool` | `false` | Abertura totalmente automática em segundo plano para bolsas no inventário. |
+| `AutoOpenIntervalTicks` | `int` | `10` | Frequência em ticks para varredura do inventário em segundo plano. |
+| `IncludeVoidBag` | `bool` | `true` | Varre e abre recipientes guardados no Void Bag. |
+| `ExcludedItemIds` | `int[]` | `[]` | Lista de IDs de itens excluídos da abertura automática. |
 
 ---
 
-## 🔧 Métodos em Runtime Interceptados
+## Métodos em Runtime Interceptados
 
 | Classe Alvo | Método Alvo | Tipo de Hook | Função |
 | :--- | :--- | :--- | :--- |
-| `Terraria.UI.ItemSlot` | `RightClick(Item[], int, int)` | `Prefix` | Detecta o clique direito mantido sobre recipientes válidos para armar o loop de abertura rápida. |
-| `Terraria.Player` | `Update(int i)` | `Postfix` | Executa o loop de abertura contínua para o jogador local. |
+| `Terraria.UI.ItemSlot` | `RightClick(Item[] inv, int context, int slot)` | `Prefix` | Intercepta o clique direito contínuo em recipientes para abertura rápida e previne divisão de pilha no cursor. |
+| `Terraria.Player` | `Update(int i)` | `Postfix` | Processa a descompactação automática no inventário quando `AutoOpenInventory` está ativado. |
 
 ---
 
-## 📁 Estrutura do Plugin
+## Estrutura do Plugin
 
 ```text
 mods/AutoOpen/
@@ -88,3 +96,9 @@ mods/AutoOpen/
 ├── README_pt-BR.md     # Documentação em português
 └── config.json         # Configurações em tempo de execução
 ```
+
+---
+
+## Licença
+
+MIT © [th3sull1van](https://github.com/th3sull1van)

@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐷 PiggyVault — Void Bag Storage Automation for the Piggy Bank
+# PiggyVault
 
 **Empowers the Piggy Bank (`player.bank`) with all the modern capabilities of the Void Bag (`player.bank4`) — including overflow auto-pickup, direct crafting, Quick Buff/Heal/Mana, ammo/bait consumption, and informational accessories — with 100% vanilla disk integrity.**
 
@@ -10,47 +10,47 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
-  <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
-  <img src="https://img.shields.io/badge/Type-TMC_Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
-  <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="License MIT">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8%20%7C%201.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
+  <img src="https://img.shields.io/badge/Framework-Harmony%202.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
+  <img src="https://img.shields.io/badge/Type-TMC%20Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
+  <img src="https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge" alt="License MIT">
 </p>
 
 </div>
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-- **📦 Overflow Auto-Pickup / Vacuum**:
+- **Overflow Auto-Pickup / Vacuum**:
   - Automatically captures items and coins from the world when player inventory (slots 0..49) is full and safely routes them directly into your Piggy Bank (`player.bank.item`).
   - Plays visual pickup text and audio feedback matching vanilla container vacuuming.
 
-- **🔨 Direct Crafting from Piggy Bank**:
-  - Hooks into `Recipe.CollectItemsFromChests` so crafting stations recognize all materials stored inside your Piggy Bank without having to place it down or manually withdraw items.
+- **Direct Crafting from Piggy Bank**:
+  - Hooks into `Recipe.CollectItemsFromChests` so crafting stations recognize all materials stored inside your Piggy Bank without placing it down or manually withdrawing items.
 
-- **🧪 Quick Buff, Quick Heal & Quick Mana**:
+- **Quick Buff, Quick Heal & Quick Mana**:
   - **Quick Heal (`H`)**: Automatically drinks healing potions from your Piggy Bank if missing from inventory.
   - **Quick Mana (`M`)**: Automatically drinks mana potions from your Piggy Bank during intense magic casting.
-  - **Quick Buff (`B`)**: Evaluates all missing buffs and consumes buff potions & best food items directly from your Piggy Bank.
+  - **Quick Buff (`B`)**: Evaluates missing buffs and consumes buff potions & best food items directly from your Piggy Bank.
 
-- **🏹 Direct Ammo, Wire & Bait Consumption**:
+- **Direct Ammo, Wire & Bait Consumption**:
   - Automatically fires arrows, bullets, rockets, and consumes wires, actuators, and fishing bait stored in the Piggy Bank when not present in the main inventory.
 
-- **🧭 Informational Accessories Activation**:
-  - Cell Phone, PDA, Compass, Depth Meter, Watch, GPS, DPS Meter, Metal Detector, Radar, and other information accessories active while stored inside your Piggy Bank.
+- **Informational Accessories Activation**:
+  - Cell Phone, PDA, Compass, Depth Meter, Watch, GPS, DPS Meter, Metal Detector, Radar, and other information accessories remain active while stored inside your Piggy Bank.
 
-- **🌀 Wormhole / Unity Potions**:
+- **Wormhole / Unity Potions**:
   - Teleport to teammates on the fullscreen map using Wormhole Potions stored in your Piggy Bank.
 
-- **🛡️ 100% Non-Destructive & In-Memory**:
+- **100% Non-Destructive & In-Memory**:
   - Preserves all standard Piggy Bank functions (saving coins, buying items, Money Trough, Chester) with zero disk modification.
 
 ---
 
-## ⚙️ Configuration (`config.json`)
+## Configuration Reference
 
-The configuration file is located at `mods/PiggyVault/config.json`:
+Located at `mods/PiggyVault/config.json`:
 
 ```json
 {
@@ -69,8 +69,6 @@ The configuration file is located at `mods/PiggyVault/config.json`:
 }
 ```
 
-### Configuration Reference
-
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `Enabled` | `bool` | `true` | Master switch enabling or disabling the PiggyVault mod. |
@@ -88,7 +86,7 @@ The configuration file is located at `mods/PiggyVault/config.json`:
 
 ---
 
-## 🔧 Intercepted Runtime Methods
+## Intercepted Runtime Methods
 
 | Target Class | Target Method | Hook Type | Purpose |
 | :--- | :--- | :--- | :--- |
@@ -97,7 +95,7 @@ The configuration file is located at `mods/PiggyVault/config.json`:
 | `Terraria.Recipe` | `CollectItemsFromChests` | `Postfix` | Adds Piggy Bank to available crafting material sources. |
 | `Terraria.Player` | `QuickHeal_GetItemToUse` | `Postfix` | Fallback search for healing potions in Piggy Bank. |
 | `Terraria.Player` | `QuickMana_GetItemToUse` | `Postfix` | Fallback search for mana potions in Piggy Bank. |
-| `Terraria.Player` | `QuickBuff_PickBestFoodItem`| `Postfix` | Fallback search for best food item in Piggy Bank. |
+| `Terraria.Player` | `QuickBuff_PickBestFoodItem` | `Postfix` | Fallback search for best food item in Piggy Bank. |
 | `Terraria.Player` | `QuickBuff` | `Postfix` | Applies missing active potion buffs from Piggy Bank. |
 | `Terraria.Player` | `ConsumeItem` | `Postfix` | Consumes ammo, wire, and bait from Piggy Bank. |
 | `Terraria.Player` | `HasUnityPotion` | `Postfix` | Checks Wormhole Potions in Piggy Bank. |
@@ -106,12 +104,20 @@ The configuration file is located at `mods/PiggyVault/config.json`:
 
 ---
 
-## 📁 Plugin Structure
+## Plugin Structure
 
 ```text
 mods/PiggyVault/
-├── manifest.json       # Mod identity and entry metadata
+├── manifest.json       # Mod identity, dependencies, and entry metadata
 ├── PiggyVault.dll      # Compiled plugin assembly
 ├── PiggyVault.pdb      # Debug symbols
+├── README.md           # Master English documentation
+├── README_pt-BR.md     # Master Brazilian Portuguese documentation
 └── config.json         # Runtime configurable options
 ```
+
+---
+
+## License
+
+MIT © [th3sull1van](https://github.com/th3sull1van)

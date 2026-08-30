@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📦 AutoOpen — Rapid & Automated Grab Bag Opener for Vanilla Terraria
+# AutoOpen
 
 **Continuous, high-speed automated opening of grab bags, crates, oysters, boss bags, lockboxes, and presents by holding right-click (Extractinator-style) with zero vanilla file modification.**
 
@@ -10,43 +10,43 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
-  <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
-  <img src="https://img.shields.io/badge/Type-TMC_Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
-  <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="License MIT">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8%20%7C%201.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
+  <img src="https://img.shields.io/badge/Framework-Harmony%202.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
+  <img src="https://img.shields.io/badge/Type-TMC%20Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
+  <img src="https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge" alt="License MIT">
 </p>
 
 </div>
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-- **⚡ Hold-to-Open Continuous Rapid Unpacking**:
-  - Eliminates vanilla's frustrating requirement of releasing and clicking the mouse button repeatedly.
-  - Simply hold down Right-Click on any stack of crates or grab bags to open them continuously at high speed (just like using an Extractinator).
+- **Hold-to-Open Continuous Rapid Unpacking**:
+  - Eliminates vanilla's requirement of clicking and releasing repeatedly.
+  - Hold down Right-Click on any stack of crates or grab bags to open them continuously at high speed (Extractinator-style).
 
-- **📦 Broad Container Support**:
+- **Broad Container Support**:
   - **Fishing Crates**: Wooden, Iron, Golden, Hallowed, Dungeon, Ocean, Jungle, Sky, Corrupt, Crimson, and Hardmode variants.
-  - **Boss Treasure Bags**: All Expert/Master mode boss treasure bags.
+  - **Boss Treasure Bags**: All Expert and Master mode boss treasure bags.
   - **Specialty Bags & Grab Containers**: Herb Bags, Can of Worms, Oysters, Goodie Bags, Presents, and Chillet Eggs.
   - **Lock Boxes**: Golden Lock Boxes (automatically consumes Golden Keys) and Obsidian Lock Boxes (requires Shadow Key in inventory or Void Bag).
 
-- **🚀 Batch Processing Support**:
+- **Batch Processing Support**:
   - Configurable `BatchSize` to process multiple containers per tick cycle for instant stack unpacking.
 
-- **🤖 Optional Hands-Free Auto-Open Mode**:
-  - `AutoOpenInventory` mode automatically unpacks any grab bags in your inventory or Void Bag in the background without needing to click.
+- **Optional Hands-Free Auto-Open Mode**:
+  - `AutoOpenInventory` mode automatically unpacks grab bags in your inventory or Void Bag in the background without clicking.
 
-- **🛡️ Key Safety & Exclusion Blacklist**:
+- **Key Safety & Exclusion Blacklist**:
   - Halts opening gracefully if prerequisite keys (e.g. Golden Keys) run out.
   - Custom `ExcludedItemIds` blacklist in `config.json` allows reserving specific containers.
 
 ---
 
-## ⚙️ Configuration (`config.json`)
+## Configuration Reference
 
-The configuration file is located at `mods/AutoOpen/config.json`:
+Located at `mods/AutoOpen/config.json`:
 
 ```json
 {
@@ -62,8 +62,6 @@ The configuration file is located at `mods/AutoOpen/config.json`:
 }
 ```
 
-### Configuration Reference
-
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `Enabled` | `bool` | `true` | Master toggle enabling or disabling AutoOpen. |
@@ -78,7 +76,7 @@ The configuration file is located at `mods/AutoOpen/config.json`:
 
 ---
 
-## 🔧 Intercepted Runtime Methods
+## Intercepted Runtime Methods
 
 | Target Class | Target Method | Hook Type | Purpose |
 | :--- | :--- | :--- | :--- |
@@ -87,12 +85,20 @@ The configuration file is located at `mods/AutoOpen/config.json`:
 
 ---
 
-## 📁 Plugin Structure
+## Plugin Structure
 
 ```text
 mods/AutoOpen/
 ├── manifest.json       # Mod identity, dependencies, and entry metadata
 ├── AutoOpen.dll        # Compiled plugin assembly
 ├── AutoOpen.pdb        # Debug symbols
+├── README.md           # Master English documentation
+├── README_pt-BR.md     # Master Brazilian Portuguese documentation
 └── config.json         # Runtime configurable options
 ```
+
+---
+
+## License
+
+MIT © [th3sull1van](https://github.com/th3sull1van)

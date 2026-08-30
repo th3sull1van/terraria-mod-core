@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎯 Boss Cursor — TerrariaModCore (TMC) Plugin
+# BossCursor
 
 **Real-time directional indicator arrows and boss head icons pointing toward active bosses in Vanilla Terraria with proximity scaling and zero file modification.**
 
@@ -10,48 +10,48 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Terraria-1.4.5.8_|_1.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
-  <img src="https://img.shields.io/badge/Framework-Harmony_2.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
-  <img src="https://img.shields.io/badge/Type-TMC_Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
-  <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="License MIT">
+  <img src="https://img.shields.io/badge/Terraria-1.4.5.8%20%7C%201.4.5.7-22c55e?style=for-the-badge&logo=steam&logoColor=white" alt="Terraria 1.4.5.8 / 1.4.5.7">
+  <img src="https://img.shields.io/badge/Framework-Harmony%202.4.2-6366f1?style=for-the-badge&logo=csharp&logoColor=white" alt="Harmony 2.4.2">
+  <img src="https://img.shields.io/badge/Type-TMC%20Plugin-06b6d4?style=for-the-badge" alt="TMC Plugin">
+  <img src="https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge" alt="License MIT">
 </p>
 
 </div>
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-1. **Directional Arrow & Boss Head Indicator**:
-   - Points directly toward active bosses and tracked enemies in real time.
-   - Renders the boss's official head icon right alongside the pointer arrow.
+- **Directional Arrow & Boss Head Indicator**:
+  - Points directly toward active bosses and tracked enemies in real time.
+  - Renders the boss's official head icon right alongside the pointer arrow.
 
-2. **Dynamic Proximity Scaling & Opacity Fading**:
-   - As the boss gets closer to the player, the arrow and head icon become larger and more opaque.
-   - As the boss moves farther away or off-screen, the indicator smoothly scales down and becomes translucent.
+- **Dynamic Proximity Scaling & Opacity Fading**:
+  - As the boss gets closer to the player, the arrow and head icon become larger and more opaque.
+  - As the boss moves farther away or off-screen, the indicator smoothly scales down and becomes translucent.
 
-3. **Gravitation Potion & Upside-Down Inversion**:
-   - Automatically detects inverted gravity (`gravDir == -1f`) and adjusts all angles and coordinates so pointers remain accurate.
+- **Gravitation Potion & Upside-Down Inversion**:
+  - Automatically detects inverted gravity (`gravDir == -1f`) and adjusts all angles and coordinates so pointers remain accurate.
 
-4. **Fullscreen Map Suppression**:
-   - Automatically hides the indicators whenever the fullscreen overlay map is open (`Main.mapStyle == 2`).
+- **Fullscreen Map Suppression**:
+  - Automatically hides the indicators whenever the fullscreen overlay map is open (`Main.mapStyle == 2`).
 
-5. **Always Active & Seamless**:
-   - Runs continuously in the background whenever bosses/mini-bosses are present in the world.
-   - Zero keybind clutter or accidental toggle interruptions.
+- **Always Active & Seamless**:
+  - Runs continuously in the background whenever bosses or mini-bosses are present in the world.
+  - Zero keybind clutter or accidental toggle interruptions.
 
-6. **Customizable Whitelist & Blacklist**:
-   - Blacklists Celestial / Lunar Towers (Solar, Nebula, Vortex, Stardust) by default.
-   - Add any custom NPC ID to the whitelist (e.g. Dreadnautilus, Mourning Wood, Pumpking, Martian Saucer) or blacklist.
+- **Customizable Whitelist & Blacklist**:
+  - Blacklists Celestial / Lunar Towers (Solar, Nebula, Vortex, Stardust) by default.
+  - Add any custom NPC ID to the whitelist (e.g. Dreadnautilus, Mourning Wood, Pumpking, Martian Saucer) or blacklist.
 
-7. **Extensible Modder API**:
-   - Programmatically add/remove NPCs from the whitelist or blacklist via `BossCursorAPI`.
+- **Extensible Modder API**:
+  - Programmatically add or remove NPCs from the whitelist/blacklist via `BossCursorAPI`.
 
 ---
 
-## ⚙️ Configuration (`config.json`)
+## Configuration Reference
 
-Located at `<Terraria>/mods/BossCursor/config.json`:
+Located at `mods/BossCursor/config.json`:
 
 ```json
 {
@@ -66,7 +66,7 @@ Located at `<Terraria>/mods/BossCursor/config.json`:
 }
 ```
 
-| Setting | Type | Default | Description |
+| Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `Enabled` | `bool` | `true` | Master switch to enable or disable Boss Cursor (always active while true). |
 | `HideOnScreen` | `bool` | `false` | When `true`, hides the cursor if the boss is currently visible within the camera view. |
@@ -79,7 +79,7 @@ Located at `<Terraria>/mods/BossCursor/config.json`:
 
 ---
 
-## 💻 Developer API (`BossCursorAPI`)
+## Developer API (`BossCursorAPI`)
 
 Other TMC plugins can interact with Boss Cursor at runtime:
 
@@ -104,9 +104,28 @@ BossCursorAPI.SetEnabled(true);
 
 ---
 
-## 🛡️ Engineering & Compatibility
+## Intercepted Runtime Methods
 
-- **Target Engine**: Terraria 1.4.5.8 / 1.4.5.7 (Steam & GOG)
-- **Runtime Framework**: .NET Framework 4.8 / x86
-- **Vanilla File Integrity**: 100% untouched on disk.
-- **Harmony Hooks**: `Main.DrawInterface_36_Cursor` (Postfix).
+| Target Class | Target Method | Hook Type | Purpose |
+| :--- | :--- | :--- | :--- |
+| `Terraria.Main` | `DrawInterface_36_Cursor()` | `Postfix` | Renders directional arrows and boss head icons over the in-game UI layer. |
+
+---
+
+## Plugin Structure
+
+```text
+mods/BossCursor/
+├── manifest.json       # Mod identity, dependencies, and entry metadata
+├── BossCursor.dll      # Compiled plugin assembly
+├── BossCursor.pdb      # Debug symbols
+├── README.md           # Master English documentation
+├── README_pt-BR.md     # Master Brazilian Portuguese documentation
+└── config.json         # Runtime configurable options
+```
+
+---
+
+## License
+
+MIT © [th3sull1van](https://github.com/th3sull1van)
