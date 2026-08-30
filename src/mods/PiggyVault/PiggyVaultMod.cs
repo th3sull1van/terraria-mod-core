@@ -30,13 +30,11 @@ namespace PiggyVault
 
         public void Load()
         {
-            PiggyVaultController.Reset();
             Context?.Logger?.Info("PiggyVault loaded and active.");
         }
 
         public void Unload()
         {
-            PiggyVaultController.Reset();
             Context?.Logger?.Info("PiggyVault unloaded.");
             Instance = null;
             Config = null;

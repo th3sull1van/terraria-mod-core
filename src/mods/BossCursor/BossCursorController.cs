@@ -18,7 +18,6 @@ namespace BossCursor
     public static class BossCursorController
     {
         public const float DefaultHeadDistance = 45f;
-        public const float HeadDistance = 45f;
 
         // Celestial Pillars NPC IDs
         public const int PillarSolar = 422;

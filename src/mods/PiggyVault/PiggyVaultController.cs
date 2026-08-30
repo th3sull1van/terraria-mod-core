@@ -16,13 +16,6 @@ namespace PiggyVault
         public const int ItemIdWormholePotion = 2997;
 
         /// <summary>
-        /// Resets internal controller state.
-        /// </summary>
-        public static void Reset()
-        {
-        }
-
-        /// <summary>
         /// Determines if the player has access to the Piggy Bank features based on config and carried items.
         /// </summary>
         public static bool IsPiggyBankUsable(Player player, PiggyVaultConfig config)
